@@ -1,11 +1,11 @@
-import Cognito from './cognito'
-import DynamoDB from './dynamoDb'
-import Graphql from './graphql'
-import HeadlessCMS from './headlessCMS'
 import ApiGateway from './apiGateway'
 import Cloudfront from './cloudfront'
+import Cognito from './cognito'
+import DynamoDB from './dynamoDb'
 import ElasticSearch from './elasticSearch'
 import FileManager from './fileManager'
+import Graphql from './graphql'
+import HeadlessCMS from './headlessCMS'
 import PageBuilder from './pageBuilder'
 import PrerenderingService from './prerenderingService'
 
@@ -46,7 +46,7 @@ export default () => {
       COGNITO_USER_POOL_ID: cognito.userPool.id,
       DB_TABLE: dynamoDb.table.name,
       DB_TABLE_ELASTICSEARCH: elasticsearch.table.name,
-      ELASTIC_SEARCH_ENDPOINT: elasticsearch.domain.endpoint,
+      ELASTIC_SEARCH_ENDPOINT: elasticsearch.url,
 
       // Not required. Useful for testing purposes / ephemeral environments.
       // https://www.webiny.com/docs/key-topics/ci-cd/testing/slow-ephemeral-environments
@@ -59,7 +59,6 @@ export default () => {
     bucket: fileManager.bucket,
     primaryDynamodbTable: dynamoDb.table,
     elasticsearchDynamodbTable: elasticsearch.table,
-    elasticsearchDomain: elasticsearch.domain,
     cognitoUserPool: cognito.userPool,
   })
 
@@ -69,7 +68,7 @@ export default () => {
       COGNITO_USER_POOL_ID: cognito.userPool.id,
       DB_TABLE: dynamoDb.table.name,
       DB_TABLE_ELASTICSEARCH: elasticsearch.table.name,
-      ELASTIC_SEARCH_ENDPOINT: elasticsearch.domain.endpoint,
+      ELASTIC_SEARCH_ENDPOINT: elasticsearch.url,
 
       // Not required. Useful for testing purposes / ephemeral environments.
       // https://www.webiny.com/docs/key-topics/ci-cd/testing/slow-ephemeral-environments
@@ -87,7 +86,6 @@ export default () => {
     },
     primaryDynamodbTable: dynamoDb.table,
     elasticsearchDynamodbTable: elasticsearch.table,
-    elasticsearchDomain: elasticsearch.domain,
     bucket: fileManager.bucket,
     cognitoUserPool: cognito.userPool,
   })
@@ -98,7 +96,7 @@ export default () => {
       COGNITO_USER_POOL_ID: cognito.userPool.id,
       DB_TABLE: dynamoDb.table.name,
       DB_TABLE_ELASTICSEARCH: elasticsearch.table.name,
-      ELASTIC_SEARCH_ENDPOINT: elasticsearch.domain.endpoint,
+      ELASTIC_SEARCH_ENDPOINT: elasticsearch.url,
 
       // Not required. Useful for testing purposes / ephemeral environments.
       // https://www.webiny.com/docs/key-topics/ci-cd/testing/slow-ephemeral-environments
@@ -110,7 +108,6 @@ export default () => {
     },
     primaryDynamodbTable: dynamoDb.table,
     elasticsearchDynamodbTable: elasticsearch.table,
-    elasticsearchDomain: elasticsearch.domain,
   })
 
   const apiGateway = new ApiGateway({

@@ -1,100 +1,20 @@
-import * as pulumi from '@pulumi/pulumi'
 import * as aws from '@pulumi/aws'
-import policies, { EsDomain } from './policies'
+import * as pulumi from '@pulumi/pulumi'
 
 class ElasticSearch {
-  domain: EsDomain
+  url: string
   table: aws.dynamodb.Table
   role: aws.iam.Role
 
   constructor() {
-    // Either create a new Amazon Elasticsearch Domain, or use an existing one.
-    if (process.env.AWS_ELASTIC_SEARCH_DOMAIN_NAME) {
-      // This can be useful for testing purposes in ephemeral environments. More information here:
-      // https://www.webiny.com/docs/key-topics/ci-cd/testing/slow-ephemeral-environments
-      this.domain = pulumi.output(
-        aws.elasticsearch.getDomain(
-          {
-            domainName: process.env.AWS_ELASTIC_SEARCH_DOMAIN_NAME,
-          },
-          { async: true },
-        ),
-      )
-    } else {
-      const domainName = 'webiny-js'
-
-      this.domain = new aws.elasticsearch.Domain(domainName, {
-        elasticsearchVersion: '7.7',
-        clusterConfig: {
-          instanceType: 't3.small.elasticsearch',
-        },
-        ebsOptions: {
-          ebsEnabled: true,
-          volumeSize: 10,
-          volumeType: 'gp2',
-        },
-        advancedOptions: {
-          'rest.action.multi.allow_explicit_index': 'true',
-        },
-        snapshotOptions: {
-          automatedSnapshotStartHour: 23,
-        },
-      })
-
-      /**
-       * Domain policy defines who can access your Elasticsearch Domain.
-       * For details on Elasticsearch security, read the official documentation:
-       * https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/security.html
-       */
-      new aws.elasticsearch.DomainPolicy(`${domainName}-policy`, {
-        domainName: this.domain.domainName.apply(v => `${v}`),
-        accessPolicies: Promise.all([aws.getCallerIdentity({})]).then(
-          ([currentCallerIdentity]) => ({
-            Version: '2012-10-17',
-            Statement: [
-              /**
-               * Allow requests signed with current account
-               */
-              {
-                Effect: 'Allow',
-                Principal: {
-                  AWS: currentCallerIdentity.accountId,
-                },
-                Action: 'es:*',
-                Resource: pulumi.interpolate`${this.domain.arn}/*`,
-              },
-              /**
-               * Uncomment the following `Allow` policy to allow access from specific IP address.
-               * This will be useful for development purposes, when you want to access Kibana to inspect your data.
-               *
-               * If you need to setup proper user accounts for access to Kibana, you'll need to connect it to
-               * Cognito User Pool. For instructions, see the official documentation:
-               * https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html
-               */
-
-              // {
-              //     Effect: "Allow",
-              //     Principal: "*",
-              //     Action: "es:*",
-              //     Resource: pulumi.interpolate`${this.domain.arn}/*`,
-              //     Condition: {
-              //         IpAddress: {
-              //             "aws:SourceIp": "213.149.51.28/32"
-              //         }
-              //     }
-              // }
-            ],
-          }),
-        ),
-      })
-    }
-
     /**
      * Create a table for Elasticsearch records. All ES records are stored in this table to dramatically improve
      * performance and stability on write operations (especially massive data imports). This table also serves as a backup and
      * a single source of truth for your Elasticsearch domain. Streaming is enabled on this table, and it will
      * allow asynchronous synchronization of data with Elasticsearch domain.
      */
+    this.url = String(process.env.ES_HOST_URL)
+
     this.table = new aws.dynamodb.Table('webiny-es', {
       attributes: [
         { name: 'PK', type: 'S' },
@@ -123,13 +43,6 @@ class ElasticSearch {
       },
     })
 
-    const policy = policies.getDynamoDbToElasticLambdaPolicy(this.domain)
-
-    new aws.iam.RolePolicyAttachment(`${roleName}-DynamoDbToElasticLambdaPolicy`, {
-      role: this.role,
-      policyArn: pulumi.interpolate`${policy.arn}`,
-    })
-
     new aws.iam.RolePolicyAttachment(`${roleName}-AWSLambdaBasicExecutionRole`, {
       role: this.role,
       policyArn: aws.iam.ManagedPolicy.AWSLambdaBasicExecutionRole,
@@ -155,7 +68,7 @@ class ElasticSearch {
       environment: {
         variables: {
           DEBUG: String(process.env.DEBUG),
-          ELASTIC_SEARCH_ENDPOINT: this.domain.endpoint,
+          ELASTIC_SEARCH_ENDPOINT: this.url,
         },
       },
       description: 'Process DynamoDB Stream.',

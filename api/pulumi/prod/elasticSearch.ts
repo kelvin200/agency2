@@ -1,84 +1,21 @@
-import * as pulumi from '@pulumi/pulumi'
 import * as aws from '@pulumi/aws'
+import * as pulumi from '@pulumi/pulumi'
 import vpc from './vpc'
-import policies from './policies'
 
 class ElasticSearch {
-  domain: aws.elasticsearch.Domain
+  url: string
   table: aws.dynamodb.Table
   role: aws.iam.Role
 
   constructor({ protectedEnvironment }: { protectedEnvironment: boolean }) {
-    const domainName = 'webiny-js'
-
-    this.domain = new aws.elasticsearch.Domain(
-      domainName,
-      {
-        elasticsearchVersion: '7.7',
-        clusterConfig: {
-          instanceType: 't3.medium.elasticsearch',
-          instanceCount: 2,
-          zoneAwarenessEnabled: true,
-          zoneAwarenessConfig: {
-            availabilityZoneCount: 2,
-          },
-        },
-        vpcOptions: {
-          subnetIds: [vpc.subnets.private[0].id, vpc.subnets.private[1].id],
-          securityGroupIds: [vpc.vpc.defaultSecurityGroupId],
-        },
-        ebsOptions: {
-          ebsEnabled: true,
-          volumeSize: 10,
-          volumeType: 'gp2',
-        },
-        advancedOptions: {
-          'rest.action.multi.allow_explicit_index': 'true',
-        },
-        snapshotOptions: {
-          automatedSnapshotStartHour: 23,
-        },
-      },
-      { protect: protectedEnvironment },
-    )
-
-    /**
-     * Domain policy defines who can access your Elasticsearch Domain.
-     * For details on Elasticsearch security, read the official documentation:
-     * https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/security.html
-     */
-    new aws.elasticsearch.DomainPolicy(
-      `${domainName}-policy`,
-      {
-        domainName: this.domain.domainName.apply(v => `${v}`),
-        accessPolicies: Promise.all([aws.getCallerIdentity({})]).then(
-          ([currentCallerIdentity]) => ({
-            Version: '2012-10-17',
-            Statement: [
-              /**
-               * Allow requests signed with current account
-               */
-              {
-                Effect: 'Allow',
-                Principal: {
-                  AWS: currentCallerIdentity.accountId,
-                },
-                Action: 'es:*',
-                Resource: pulumi.interpolate`${this.domain.arn}/*`,
-              },
-            ],
-          }),
-        ),
-      },
-      { protect: protectedEnvironment },
-    )
-
     /**
      * Create a table for Elasticsearch records. All ES records are stored in this table to dramatically improve
      * performance and stability on write operations (especially massive data imports). This table also serves as a backup and
      * a single source of truth for your Elasticsearch domain. Streaming is enabled on this table, and it will
      * allow asynchronous synchronization of data with Elasticsearch domain.
      */
+    this.url = String(process.env.ES_HOST_URL)
+
     this.table = new aws.dynamodb.Table(
       'webiny-es',
       {
@@ -112,13 +49,6 @@ class ElasticSearch {
       },
     })
 
-    const policy = policies.getDynamoDbToElasticLambdaPolicy(this.domain)
-
-    new aws.iam.RolePolicyAttachment(`${roleName}-DynamoDbToElasticLambdaPolicy`, {
-      role: this.role,
-      policyArn: pulumi.interpolate`${policy.arn}`,
-    })
-
     new aws.iam.RolePolicyAttachment(`${roleName}-AWSLambdaVPCAccessExecutionRole`, {
       role: this.role,
       policyArn: aws.iam.ManagedPolicy.AWSLambdaVPCAccessExecutionRole,
@@ -144,7 +74,7 @@ class ElasticSearch {
       environment: {
         variables: {
           DEBUG: String(process.env.DEBUG),
-          ELASTIC_SEARCH_ENDPOINT: this.domain.endpoint,
+          ELASTIC_SEARCH_ENDPOINT: this.url,
         },
       },
       description: 'Process DynamoDB Stream.',

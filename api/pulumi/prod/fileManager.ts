@@ -1,10 +1,9 @@
-import * as pulumi from '@pulumi/pulumi'
 import * as aws from '@pulumi/aws'
-import vpc from './vpc'
-import policies from './policies'
-
+import * as pulumi from '@pulumi/pulumi'
 // @ts-ignore
 import { getLayerArn } from '@webiny/aws-layers'
+import policies from './policies'
+import vpc from './vpc'
 
 class FileManager {
   bucket: aws.s3.Bucket

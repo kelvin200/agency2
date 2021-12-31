@@ -1,7 +1,7 @@
 import { createBuildFunction, createWatchFunction } from '@webiny/project-utils'
 
 const webpack = config => {
-  ;(config.externals as any).push('sharp')
+  config.externals.push('sharp')
   return config
 }
 

@@ -1,13 +1,12 @@
-import * as pulumi from '@pulumi/pulumi'
 import * as aws from '@pulumi/aws'
-import policies, { EsDomain } from './policies'
+import * as pulumi from '@pulumi/pulumi'
+import policies from './policies'
 
 interface GraphqlParams {
   env: Record<string, any>
   primaryDynamodbTable: aws.dynamodb.Table
   elasticsearchDynamodbTable: aws.dynamodb.Table
   bucket: aws.s3.Bucket
-  elasticsearchDomain: EsDomain
   cognitoUserPool: aws.cognito.UserPool
 }
 
@@ -22,7 +21,6 @@ class Graphql {
     primaryDynamodbTable,
     elasticsearchDynamodbTable,
     bucket,
-    elasticsearchDomain,
     cognitoUserPool,
   }: GraphqlParams) {
     const roleName = 'api-lambda-role'
@@ -45,7 +43,6 @@ class Graphql {
       primaryDynamodbTable,
       elasticsearchDynamodbTable,
       bucket,
-      elasticsearchDomain,
       cognitoUserPool,
     })
 

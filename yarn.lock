@@ -7812,6 +7812,7 @@ __metadata:
     babel-plugin-named-asset-import: ^1.0.0-next.154
     chalk: ^4.1.0
     cross-env: ^5.0.2
+    elasticsearch: ^16.7.2
     eslint: ^7.18.0
     eslint-config-standard: ^16.0.2
     eslint-import-resolver-babel-module: ^5.2.0
@@ -7836,6 +7837,15 @@ __metadata:
   dependencies:
     debug: 4
   checksum: f52b6872cc96fd5f622071b71ef200e01c7c4c454ee68bc9accca90c98cfb39f2810e3e9aa330435835eedc8c23f4f8a15267f67c6e245d2b33757575bdac49d
+  languageName: node
+  linkType: hard
+
+"agentkeepalive@npm:^3.4.1":
+  version: 3.5.2
+  resolution: "agentkeepalive@npm:3.5.2"
+  dependencies:
+    humanize-ms: ^1.2.1
+  checksum: 75ecb0f764cae3b3c2ba919e2230ac5ff82051e029d8c74d5044e29ddbec14106f696be0196ac83ed370c8dabd2e5ff67bd7601b24660f3d9ed62bd3cdf0f23a
   languageName: node
   linkType: hard
 
@@ -10047,7 +10057,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:^1.1.0, chalk@npm:^1.1.3":
+"chalk@npm:^1.0.0, chalk@npm:^1.1.0, chalk@npm:^1.1.3":
   version: 1.1.3
   resolution: "chalk@npm:1.1.3"
   dependencies:
@@ -12289,6 +12299,17 @@ __metadata:
   dependencies:
     "@sindresorhus/is": ^4.0.0
   checksum: 47e6d1c5113a97792d30da7ea2727e9e0890b63b8e64c8b23444492a710770f7980d2756a161e6d64b0155c5a2b85ace11b9055bd11a4f5bb715b6c3524921e2
+  languageName: node
+  linkType: hard
+
+"elasticsearch@npm:^16.7.2":
+  version: 16.7.2
+  resolution: "elasticsearch@npm:16.7.2"
+  dependencies:
+    agentkeepalive: ^3.4.1
+    chalk: ^1.0.0
+    lodash: ^4.17.10
+  checksum: e12bad6a0430fcdf8fde32937ac42f69459c3eb624c395475ab2047efc95ed04634bb4ca10e139f984c6caced5d109f78aa42cf2dafd28873a86f1e3a3b9843c
   languageName: node
   linkType: hard
 

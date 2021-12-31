@@ -1,13 +1,12 @@
-import * as pulumi from '@pulumi/pulumi'
 import * as aws from '@pulumi/aws'
+import * as pulumi from '@pulumi/pulumi'
+import policies from './policies'
 import vpc from './vpc'
-import policies, { EsDomain } from './policies'
 
 interface HeadlessCMSParams {
   env: Record<string, any>
   primaryDynamodbTable: aws.dynamodb.Table
   elasticsearchDynamodbTable: aws.dynamodb.Table
-  elasticsearchDomain: EsDomain
 }
 
 class HeadlessCMS {
@@ -16,12 +15,7 @@ class HeadlessCMS {
   }
   role: aws.iam.Role
 
-  constructor({
-    env,
-    primaryDynamodbTable,
-    elasticsearchDynamodbTable,
-    elasticsearchDomain,
-  }: HeadlessCMSParams) {
+  constructor({ env, primaryDynamodbTable, elasticsearchDynamodbTable }: HeadlessCMSParams) {
     const roleName = 'headless-cms-lambda-role'
     this.role = new aws.iam.Role(roleName, {
       assumeRolePolicy: {
@@ -40,7 +34,6 @@ class HeadlessCMS {
 
     const policy = policies.getHeadlessCmsLambdaPolicy({
       primaryDynamodbTable,
-      elasticsearchDomain,
       elasticsearchDynamodbTable,
     })
 

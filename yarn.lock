@@ -8210,9 +8210,7 @@ __metadata:
     "@webiny/api-file-manager": 5.20.0
     "@webiny/api-file-manager-s3": 5.20.0
     "@webiny/api-form-builder": 5.20.0
-    "@webiny/api-form-builder-so-ddb-es": 5.20.0
     "@webiny/api-headless-cms": 5.20.0
-    "@webiny/api-headless-cms-ddb-es": 5.20.0
     "@webiny/api-i18n": 5.20.0
     "@webiny/api-i18n-content": 5.20.0
     "@webiny/api-i18n-ddb": 5.20.0
@@ -8247,7 +8245,6 @@ __metadata:
     "@webiny/api-admin-users-cognito-so-ddb": 5.20.0
     "@webiny/api-elasticsearch": 5.20.0
     "@webiny/api-headless-cms": 5.20.0
-    "@webiny/api-headless-cms-ddb-es": 5.20.0
     "@webiny/api-i18n": 5.20.0
     "@webiny/api-i18n-content": 5.20.0
     "@webiny/api-i18n-ddb": 5.20.0

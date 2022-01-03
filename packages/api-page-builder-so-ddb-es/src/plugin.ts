@@ -4,7 +4,6 @@ import {
   Params,
 } from '@webiny/api-page-builder/plugins/PageStorageOperationsProviderPlugin'
 import { PageStorageOperations } from '@webiny/api-page-builder/types'
-import { installation } from './InstallationDdbEsPlugin'
 import { PageStorageOperationsDdbEs } from './PageStorageOperations'
 
 export class PageStorageOperationsDdbEsProviderPlugin extends PageStorageOperationsProviderPlugin {
@@ -12,7 +11,7 @@ export class PageStorageOperationsDdbEsProviderPlugin extends PageStorageOperati
     /**
      * We need the installation plugin to insert the page builder elasticsearch index on before install.
      */
-    context.plugins.register([installation(), fields()])
+    context.plugins.register([fields()])
 
     return new PageStorageOperationsDdbEs({
       context,

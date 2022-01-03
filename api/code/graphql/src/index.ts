@@ -1,23 +1,11 @@
-import { DocumentClient } from 'aws-sdk/clients/dynamodb'
-import { createHandler } from '@webiny/handler-aws'
-import graphqlPlugins from '@webiny/handler-graphql'
-import i18nPlugins from '@webiny/api-i18n/graphql'
-import i18nDynamoDbStorageOperations from '@webiny/api-i18n-ddb'
-import i18nContentPlugins from '@webiny/api-i18n-content/plugins'
-import pageBuilderPlugins from '@webiny/api-page-builder/graphql'
-import pageBuilderDynamoDbElasticsearchPlugins from '@webiny/api-page-builder-so-ddb-es'
-import pageBuilderPrerenderingPlugins from '@webiny/api-page-builder/prerendering'
-import pageBuilderImportExportPlugins from '@webiny/api-page-builder-import-export/graphql'
-import { createStorageOperations as createPageImportExportStorageOperations } from '@webiny/api-page-builder-import-export-so-ddb'
-import prerenderingServicePlugins from '@webiny/api-prerendering-service/client'
-import dbPlugins from '@webiny/handler-db'
-import { DynamoDbDriver } from '@webiny/db-dynamodb'
-import dynamoDbPlugins from '@webiny/db-dynamodb/plugins'
-import elasticsearchClientContext from '@webiny/api-elasticsearch'
-import fileManagerPlugins from '@webiny/api-file-manager/plugins'
-import fileManagerDynamoDbElasticStorageOperation from '@webiny/api-file-manager-ddb-es'
-import logsPlugins from '@webiny/handler-logs'
+// Override
+import elasticsearchClientContext from '@m/api-elasticsearch/src'
+import { createElasticsearchClient } from '@m/api-elasticsearch/src/create'
+import fileManagerDynamoDbElasticStorageOperation from '@m/api-file-manager-ddb-es/src'
+import pageBuilderDynamoDbElasticsearchPlugins from '@m/api-page-builder-so-ddb-es/src'
+import elasticsearchDataGzipCompression from '@webiny/api-elasticsearch/plugins/GzipCompression'
 import fileManagerS3 from '@webiny/api-file-manager-s3'
+import fileManagerPlugins from '@webiny/api-file-manager/plugins'
 import { createFormBuilder } from '@webiny/api-form-builder'
 import { createFormBuilderStorageOperations } from '@webiny/api-form-builder-so-ddb-es'
 import {
@@ -26,12 +14,23 @@ import {
 } from '@webiny/api-headless-cms'
 import { createStorageOperations as createHeadlessCmsStorageOperations } from '@webiny/api-headless-cms-ddb-es'
 import headlessCmsModelFieldToGraphQLPlugins from '@webiny/api-headless-cms/content/plugins/graphqlFields'
-import elasticsearchDataGzipCompression from '@webiny/api-elasticsearch/plugins/GzipCompression'
+import i18nContentPlugins from '@webiny/api-i18n-content/plugins'
+import i18nDynamoDbStorageOperations from '@webiny/api-i18n-ddb'
+import i18nPlugins from '@webiny/api-i18n/graphql'
+import { createStorageOperations as createPageImportExportStorageOperations } from '@webiny/api-page-builder-import-export-so-ddb'
+import pageBuilderImportExportPlugins from '@webiny/api-page-builder-import-export/graphql'
+import pageBuilderPlugins from '@webiny/api-page-builder/graphql'
+import pageBuilderPrerenderingPlugins from '@webiny/api-page-builder/prerendering'
+import prerenderingServicePlugins from '@webiny/api-prerendering-service/client'
+import { DynamoDbDriver } from '@webiny/db-dynamodb'
+import dynamoDbPlugins from '@webiny/db-dynamodb/plugins'
+import { createHandler } from '@webiny/handler-aws'
+import dbPlugins from '@webiny/handler-db'
+import graphqlPlugins from '@webiny/handler-graphql'
+import logsPlugins from '@webiny/handler-logs'
+import { DocumentClient } from 'aws-sdk/clients/dynamodb'
+import overridePlugins from './plugins'
 import securityPlugins from './security'
-
-// Imports plugins created via scaffolding utilities.
-import scaffoldsPlugins from './plugins/scaffolds'
-import { createElasticsearchClient } from '@webiny/api-elasticsearch/client'
 
 const debug = process.env.DEBUG === 'true'
 
@@ -80,20 +79,24 @@ export const handler = createHandler({
     createFormBuilder({
       storageOperations: createFormBuilderStorageOperations({
         documentClient,
+        // @ts-ignore
         elasticsearch: elasticsearchClient,
       }),
     }),
     createAdminHeadlessCmsContext({
       storageOperations: createHeadlessCmsStorageOperations({
         documentClient,
+        // @ts-ignore
         elasticsearch: elasticsearchClient,
         modelFieldToGraphQLPlugins: headlessCmsModelFieldToGraphQLPlugins(),
         plugins: [elasticsearchDataGzipCompression()],
       }),
     }),
     createAdminHeadlessCmsGraphQL(),
-    scaffoldsPlugins(),
     elasticsearchDataGzipCompression(),
+
+    // Override
+    overridePlugins(),
   ],
   http: { debug },
 })

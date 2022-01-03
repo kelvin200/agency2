@@ -1,9 +1,8 @@
-import * as pulumi from '@pulumi/pulumi'
 import * as aws from '@pulumi/aws'
-import policies from './policies'
-
+import * as pulumi from '@pulumi/pulumi'
 // @ts-ignore
 import { getLayerArn } from '@webiny/aws-layers'
+import policies from './policies'
 
 interface PreRenderingServiceParams {
   env: Record<string, any>
@@ -63,7 +62,7 @@ class PageBuilder {
 
     const render = new aws.lambda.Function('ps-render', {
       role: this.role.arn,
-      runtime: 'nodejs12.x',
+      runtime: 'nodejs14.x',
       handler: 'handler.handler',
       timeout: 600,
       memorySize: 2048,
@@ -81,7 +80,7 @@ class PageBuilder {
 
     const flush = new aws.lambda.Function('ps-flush', {
       role: this.role.arn,
-      runtime: 'nodejs12.x',
+      runtime: 'nodejs14.x',
       handler: 'handler.handler',
       timeout: 30,
       memorySize: 512,
@@ -98,7 +97,7 @@ class PageBuilder {
 
     const queueAdd = new aws.lambda.Function('ps-queue-add', {
       role: this.role.arn,
-      runtime: 'nodejs12.x',
+      runtime: 'nodejs14.x',
       handler: 'handler.handler',
       timeout: 30,
       memorySize: 512,
@@ -115,7 +114,7 @@ class PageBuilder {
 
     const queueProcess = new aws.lambda.Function('ps-queue-process', {
       role: this.role.arn,
-      runtime: 'nodejs12.x',
+      runtime: 'nodejs14.x',
       handler: 'handler.handler',
       timeout: 300, // 5 minutes.
       memorySize: 1024,

@@ -3391,6 +3391,57 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@m/api-elasticsearch@workspace:packages/api-elasticsearch":
+  version: 0.0.0-use.local
+  resolution: "@m/api-elasticsearch@workspace:packages/api-elasticsearch"
+  dependencies:
+    "@webiny/api-dynamodb-to-elasticsearch": 5.20.0
+    "@webiny/api-elasticsearch": 5.20.0
+    "@webiny/cli": 5.20.0
+    "@webiny/handler-aws": 5.20.0
+    "@webiny/project-utils": 5.20.0
+  languageName: unknown
+  linkType: soft
+
+"@m/api-file-manager-ddb-es@workspace:packages/api-file-manager-ddb-es":
+  version: 0.0.0-use.local
+  resolution: "@m/api-file-manager-ddb-es@workspace:packages/api-file-manager-ddb-es"
+  dependencies:
+    "@webiny/api-dynamodb-to-elasticsearch": 5.20.0
+    "@webiny/api-elasticsearch": 5.20.0
+    "@webiny/api-file-manager-ddb-es": 5.20.0
+    "@webiny/cli": 5.20.0
+    "@webiny/handler-aws": 5.20.0
+    "@webiny/project-utils": 5.20.0
+  languageName: unknown
+  linkType: soft
+
+"@m/api-form-builder-so-ddb-es@workspace:packages/api-form-builder-so-ddb-es":
+  version: 0.0.0-use.local
+  resolution: "@m/api-form-builder-so-ddb-es@workspace:packages/api-form-builder-so-ddb-es"
+  dependencies:
+    "@webiny/api-dynamodb-to-elasticsearch": 5.20.0
+    "@webiny/api-elasticsearch": 5.20.0
+    "@webiny/api-form-builder-so-ddb-es": 5.20.0
+    "@webiny/cli": 5.20.0
+    "@webiny/handler-aws": 5.20.0
+    "@webiny/project-utils": 5.20.0
+  languageName: unknown
+  linkType: soft
+
+"@m/api-page-builder-so-ddb-es@workspace:packages/api-page-builder-so-ddb-es":
+  version: 0.0.0-use.local
+  resolution: "@m/api-page-builder-so-ddb-es@workspace:packages/api-page-builder-so-ddb-es"
+  dependencies:
+    "@webiny/api-dynamodb-to-elasticsearch": 5.20.0
+    "@webiny/api-elasticsearch": 5.20.0
+    "@webiny/api-page-builder-so-ddb-es": 5.20.0
+    "@webiny/cli": 5.20.0
+    "@webiny/handler-aws": 5.20.0
+    "@webiny/project-utils": 5.20.0
+  languageName: unknown
+  linkType: soft
+
 "@material/animation@npm:^3.1.0":
   version: 3.1.0
   resolution: "@material/animation@npm:3.1.0"
@@ -5213,6 +5264,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/elasticsearch@npm:^5.0.40":
+  version: 5.0.40
+  resolution: "@types/elasticsearch@npm:5.0.40"
+  checksum: 35682edb3dce461b62c3d2e7327f211fc592fec27c20f539e23ebc7f22920fca63b44f5fb71a359ae3568e11fd9dab668647276ce89e525f02498bfaa7bd023e
+  languageName: node
+  linkType: hard
+
 "@types/glob@npm:^7.1.1":
   version: 7.2.0
   resolution: "@types/glob@npm:7.2.0"
@@ -5358,10 +5416,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^12.12.22":
-  version: 12.20.39
-  resolution: "@types/node@npm:12.20.39"
-  checksum: 6bf9fe4317e472f0f00d3f98afa18307765271994b09f9ba6b2c5f4f35478b55642d1c3c7d3e61dbec5df5ba3159aa9820bd8f420fc9f332e8ee067ffc7ce35c
+"@types/node@npm:14.18.0":
+  version: 14.18.0
+  resolution: "@types/node@npm:14.18.0"
+  checksum: b120c26fe5f30bc358e861db8d7e401e419d14bd9dd25c022f3c2ea8b0b429d4c9efd77ad5d6d2a8bde61702a6786fb74d409f1b2cbb61c79133e2a65aab4fb1
   languageName: node
   linkType: hard
 
@@ -7786,8 +7844,9 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.10.4
     "@babel/preset-env": ^7.10.4
     "@babel/preset-typescript": ^7.10.4
+    "@types/elasticsearch": ^5.0.40
     "@types/jest": ^26.0.20
-    "@types/node": ^12.12.22
+    "@types/node": 14.18.0
     "@types/react": ^16.9.17
     "@types/react-dom": ^16.9.4
     "@typescript-eslint/eslint-plugin": ^4.14.1
@@ -8138,7 +8197,6 @@ __metadata:
     "@webiny/api-admin-users-cognito-so-ddb": 5.20.0
     "@webiny/api-elasticsearch": 5.20.0
     "@webiny/api-file-manager": 5.20.0
-    "@webiny/api-file-manager-ddb-es": 5.20.0
     "@webiny/api-file-manager-s3": 5.20.0
     "@webiny/api-form-builder": 5.20.0
     "@webiny/api-form-builder-so-ddb-es": 5.20.0
@@ -8150,7 +8208,6 @@ __metadata:
     "@webiny/api-page-builder": 5.20.0
     "@webiny/api-page-builder-import-export": 5.20.0
     "@webiny/api-page-builder-import-export-so-ddb": 5.20.0
-    "@webiny/api-page-builder-so-ddb-es": 5.20.0
     "@webiny/api-prerendering-service": 5.20.0
     "@webiny/api-security": 5.20.0
     "@webiny/api-security-cognito": 5.20.0
@@ -8205,9 +8262,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "api-page-builder-export-pages-combine@workspace:api/code/pageBuilder/exportPages/combine"
   dependencies:
-    "@webiny/api-elasticsearch": 5.20.0
     "@webiny/api-file-manager": 5.20.0
-    "@webiny/api-file-manager-ddb-es": 5.20.0
     "@webiny/api-file-manager-s3": 5.20.0
     "@webiny/api-i18n": 5.20.0
     "@webiny/api-i18n-content": 5.20.0
@@ -8215,7 +8270,6 @@ __metadata:
     "@webiny/api-page-builder": 5.20.0
     "@webiny/api-page-builder-import-export": 5.20.0
     "@webiny/api-page-builder-import-export-so-ddb": 5.20.0
-    "@webiny/api-page-builder-so-ddb-es": 5.20.0
     "@webiny/api-security": 5.20.0
     "@webiny/api-security-so-ddb": 5.20.0
     "@webiny/api-tenancy": 5.20.0
@@ -8233,9 +8287,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "api-page-builder-export-pages-process@workspace:api/code/pageBuilder/exportPages/process"
   dependencies:
-    "@webiny/api-elasticsearch": 5.20.0
     "@webiny/api-file-manager": 5.20.0
-    "@webiny/api-file-manager-ddb-es": 5.20.0
     "@webiny/api-file-manager-s3": 5.20.0
     "@webiny/api-i18n": 5.20.0
     "@webiny/api-i18n-content": 5.20.0
@@ -8243,7 +8295,6 @@ __metadata:
     "@webiny/api-page-builder": 5.20.0
     "@webiny/api-page-builder-import-export": 5.20.0
     "@webiny/api-page-builder-import-export-so-ddb": 5.20.0
-    "@webiny/api-page-builder-so-ddb-es": 5.20.0
     "@webiny/api-security": 5.20.0
     "@webiny/api-security-so-ddb": 5.20.0
     "@webiny/api-tenancy": 5.20.0
@@ -8261,9 +8312,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "api-page-builder-import-pages-create@workspace:api/code/pageBuilder/importPages/create"
   dependencies:
-    "@webiny/api-elasticsearch": 5.20.0
     "@webiny/api-file-manager": 5.20.0
-    "@webiny/api-file-manager-ddb-es": 5.20.0
     "@webiny/api-file-manager-s3": 5.20.0
     "@webiny/api-i18n": 5.20.0
     "@webiny/api-i18n-content": 5.20.0
@@ -8271,7 +8320,6 @@ __metadata:
     "@webiny/api-page-builder": 5.20.0
     "@webiny/api-page-builder-import-export": 5.20.0
     "@webiny/api-page-builder-import-export-so-ddb": 5.20.0
-    "@webiny/api-page-builder-so-ddb-es": 5.20.0
     "@webiny/api-security": 5.20.0
     "@webiny/api-security-so-ddb": 5.20.0
     "@webiny/api-tenancy": 5.20.0
@@ -8289,9 +8337,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "api-page-builder-import-pages-process@workspace:api/code/pageBuilder/importPages/process"
   dependencies:
-    "@webiny/api-elasticsearch": 5.20.0
     "@webiny/api-file-manager": 5.20.0
-    "@webiny/api-file-manager-ddb-es": 5.20.0
     "@webiny/api-file-manager-s3": 5.20.0
     "@webiny/api-i18n": 5.20.0
     "@webiny/api-i18n-content": 5.20.0
@@ -8299,7 +8345,6 @@ __metadata:
     "@webiny/api-page-builder": 5.20.0
     "@webiny/api-page-builder-import-export": 5.20.0
     "@webiny/api-page-builder-import-export-so-ddb": 5.20.0
-    "@webiny/api-page-builder-so-ddb-es": 5.20.0
     "@webiny/api-security": 5.20.0
     "@webiny/api-security-so-ddb": 5.20.0
     "@webiny/api-tenancy": 5.20.0
@@ -8318,7 +8363,6 @@ __metadata:
   resolution: "api-page-builder-update-settings@workspace:api/code/pageBuilder/updateSettings"
   dependencies:
     "@webiny/api-page-builder": 5.20.0
-    "@webiny/api-page-builder-so-ddb-es": 5.20.0
     "@webiny/cli": 5.20.0
     "@webiny/db-dynamodb": 5.20.0
     "@webiny/handler-aws": 5.20.0

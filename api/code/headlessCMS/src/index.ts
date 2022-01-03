@@ -1,23 +1,22 @@
-import { DocumentClient } from 'aws-sdk/clients/dynamodb'
-import { createHandler } from '@webiny/handler-aws'
-import i18nPlugins from '@webiny/api-i18n/graphql'
-import i18nDynamoDbStorageOperations from '@webiny/api-i18n-ddb'
-import i18nContentPlugins from '@webiny/api-i18n-content/plugins'
-import dbPlugins from '@webiny/handler-db'
-import { DynamoDbDriver } from '@webiny/db-dynamodb'
-import securityPlugins from './security'
+import { createElasticsearchClient } from '@m/api-elasticsearch/src/create'
+import elasticsearchDataGzipCompression from '@webiny/api-elasticsearch/plugins/GzipCompression'
 import {
   createContentHeadlessCmsContext,
   createContentHeadlessCmsGraphQL,
 } from '@webiny/api-headless-cms'
 import { createStorageOperations as createHeadlessCmsStorageOperations } from '@webiny/api-headless-cms-ddb-es'
 import headlessCmsModelFieldToGraphQLPlugins from '@webiny/api-headless-cms/content/plugins/graphqlFields'
+import i18nContentPlugins from '@webiny/api-i18n-content/plugins'
+import i18nDynamoDbStorageOperations from '@webiny/api-i18n-ddb'
+import i18nPlugins from '@webiny/api-i18n/graphql'
+import { DynamoDbDriver } from '@webiny/db-dynamodb'
+import { createHandler } from '@webiny/handler-aws'
+import dbPlugins from '@webiny/handler-db'
 import logsPlugins from '@webiny/handler-logs'
-import elasticsearchDataGzipCompression from '@webiny/api-elasticsearch/plugins/GzipCompression'
-import { createElasticsearchClient } from '@webiny/api-elasticsearch/client'
-
+import { DocumentClient } from 'aws-sdk/clients/dynamodb'
 // Imports plugins created via scaffolding utilities.
 import scaffoldsPlugins from './plugins/scaffolds'
+import securityPlugins from './security'
 
 const debug = process.env.DEBUG === 'true'
 
@@ -47,6 +46,7 @@ export const handler = createHandler({
     createContentHeadlessCmsContext({
       storageOperations: createHeadlessCmsStorageOperations({
         documentClient,
+        // @ts-ignore
         elasticsearch,
         modelFieldToGraphQLPlugins: headlessCmsModelFieldToGraphQLPlugins(),
         plugins: [elasticsearchDataGzipCompression()],

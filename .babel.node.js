@@ -22,6 +22,7 @@ module.exports = ({ path }) => ({
         cwd: path,
         alias: {
           '~': './src',
+          '@packages': './packages',
         },
       },
     ],

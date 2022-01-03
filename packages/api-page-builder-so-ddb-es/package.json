@@ -1,0 +1,16 @@
+{
+  "name": "@m/api-page-builder-so-ddb-es",
+  "version": "0.1.0",
+  "scripts": {
+    "build": "yarn webiny run build",
+    "watch": "yarn webiny run watch"
+  },
+  "dependencies": {
+    "@webiny/api-dynamodb-to-elasticsearch": "5.20.0",
+    "@webiny/api-elasticsearch": "5.20.0",
+    "@webiny/api-page-builder-so-ddb-es": "5.20.0",
+    "@webiny/cli": "5.20.0",
+    "@webiny/handler-aws": "5.20.0",
+    "@webiny/project-utils": "5.20.0"
+  }
+}

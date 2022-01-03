@@ -27,3 +27,4 @@ cypress.json
 !.yarn/sdks
 !.yarn/versions
 .pnp.*
+test-es.js

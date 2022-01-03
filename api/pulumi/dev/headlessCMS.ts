@@ -48,7 +48,7 @@ class HeadlessCMS {
 
     this.functions = {
       graphql: new aws.lambda.Function('headless-cms', {
-        runtime: 'nodejs12.x',
+        runtime: 'nodejs14.x',
         handler: 'handler.handler',
         role: this.role.arn,
         timeout: 30,

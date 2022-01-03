@@ -11,11 +11,15 @@
     "declaration": true,
     "composite": true,
     "noEmit": false,
+    "resolveJsonModule": true,
     "jsx": "preserve",
     "emitDeclarationOnly": true,
     "baseUrl": ".",
-    "paths": {},
+    "paths": {
+      "@m/*": ["./packages/*"]
+    },
     "typeRoots": ["node_modules/@types", "./types"]
   },
+  "include": ["packages"],
   "exclude": ["node_modules", "dist", "**jest**", "**resources.js"]
 }

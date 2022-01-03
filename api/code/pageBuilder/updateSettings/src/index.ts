@@ -1,9 +1,9 @@
-import { DocumentClient } from 'aws-sdk/clients/dynamodb'
+import pageBuilderDynamoDbElasticsearchPlugins from '@m/api-page-builder-so-ddb-es/src'
+import updateSettingsPlugins from '@webiny/api-page-builder/updateSettings'
+import { DynamoDbDriver } from '@webiny/db-dynamodb'
 import { createHandler } from '@webiny/handler-aws'
 import dbPlugins from '@webiny/handler-db'
-import { DynamoDbDriver } from '@webiny/db-dynamodb'
-import updateSettingsPlugins from '@webiny/api-page-builder/updateSettings'
-import pageBuilderDynamoDbElasticsearchPlugins from '@webiny/api-page-builder-so-ddb-es'
+import { DocumentClient } from 'aws-sdk/clients/dynamodb'
 
 export const handler = createHandler(
   updateSettingsPlugins(),

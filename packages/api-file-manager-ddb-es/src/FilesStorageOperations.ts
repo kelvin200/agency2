@@ -385,7 +385,7 @@ export class FilesStorageOperations implements FileManagerFilesStorageOperations
           must,
         },
       },
-      size: limit + 1,
+      size: 0, // Do not returns hits but still calculate aggregations
       aggs: {
         listTags: {
           terms: { field: 'tags.keyword' },
@@ -394,7 +394,7 @@ export class FilesStorageOperations implements FileManagerFilesStorageOperations
       search_after: decodeCursor(null),
     }
 
-    let response = undefined
+    let response: SearchResponse<any>
 
     try {
       response = await this.esClient.search({
@@ -411,7 +411,7 @@ export class FilesStorageOperations implements FileManagerFilesStorageOperations
       )
     }
 
-    const tags = response.body.aggregations.listTags.buckets.map(item => item.key) || []
+    const tags = response.aggregations.listTags.buckets.map(item => item.key) || []
 
     let hasMoreItems = false
     const totalCount = tags.length

@@ -1,10 +1,10 @@
 import { createElasticsearchClient } from '@m/api-elasticsearch/src/create'
+import { createStorageOperations as createHeadlessCmsStorageOperations } from '@m/api-headless-cms-ddb-es/src'
 import elasticsearchDataGzipCompression from '@webiny/api-elasticsearch/plugins/GzipCompression'
 import {
   createContentHeadlessCmsContext,
   createContentHeadlessCmsGraphQL,
 } from '@webiny/api-headless-cms'
-import { createStorageOperations as createHeadlessCmsStorageOperations } from '@webiny/api-headless-cms-ddb-es'
 import headlessCmsModelFieldToGraphQLPlugins from '@webiny/api-headless-cms/content/plugins/graphqlFields'
 import i18nContentPlugins from '@webiny/api-i18n-content/plugins'
 import i18nDynamoDbStorageOperations from '@webiny/api-i18n-ddb'

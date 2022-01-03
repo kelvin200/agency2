@@ -3429,6 +3429,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@m/api-headless-cms-ddb-es@workspace:packages/api-headless-cms-ddb-es":
+  version: 0.0.0-use.local
+  resolution: "@m/api-headless-cms-ddb-es@workspace:packages/api-headless-cms-ddb-es"
+  dependencies:
+    "@webiny/api-headless-cms-ddb-es": 5.20.0
+    "@webiny/cli": 5.20.0
+    "@webiny/handler-aws": 5.20.0
+    "@webiny/project-utils": 5.20.0
+  languageName: unknown
+  linkType: soft
+
 "@m/api-page-builder-so-ddb-es@workspace:packages/api-page-builder-so-ddb-es":
   version: 0.0.0-use.local
   resolution: "@m/api-page-builder-so-ddb-es@workspace:packages/api-page-builder-so-ddb-es"

@@ -6,10 +6,8 @@ import { createSubmissionEntity } from '@webiny/api-form-builder-so-ddb-es/defin
 import { createSystemEntity } from '@webiny/api-form-builder-so-ddb-es/definitions/system'
 import { createTable } from '@webiny/api-form-builder-so-ddb-es/definitions/table'
 import { createElasticsearchTable } from '@webiny/api-form-builder-so-ddb-es/definitions/tableElasticsearch'
-import { createFormStorageOperations } from '@webiny/api-form-builder-so-ddb-es/operations/form'
 import formElasticsearchFields from '@webiny/api-form-builder-so-ddb-es/operations/form/elasticsearchFields'
 import { createSettingsStorageOperations } from '@webiny/api-form-builder-so-ddb-es/operations/settings'
-import { createSubmissionStorageOperations } from '@webiny/api-form-builder-so-ddb-es/operations/submission'
 import submissionElasticsearchFields from '@webiny/api-form-builder-so-ddb-es/operations/submission/elasticsearchFields'
 import { createSystemStorageOperations } from '@webiny/api-form-builder-so-ddb-es/operations/system'
 import { createElasticsearchIndex } from '@webiny/api-form-builder-so-ddb-es/operations/system/createElasticsearchIndex'
@@ -20,6 +18,8 @@ import {
 import dynamoDbValueFilters from '@webiny/db-dynamodb/plugins/filters'
 import WebinyError from '@webiny/error'
 import { PluginsContainer } from '@webiny/plugins'
+import { createFormStorageOperations } from './operations-form'
+import { createSubmissionStorageOperations } from './operations-submission'
 
 // import upgrade5160 from "@webiny/api-form-builder-so-ddb-es/upgrades/5.16.0";
 
@@ -144,6 +144,7 @@ export const createFormBuilderStorageOperations: FormBuilderStorageOperationsFac
       entity: entities.settings,
     }),
     ...createFormStorageOperations({
+      // @ts-ignore
       elasticsearch,
       table,
       entity: entities.form,
@@ -151,6 +152,7 @@ export const createFormBuilderStorageOperations: FormBuilderStorageOperationsFac
       plugins,
     }),
     ...createSubmissionStorageOperations({
+      // @ts-ignore
       elasticsearch,
       table,
       entity: entities.submission,

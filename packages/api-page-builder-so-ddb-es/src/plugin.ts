@@ -1,10 +1,10 @@
 import fields from '@webiny/api-page-builder-so-ddb-es/operations/pages/fields'
+import { PageStorageOperationsDdbEs } from '@webiny/api-page-builder-so-ddb-es/operations/pages/PageStorageOperations'
 import {
   PageStorageOperationsProviderPlugin,
   Params,
 } from '@webiny/api-page-builder/plugins/PageStorageOperationsProviderPlugin'
 import { PageStorageOperations } from '@webiny/api-page-builder/types'
-import { PageStorageOperationsDdbEs } from './PageStorageOperations'
 
 export class PageStorageOperationsDdbEsProviderPlugin extends PageStorageOperationsProviderPlugin {
   public async provide({ context }: Params): Promise<PageStorageOperations> {

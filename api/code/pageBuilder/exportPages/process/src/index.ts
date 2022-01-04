@@ -1,6 +1,6 @@
 import elasticSearch from '@m/api-elasticsearch/src'
-import fileManagerDynamoDbElasticStorageOperation from '@m/api-file-manager-ddb-es/src'
 import pageBuilderDynamoDbElasticsearchPlugins from '@m/api-page-builder-so-ddb-es/src'
+import fileManagerDynamoDbElasticStorageOperation from '@webiny/api-file-manager-ddb-es'
 import fileManagerS3 from '@webiny/api-file-manager-s3'
 import fileManagerPlugins from '@webiny/api-file-manager/plugins'
 import i18nContentPlugins from '@webiny/api-i18n-content/plugins'

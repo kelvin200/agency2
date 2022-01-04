@@ -1,4 +1,4 @@
-import { ElasticsearchContext } from '@m/api-elasticsearch/src/types'
+import { ElasticsearchContext } from '@webiny/api-elasticsearch/types'
 import { FileManagerContext } from '@webiny/api-file-manager/types'
 import { FormBuilderContext } from '@webiny/api-form-builder/types'
 import { BaseI18NContentContext as I18NContentContext } from '@webiny/api-i18n-content/types'

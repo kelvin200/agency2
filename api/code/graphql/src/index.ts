@@ -1,18 +1,18 @@
 // Override
 import elasticsearchClientContext from '@m/api-elasticsearch/src'
 import { createElasticsearchClient } from '@m/api-elasticsearch/src/create'
-import fileManagerDynamoDbElasticStorageOperation from '@m/api-file-manager-ddb-es/src'
-import { createFormBuilderStorageOperations } from '@m/api-form-builder-so-ddb-es/src'
-import { createStorageOperations as createHeadlessCmsStorageOperations } from '@m/api-headless-cms-ddb-es/src'
 import pageBuilderDynamoDbElasticsearchPlugins from '@m/api-page-builder-so-ddb-es/src'
 import elasticsearchDataGzipCompression from '@webiny/api-elasticsearch/plugins/GzipCompression'
+import fileManagerDynamoDbElasticStorageOperation from '@webiny/api-file-manager-ddb-es'
 import fileManagerS3 from '@webiny/api-file-manager-s3'
 import fileManagerPlugins from '@webiny/api-file-manager/plugins'
 import { createFormBuilder } from '@webiny/api-form-builder'
+import { createFormBuilderStorageOperations } from '@webiny/api-form-builder-so-ddb-es'
 import {
   createAdminHeadlessCmsContext,
   createAdminHeadlessCmsGraphQL,
 } from '@webiny/api-headless-cms'
+import { createStorageOperations as createHeadlessCmsStorageOperations } from '@webiny/api-headless-cms-ddb-es'
 import headlessCmsModelFieldToGraphQLPlugins from '@webiny/api-headless-cms/content/plugins/graphqlFields'
 import i18nContentPlugins from '@webiny/api-i18n-content/plugins'
 import i18nDynamoDbStorageOperations from '@webiny/api-i18n-ddb'
@@ -48,6 +48,7 @@ export const handler = createHandler({
     dynamoDbPlugins(),
     logsPlugins(),
     graphqlPlugins({ debug }),
+    // @ts-ignore
     elasticsearchClientContext(elasticsearchClient),
     dbPlugins({
       table: process.env.DB_TABLE,

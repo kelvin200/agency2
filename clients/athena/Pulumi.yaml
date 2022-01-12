@@ -1,0 +1,4 @@
+name: athena
+runtime: nodejs
+description: Fullstack Athena website.
+main: pulumi/

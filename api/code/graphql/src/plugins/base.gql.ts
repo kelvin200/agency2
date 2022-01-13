@@ -11,12 +11,23 @@ export const createBaseGraphQL = (): GraphQLSchemaPlugin => {
           athena: AthenaQuery
         }
 
+        type AthenaMutation {
+          athena: AthenaMutation
+        }
+
         extend type Query {
           athena: AthenaQuery
+        }
+
+        extend type Mutation {
+          athena: AthenaMutation
         }
       `,
       resolvers: {
         Query: {
+          athena: emptyResolver,
+        },
+        Mutation: {
           athena: emptyResolver,
         },
       },

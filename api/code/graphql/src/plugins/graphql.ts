@@ -1,15 +1,22 @@
-import { ErrorResponse, ListResponse } from '@webiny/handler-graphql/responses'
+import { ErrorResponse, ListResponse, Response } from '@webiny/handler-graphql/responses'
+
+const resolve = async fn => {
+  try {
+    return new Response(await fn())
+  } catch (e) {
+    return new ErrorResponse(e)
+  }
+}
 
 export const createAthenaGraphQL = () => ({
   type: 'graphql-schema',
   schema: {
     typeDefs: /* GraphQL */ `
       type NhapHangRecord {
-        key: String
+        id: String
         name: String
-        age: Int
-        address: String
-        tags: [String]
+        price: Int
+        date: String
       }
 
       type ListNhapHangResponse {
@@ -20,6 +27,10 @@ export const createAthenaGraphQL = () => ({
       extend type AthenaQuery {
         listNhapHang: ListNhapHangResponse
       }
+
+      extend type AthenaMutation {
+        importNhapHang(csv: String): ListNhapHangResponse
+      }
     `,
     resolvers: {
       AthenaQuery: {
@@ -27,25 +38,22 @@ export const createAthenaGraphQL = () => ({
           try {
             const data = [
               {
-                key: '1',
+                id: '1',
                 name: 'John Brown',
-                age: 32,
-                address: 'New York No. 1 Lake Park',
-                tags: ['nice', 'developer'],
+                price: 32,
+                date: 'New York No. 1 Lake Park',
               },
               {
-                key: '2',
+                id: '2',
                 name: 'Jim Green',
-                age: 42,
-                address: 'London No. 1 Lake Park',
-                tags: ['loser'],
+                price: 42,
+                date: 'London No. 1 Lake Park',
               },
               {
-                key: '3',
+                id: '3',
                 name: 'Joe Black',
-                age: 32,
-                address: 'Sidney No. 1 Lake Park',
-                tags: ['cool', 'teacher'],
+                price: 32,
+                date: 'Sidney No. 1 Lake Park',
               },
             ]
             return new ListResponse(data)
@@ -53,6 +61,29 @@ export const createAthenaGraphQL = () => ({
             return new ErrorResponse(e)
           }
         },
+      },
+      AthenaMutation: {
+        importNhapHang: async (_, args: { csv?: string }, context) =>
+          resolve(() => {
+            const { csv } = args
+            if (!csv) {
+              throw new Error(`csv required`)
+            }
+            return [
+              {
+                id: '5',
+                name: 'test',
+                price: 1111,
+                date: 'asafasdasdas',
+              },
+              {
+                id: '6',
+                name: 'test 2',
+                price: 3333,
+                date: 'cbfbvbcxv',
+              },
+            ]
+          }),
       },
     },
   },

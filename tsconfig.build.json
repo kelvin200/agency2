@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "ESNext",
     "allowJs": true,
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
     "module": "esnext",
-    "lib": ["dom", "dom.iterable"],
+    "lib": ["dom", "dom.iterable", "ESNext"],
     "esModuleInterop": true,
     "declaration": true,
     "composite": true,

@@ -1,24 +1,28 @@
 // If using old ES SDK (Not AWS)
-import { Client, ConfigOptions } from 'elasticsearch'
+import { Client, ConfigOptions, SearchResponse } from 'elasticsearch'
 import { ElasticsearchClientOptions } from './types'
 
-class MClient {
+export class MClient {
   private _es: Client
-  public bulk: any
   public indices: any
   public cat: any
 
   constructor(clientOptions: ConfigOptions) {
     this._es = new Client(clientOptions)
-    this.bulk = this._es.bulk
     this.indices = this._es.indices
     this.cat = this._es.cat
+  }
+
+  async bulk(a) {
+    const r = await this._es.bulk(a)
+    // @ts-ignore
+    return r.body ? r : { body: r }
   }
 
   async search(a) {
     const r = await this._es.search(a)
     // @ts-ignore
-    return r.body ? r : { body: r }
+    return (r.body ? r : { body: r }) as { body: SearchResponse }
   }
 }
 

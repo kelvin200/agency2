@@ -1,8 +1,7 @@
 import { useMutation, useQuery } from '@apollo/react-hooks'
 import { Alert, Button, Space, Table } from 'antd'
-import dotProp from 'dot-prop-immutable'
+import { get, set } from 'dot-prop-immutable'
 import gql from 'graphql-tag'
-import get from 'lodash/get'
 import React, { useEffect, useState } from 'react'
 
 const columns = [
@@ -34,14 +33,22 @@ const columns = [
 ]
 
 const LIST = gql`
-  query List {
+  query List(
+    $where: ListStockingInput
+    $limit: Int
+    $after: String
+    $sort: [ListStockingSort!]
+    $search: ListStockingSearchInput
+  ) {
     athena {
-      listNhapHang {
+      listStocking(where: $where, sort: $sort, limit: $limit, after: $after, search: $search) {
         data {
           id
           name
-          price
-          date
+          vendor
+          toLocation
+          quantity
+          expiryDate
         }
         error {
           code
@@ -56,7 +63,7 @@ const LIST = gql`
 const IMPORT = gql`
   mutation Import($csv: String!) {
     athena {
-      importNhapHang(csv: $csv) {
+      importStocking(csv: $csv) {
         data {
           id
           name
@@ -75,14 +82,14 @@ const IMPORT = gql`
 
 const extractVariables = key => {
   // TODO: Find a better way to parse the query/id from cache
-  const variables = key.replace('$ROOT_QUERY.athena.listNhapHang(', '').replace(')', '')
+  const variables = key.replace('$ROOT_QUERY.athena.listStocking(', '').replace(')', '')
 
   return JSON.parse(variables)
 }
 
 const modifyCacheForAllListPagesQuery = (cache, operation: (variables?: any) => void) => {
   const existingQueriesInCache = Object.keys(cache.data.data).filter(
-    key => key.includes('.listNhapHang') && !key.endsWith('.meta'),
+    key => key.includes('.listStocking') && !key.endsWith('.meta'),
   )
 
   existingQueriesInCache.forEach(cacheKey => {
@@ -97,28 +104,32 @@ export const addExtraItemsToList = (cache, extraItems) => {
     const gqlParams = { query: LIST, variables }
     const data = cache.readQuery(gqlParams)
 
-    const list = get(data, 'athena.listNhapHang.data')
+    const list = get(data, 'athena.listStocking.data')
 
     cache.writeQuery({
       ...gqlParams,
-      data: dotProp.set(data, 'athena.listNhapHang.data', list.concat(extraItems)),
+      data: set(data, 'athena.listStocking.data', list.concat(extraItems)),
     })
   })
 }
 
-export const NhapHang = () => {
+export const Stocking = () => {
   const [error, setError] = useState(null)
 
   const [ls, setLs] = useState([])
 
-  const { data: _ } = useQuery(LIST)
+  const variables = {}
+
+  const { data: _ } = useQuery(LIST, {
+    variables,
+  })
 
   useEffect(() => {
     if (!_) {
       return
     }
 
-    const { error, data } = _.athena.listNhapHang
+    const { error, data } = _.athena.listStocking
 
     if (error) {
       setError(error.message)
@@ -134,14 +145,14 @@ export const NhapHang = () => {
     const { data: res } = await importCsv({
       variables: { csv: 'h' },
       update(cache, { data }) {
-        if (data.athena.importNhapHang.error) {
+        if (data.athena.importStocking.error) {
           return
         }
 
-        addExtraItemsToList(cache, data.athena.importNhapHang.data)
+        addExtraItemsToList(cache, data.athena.importStocking.data)
       },
     })
-    const { error } = res.athena.importNhapHang
+    const { error } = res.athena.importStocking
 
     if (error) {
       return setError(error.message)

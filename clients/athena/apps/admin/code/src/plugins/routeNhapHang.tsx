@@ -1,6 +1,6 @@
 import { Route } from '@webiny/react-router'
 import React from 'react'
-import { NhapHang } from '../components/nhapHang'
+import { Stocking } from '../components/stocking'
 
 /**
  * When react-router is unable to find a proper route, redirect to "/".
@@ -8,5 +8,5 @@ import { NhapHang } from '../components/nhapHang'
 export const routeNhapHang = {
   type: 'route',
   name: 'route-nhap-hang',
-  route: <Route path="/nhap-hang" component={NhapHang} />,
+  route: <Route path="/nhap-hang" component={Stocking} />,
 }

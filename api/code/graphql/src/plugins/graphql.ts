@@ -1,4 +1,6 @@
-import { ErrorResponse, ListResponse, Response } from '@webiny/handler-graphql/responses'
+import { ErrorResponse, Response } from '@webiny/handler-graphql/responses'
+import { importStocking } from './stocking/import'
+import { listStocking } from './stocking/list'
 
 const resolve = async fn => {
   try {
@@ -12,77 +14,82 @@ export const createAthenaGraphQL = () => ({
   type: 'graphql-schema',
   schema: {
     typeDefs: /* GraphQL */ `
-      type NhapHangRecord {
+      type StockingRecord {
         id: String
         name: String
-        price: Int
-        date: String
+        vendor: String
+        toLocation: String
+        quantity: Number
+        expiryDate: String
       }
 
-      type ListNhapHangResponse {
-        data: [NhapHangRecord]
+      type ListStockingResponse {
+        data: [StockingRecord]
         error: PbError
       }
 
+      input ListStockingInput {
+        toLocation: String
+        vendor: String
+        tags: ListStockingWhereTagsInput
+      }
+
+      enum TagsRule {
+        all
+        any
+      }
+
+      input ListStockingWhereTagsInput {
+        query: [String]
+        rule: TagsRule
+      }
+
+      enum ListStockingSort {
+        quantity_ASC
+        quantity_DESC
+        expiryDate_ASC
+        expiryDate_DESC
+        name_ASC
+        name_DESC
+      }
+
+      input ListStockingSearchInput {
+        query: String
+      }
+
       extend type AthenaQuery {
-        listNhapHang: ListNhapHangResponse
+        listStocking(
+          where: ListStockingInput
+          limit: Int
+          after: String
+          sort: [ListStockingSort!]
+          search: ListStockingSearchInput
+        ): ListStockingResponse
       }
 
       extend type AthenaMutation {
-        importNhapHang(csv: String): ListNhapHangResponse
+        importStocking(csv: String): ListStockingResponse
       }
     `,
     resolvers: {
       AthenaQuery: {
-        listNhapHang: async (_, args, context) => {
+        listStocking: (_, args, context) => {
           try {
-            const data = [
-              {
-                id: '1',
-                name: 'John Brown',
-                price: 32,
-                date: 'New York No. 1 Lake Park',
-              },
-              {
-                id: '2',
-                name: 'Jim Green',
-                price: 42,
-                date: 'London No. 1 Lake Park',
-              },
-              {
-                id: '3',
-                name: 'Joe Black',
-                price: 32,
-                date: 'Sidney No. 1 Lake Park',
-              },
-            ]
-            return new ListResponse(data)
+            return listStocking(args, context)
           } catch (e) {
             return new ErrorResponse(e)
           }
         },
       },
       AthenaMutation: {
-        importNhapHang: async (_, args: { csv?: string }, context) =>
+        importStocking: (_, args: { csv?: string }, context) =>
           resolve(() => {
             const { csv } = args
             if (!csv) {
               throw new Error(`csv required`)
             }
-            return [
-              {
-                id: '5',
-                name: 'test',
-                price: 1111,
-                date: 'asafasdasdas',
-              },
-              {
-                id: '6',
-                name: 'test 2',
-                price: 3333,
-                date: 'cbfbvbcxv',
-              },
-            ]
+
+            return importStocking({ csv }, context)
           }),
       },
     },

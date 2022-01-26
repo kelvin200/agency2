@@ -26,7 +26,9 @@ export const record = ({
   const fromRecord = (obj: Record<string, any>) => {
     const result: any = {}
     for (const f of FIELDS) {
-      set(obj, f[0], obj[f[1]])
+      if (typeof obj[f[1]] !== 'undefined') {
+        set(result, f[0], obj[f[1]])
+      }
     }
     return result
   }

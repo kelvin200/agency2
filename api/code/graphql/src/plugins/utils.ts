@@ -41,7 +41,7 @@ export const makeCreateObj = ({
   id = createId(),
 }: any) => {
   const identity = context.security.getIdentity()
-  const own = {
+  const own = identity && {
     id: identity.id,
     displayName: identity.displayName,
     type: identity.type,

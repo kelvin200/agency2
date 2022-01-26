@@ -18,17 +18,22 @@ export const importStocking = async (params: Params, context) => {
 
     const { csv } = params
 
-    const input = csvToObjectArray(csv)
-      .map(i => create(i, context, true))
-      .flat()
+    const arr = await Promise.all(
+      csvToObjectArray(csv).map(i => create(i, context, true)),
+    )
 
-    return batchWrite(input).then(() => true)
+    await batchWrite(arr.map(a => a.input).flat())
+
+    return arr.map(a => a.data)
   } catch (ex) {
+    console.log('ERROR', ex)
+
     throw new WebinyError(
       ex.message || 'Could not create new page.',
-      ex.code || 'CREATE_PAGE_ERROR',
-      {
+      ex.code || 'IMPORT_STOCKING_ERROR',
+      ex.data || {
         params,
+        stack: ex.stack,
       },
     )
   }

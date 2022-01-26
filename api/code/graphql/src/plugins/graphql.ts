@@ -16,7 +16,8 @@ export const createAthenaGraphQL = () => ({
     typeDefs: /* GraphQL */ `
       type StockingRecord {
         id: String
-        name: String
+        pName: String
+        purchaseDate: String
         vendor: String
         toLocation: String
         quantity: Number
@@ -84,12 +85,16 @@ export const createAthenaGraphQL = () => ({
       AthenaMutation: {
         importStocking: (_, args: { csv?: string }, context) =>
           resolve(() => {
-            const { csv } = args
-            if (!csv) {
-              throw new Error(`csv required`)
-            }
+            try {
+              const { csv } = args
+              if (!csv) {
+                throw new Error(`csv required`)
+              }
 
-            return importStocking({ csv }, context)
+              return importStocking({ csv }, context)
+            } catch (e) {
+              return new ErrorResponse(e)
+            }
           }),
       },
     },

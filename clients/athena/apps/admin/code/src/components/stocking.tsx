@@ -1,35 +1,50 @@
 import { useMutation, useQuery } from '@apollo/react-hooks'
-import { Alert, Button, Space, Table } from 'antd'
+import { Alert, Button, Table } from 'antd'
 import { get, set } from 'dot-prop-immutable'
 import gql from 'graphql-tag'
-import React, { useEffect, useState } from 'react'
+import React, { ChangeEventHandler, useEffect, useState } from 'react'
 
 const columns = [
   {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
+    title: 'Purchase Date',
+    dataIndex: 'purchaseDate',
+    key: 'purchaseDate',
   },
   {
-    title: 'Price',
-    dataIndex: 'price',
-    key: 'price',
+    title: 'Product Name',
+    dataIndex: 'pName',
+    key: 'pName',
   },
   {
-    title: 'Date',
-    dataIndex: 'date',
-    key: 'date',
+    title: 'Vendor',
+    dataIndex: 'vendor',
+    key: 'vendor',
   },
   {
-    title: 'Action',
-    key: 'action',
-    render: (text, record) => (
-      <Space size="middle">
-        <a>Invite {record.name}</a>
-        <a>Delete</a>
-      </Space>
-    ),
+    title: 'Location',
+    dataIndex: 'toLocation',
+    key: 'toLocation',
   },
+  {
+    title: 'Expiry Date',
+    dataIndex: 'expiryDate',
+    key: 'expiryDate',
+  },
+  {
+    title: 'Quantity',
+    dataIndex: 'quantity',
+    key: 'quantity',
+  },
+  // {
+  //   title: 'Action',
+  //   key: 'action',
+  //   render: (text, record) => (
+  //     <Space size="middle">
+  //       <a>Invite {record.name}</a>
+  //       <a>Delete</a>
+  //     </Space>
+  //   ),
+  // },
 ]
 
 const LIST = gql`
@@ -41,10 +56,17 @@ const LIST = gql`
     $search: ListStockingSearchInput
   ) {
     athena {
-      listStocking(where: $where, sort: $sort, limit: $limit, after: $after, search: $search) {
+      listStocking(
+        where: $where
+        sort: $sort
+        limit: $limit
+        after: $after
+        search: $search
+      ) {
         data {
           id
-          name
+          pName
+          purchaseDate
           vendor
           toLocation
           quantity
@@ -66,9 +88,12 @@ const IMPORT = gql`
       importStocking(csv: $csv) {
         data {
           id
-          name
-          price
-          date
+          pName
+          purchaseDate
+          vendor
+          toLocation
+          quantity
+          expiryDate
         }
         error {
           code
@@ -82,12 +107,17 @@ const IMPORT = gql`
 
 const extractVariables = key => {
   // TODO: Find a better way to parse the query/id from cache
-  const variables = key.replace('$ROOT_QUERY.athena.listStocking(', '').replace(')', '')
+  const variables = key
+    .replace('$ROOT_QUERY.athena.listStocking(', '')
+    .replace(')', '')
 
   return JSON.parse(variables)
 }
 
-const modifyCacheForAllListPagesQuery = (cache, operation: (variables?: any) => void) => {
+const modifyCacheForAllListPagesQuery = (
+  cache,
+  operation: (variables?: any) => void,
+) => {
   const existingQueriesInCache = Object.keys(cache.data.data).filter(
     key => key.includes('.listStocking') && !key.endsWith('.meta'),
   )
@@ -142,31 +172,46 @@ export const Stocking = () => {
   const [importCsv] = useMutation(IMPORT)
 
   const onClick = async () => {
+    if (!csv) {
+      setError('Select csv file first!')
+      return
+    }
     const { data: res } = await importCsv({
-      variables: { csv: 'h' },
+      variables: { csv },
       update(cache, { data }) {
         if (data.athena.importStocking.error) {
           return
         }
-
         addExtraItemsToList(cache, data.athena.importStocking.data)
       },
     })
     const { error } = res.athena.importStocking
-
     if (error) {
       return setError(error.message)
     }
   }
-  console.log(ls)
+
+  const [csv, setCsv] = useState('')
+  const onChange: ChangeEventHandler<HTMLInputElement> = event => {
+    const file = event.target.files[0]
+    if (!file) {
+      setCsv('')
+      return
+    }
+
+    file.text().then(setCsv)
+  }
 
   return (
     <div>
       <h1>Nhap Hang</h1>
-      <Button type="primary" onClick={onClick}>
+      <Button type="primary" onClick={onClick} disabled={!csv}>
         Import
       </Button>
-      {error ? <Alert message={'Error'} description={error} type="error" showIcon /> : null}
+      <input type="file" onChange={onChange} accept=".csv" />
+      {error ? (
+        <Alert message={'Error'} description={error} type="error" showIcon />
+      ) : null}
       <Table columns={columns} dataSource={ls} />
     </div>
   )

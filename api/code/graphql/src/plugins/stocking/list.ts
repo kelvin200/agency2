@@ -1,7 +1,9 @@
 import type { MClient } from '@m/api-elasticsearch/src/create'
+import { fromEsRecord, toEsRecord } from '@m/ultimate/src/es/record'
 import WebinyError from '@webiny/error'
 import get from 'lodash/get'
 import set from 'lodash/set'
+import { EsRecordType } from './type'
 
 interface Meta {
   total: number
@@ -81,10 +83,14 @@ const addLimit = (query: any, limit?: number) => {
   if (typeof limit !== 'number') {
     return
   }
-  query.limit = Math.min(limit, 100)
+  query.size = Math.min(limit, 100)
 }
 
-const addSearch = (query: any, field: string, search?: ListStockingSearchInput) => {
+const addSearch = (
+  query: any,
+  field: string,
+  search?: ListStockingSearchInput,
+) => {
   if (!search?.query || search.query.length < 3) {
     return
   }
@@ -143,7 +149,9 @@ export const listStocking = async (params: Params, context: Context) => {
         bool: {
           filter: [
             {
-              term: { cid: 'athena-stocking' },
+              term: toEsRecord({
+                esIndex: EsRecordType.STOCKING,
+              }),
             },
           ],
         },
@@ -157,16 +165,19 @@ export const listStocking = async (params: Params, context: Context) => {
     console.log('QUERY', body)
 
     try {
-      const res = await context.elasticsearch.search({ index: 'one-index', body })
+      const res = await context.elasticsearch.search({
+        index: 'one-index',
+        body,
+      })
 
       const { hits, total } = res.body.hits
-      const items = hits.map(item => item._source)
+      const data = hits.map(item => fromEsRecord(item._source))
 
       const meta = {
         total: total.value,
       }
 
-      return { items, meta }
+      return { data, meta }
     } catch (ex) {
       throw new WebinyError(
         ex.message || 'Could not load pages by given Elasticsearch body.',

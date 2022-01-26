@@ -7,7 +7,9 @@ import React from 'react'
 import { createApolloClient } from './components/apolloClient'
 
 export const App = () => (
-  <ApolloProvider client={createApolloClient({ uri: process.env.REACT_APP_GRAPHQL_API_URL })}>
+  <ApolloProvider
+    client={createApolloClient({ uri: process.env.REACT_APP_GRAPHQL_API_URL })}
+  >
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <UiProvider>
         <Routes />

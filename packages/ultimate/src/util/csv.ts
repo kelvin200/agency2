@@ -4,10 +4,29 @@ import zipObject from 'lodash/zipObject'
 export const csvToObjectArray = <T = unknown>(csvString: string): T[] => {
   const csvRowArray = csvString.split(/\n/)
   const headerCellArray = trimQuotes(csvRowArray.shift().split(','))
+  const emptyCell = []
+
+  for (let i = 0; i < headerCellArray.length; ++i) {
+    if (!headerCellArray[i]) {
+      emptyCell.push(i)
+    }
+  }
+  for (let i = emptyCell.length - 1; i >= 0; --i) {
+    headerCellArray.splice(emptyCell[i], 1)
+  }
+
   const objectArray = []
 
   while (csvRowArray.length) {
-    const rowCellArray = trimQuotes(csvRowArray.shift().split(','))
+    const c = csvRowArray.shift()
+    if (!trim(c)) {
+      continue
+    }
+    const rowCellArray = trimQuotes(c.split(','))
+    for (let i = emptyCell.length - 1; i >= 0; --i) {
+      rowCellArray.splice(emptyCell[i], 1)
+    }
+
     const rowObject = zipObject(headerCellArray, rowCellArray)
     objectArray.push(rowObject)
   }

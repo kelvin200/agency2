@@ -2,10 +2,9 @@
   "compilerOptions": {
     "target": "ESNext",
     "allowJs": true,
-    "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
-    "module": "esnext",
+    "module": "ESNext",
     "lib": ["dom", "dom.iterable", "ESNext"],
     "esModuleInterop": true,
     "declaration": true,
@@ -13,7 +12,9 @@
     "noEmit": false,
     "resolveJsonModule": true,
     "jsx": "preserve",
+    "diagnostics": false,
     "emitDeclarationOnly": true,
+    "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
       "@m/*": ["./packages/*"]
@@ -21,5 +22,13 @@
     "typeRoots": ["node_modules/@types", "./types"]
   },
   "include": ["packages"],
-  "exclude": ["node_modules", "dist", "**jest**", "**resources.js"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**jest**",
+    "**resources.js",
+    ".pulumi",
+    ".webiny",
+    ".yarn"
+  ]
 }

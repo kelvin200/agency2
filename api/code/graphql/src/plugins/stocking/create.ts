@@ -2,17 +2,51 @@ import { toEsRecord } from '@m/ultimate/src/es/record'
 import { batchWrite, WriteRequest } from '@m/ultimate/src/util/dynamo'
 import WebinyError from '@webiny/error'
 import { createId, getOneIndexPK, makeCreateObj, makeEntity } from '../utils'
+import { EntityType, EsRecordType } from './type'
 
-enum EsRecordType {
-  STOCKING = 's',
-}
-enum EntityType {
-  ONE_INDEX = 'OI',
-}
+const validateRequiredFields =
+  ({
+    requiredFields,
+    requiredFieldSets,
+  }: {
+    requiredFields: string[]
+    requiredFieldSets: string[][]
+  }) =>
+  (params = {}) => {
+    const er = requiredFields.filter(k => !(k in params))
+    if (er.length > 0) {
+      throw new Error(`[${er.join(', ')}] are required!`)
+    }
 
-export function create(params, context, returnForBatch: true): WriteRequest[]
-export function create(params, context, returnForBatch?: false): Promise<any>
-export function create(params, context, returnForBatch?: boolean) {
+    const es = requiredFieldSets.filter(ks => ks.every(k => !(k in params)))
+    if (es.length > 0) {
+      throw new Error(
+        es
+          .map(ks => `One of the fields: [${ks.join(', ')}] are required!`)
+          .join('\n'),
+      )
+    }
+  }
+
+const validateRequired = validateRequiredFields({
+  requiredFields: ['purchaseDate', 'toLocation', 'vendor', 'quantity'],
+  requiredFieldSets: [
+    ['pName', 'pId'],
+    ['costAud', 'costVnd'],
+  ],
+})
+
+export async function create(
+  params,
+  context,
+  returnForBatch: true,
+): Promise<{ input: WriteRequest[]; data: any }>
+export async function create(
+  params,
+  context,
+  returnForBatch?: false,
+): Promise<any>
+export async function create(params, context, returnForBatch?: boolean) {
   try {
     if (!process.env.DB_TABLE) {
       throw new Error('Missing DB_TABLE')
@@ -20,22 +54,7 @@ export function create(params, context, returnForBatch?: boolean) {
     if (!process.env.DB_TABLE_ELASTICSEARCH) {
       throw new Error('Missing DB_TABLE_ELASTICSEARCH')
     }
-
-    const {
-      pName,
-      pId,
-      vendor,
-      quantity,
-      expiryDate,
-      received,
-      costAud: _costA,
-      audRate,
-      costVnd: _costV,
-    } = params
-
-    if (typeof _costA === 'undefined' && typeof _costV === 'undefined') {
-      throw new Error('Either cost AUD or cost VND has to be provided')
-    }
+    validateRequired(params)
 
     const id = createId()
 
@@ -46,20 +65,18 @@ export function create(params, context, returnForBatch?: boolean) {
       context,
     })
 
+    let pId = params
+
+    if (!pId) {
+      pId = ''
+    }
+
     const PK = getOneIndexPK('S', pId)
     const SK = id
 
     const data = {
       ...record,
-      pName,
-      pId,
-      vendor,
-      quantity,
-      expiryDate,
-      received,
-      costAud: 0,
-      audRate,
-      costVnd: 0,
+      ...params,
     }
 
     const dataEs = toEsRecord({
@@ -100,16 +117,18 @@ export function create(params, context, returnForBatch?: boolean) {
     ]
 
     if (returnForBatch) {
-      return input
+      return { input, data }
     }
 
-    return batchWrite(input).then(() => data)
+    await batchWrite(input)
+    return { data }
   } catch (ex) {
     throw new WebinyError(
       ex.message || 'Could not create new page.',
-      ex.code || 'CREATE_PAGE_ERROR',
-      {
+      ex.code || 'CREATE_STOCKING_ERROR',
+      ex.data || {
         params,
+        stack: ex.stack,
       },
     )
   }

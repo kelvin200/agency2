@@ -1,4 +1,5 @@
-import mdbid from 'mdbid'
+import { nanoid } from 'nanoid'
+import { EntityPK } from './type'
 
 export const getZeroPaddedVersionNumber = (value: string | number): string => {
   if (typeof value !== 'number') {
@@ -7,13 +8,13 @@ export const getZeroPaddedVersionNumber = (value: string | number): string => {
   return String(value).padStart(4, '0')
 }
 
-export const createId = mdbid
+export const createId = () => nanoid(10)
 
 export const getIdWithVersion = (id: string, version: number) =>
   `${id}#${getZeroPaddedVersionNumber(version)}`
 
 export const getOneIndexPK = (type: string, id: string) =>
-  `T#root#L#en-AU#OI#${type}#${id}`
+  `${EntityPK.ONE_INDEX}#${type}#${id}`
 
 export const makeEntity = ({
   type,
@@ -51,10 +52,7 @@ export const makeCreateObj = ({
     id,
   }
 
-  if (versioning) {
-    obj.version = 1
-    obj.id = getIdWithVersion(id, 1)
-  }
+  versioning && (obj.version = 1)
   createdBy && (obj.createdBy = own)
   owner && (obj.owner = own)
 

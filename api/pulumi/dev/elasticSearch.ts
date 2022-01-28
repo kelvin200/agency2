@@ -22,9 +22,11 @@ class ElasticSearch {
       ],
       streamEnabled: true,
       streamViewType: 'NEW_AND_OLD_IMAGES',
-      billingMode: 'PAY_PER_REQUEST',
+      billingMode: 'PROVISIONED',
       hashKey: 'PK',
       rangeKey: 'SK',
+      readCapacity: 2,
+      writeCapacity: 2,
     })
 
     const roleName = 'dynamo-to-elastic-lambda-role'
@@ -43,15 +45,21 @@ class ElasticSearch {
       },
     })
 
-    new aws.iam.RolePolicyAttachment(`${roleName}-AWSLambdaBasicExecutionRole`, {
-      role: this.role,
-      policyArn: aws.iam.ManagedPolicy.AWSLambdaBasicExecutionRole,
-    })
+    new aws.iam.RolePolicyAttachment(
+      `${roleName}-AWSLambdaBasicExecutionRole`,
+      {
+        role: this.role,
+        policyArn: aws.iam.ManagedPolicy.AWSLambdaBasicExecutionRole,
+      },
+    )
 
-    new aws.iam.RolePolicyAttachment(`${roleName}-AWSLambdaDynamoDBExecutionRole`, {
-      role: this.role,
-      policyArn: aws.iam.ManagedPolicy.AWSLambdaDynamoDBExecutionRole,
-    })
+    new aws.iam.RolePolicyAttachment(
+      `${roleName}-AWSLambdaDynamoDBExecutionRole`,
+      {
+        role: this.role,
+        policyArn: aws.iam.ManagedPolicy.AWSLambdaDynamoDBExecutionRole,
+      },
+    )
 
     /**
      * This Lambda will process the stream events from DynamoDB table that contains Elasticsearch items.

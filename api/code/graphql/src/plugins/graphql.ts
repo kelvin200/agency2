@@ -50,8 +50,8 @@ export const createAthenaGraphQL = () => ({
         quantity_DESC
         expiryDate_ASC
         expiryDate_DESC
-        name_ASC
-        name_DESC
+        purchaseDate_ASC
+        purchaseDate_DESC
       }
 
       input ListStockingSearchInput {

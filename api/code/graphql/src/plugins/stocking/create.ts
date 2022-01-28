@@ -1,8 +1,10 @@
-import { toEsRecord } from '@m/ultimate/src/es/record'
 import { batchWrite, WriteRequest } from '@m/ultimate/src/util/dynamo'
 import WebinyError from '@webiny/error'
-import { createId, getOneIndexPK, makeCreateObj, makeEntity } from '../utils'
-import { EntityType, EsRecordType } from './type'
+import { Create, EntityPK, EntityType } from '../type'
+import { getOneIndexPK, makeCreateObj, makeEntity } from '../utils'
+import { toDbRecord } from './dbRecord'
+import { toEsRecord } from './esRecord'
+import { StockingEntity } from './type'
 
 const validateRequiredFields =
   ({
@@ -29,24 +31,25 @@ const validateRequiredFields =
   }
 
 const validateRequired = validateRequiredFields({
-  requiredFields: ['purchaseDate', 'toLocation', 'vendor', 'quantity'],
+  requiredFields: [
+    StockingEntity.PURCHASE_DATE,
+    StockingEntity.TO_LOCATION,
+    StockingEntity.VENDOR,
+    StockingEntity.QUANTITY,
+    StockingEntity.PAID_BY,
+    StockingEntity.PURCHASED_BY,
+  ],
   requiredFieldSets: [
-    ['pName', 'pId'],
-    ['costAud', 'costVnd'],
+    [StockingEntity.PNAME, StockingEntity.PID],
+    [StockingEntity.TOTAL_AUD, StockingEntity.TOTAL_VND],
   ],
 })
 
-export async function create(
+export const create: Create = async (
   params,
   context,
-  returnForBatch: true,
-): Promise<{ input: WriteRequest[]; data: any }>
-export async function create(
-  params,
-  context,
-  returnForBatch?: false,
-): Promise<any>
-export async function create(params, context, returnForBatch?: boolean) {
+  returnForBatch?: boolean,
+) => {
   try {
     if (!process.env.DB_TABLE) {
       throw new Error('Missing DB_TABLE')
@@ -56,47 +59,46 @@ export async function create(params, context, returnForBatch?: boolean) {
     }
     validateRequired(params)
 
-    const id = createId()
-
     const entity = makeEntity({ type: EntityType.ONE_INDEX })
     const record = makeCreateObj({
       owner: false,
-      id,
       context,
     })
 
-    let pId = params
+    let { pId } = params
+    // TODO: No pId => search pId => create product record
 
     if (!pId) {
       pId = ''
     }
 
-    const PK = getOneIndexPK('S', pId)
-    const SK = id
+    const PK = getOneIndexPK(EntityPK.STOCKING, pId)
+    const SK = record.id
 
     const data = {
       ...record,
       ...params,
     }
 
-    const dataEs = toEsRecord({
-      ...data,
-      id,
-      esIndex: EsRecordType.STOCKING,
-    })
+    const itemDb = toDbRecord(data, d => ({
+      ...entity,
+      ...d,
+      PK,
+      SK,
+    }))
+
+    const itemEs = toEsRecord(data, d => ({
+      data: d,
+      PK,
+      SK,
+    }))
 
     const input: WriteRequest[] = [
       {
         tableName: process.env.DB_TABLE,
         request: {
           PutRequest: {
-            Item: {
-              ...entity,
-              ...data,
-              PK,
-              SK,
-              TYPE: 'oi.stocking',
-            },
+            Item: itemDb,
           },
         },
       },
@@ -104,13 +106,7 @@ export async function create(params, context, returnForBatch?: boolean) {
         tableName: process.env.DB_TABLE_ELASTICSEARCH,
         request: {
           PutRequest: {
-            Item: {
-              ...entity,
-              PK,
-              SK,
-              data: dataEs,
-              index: 'one-index',
-            },
+            Item: itemEs,
           },
         },
       },
@@ -124,7 +120,7 @@ export async function create(params, context, returnForBatch?: boolean) {
     return { data }
   } catch (ex) {
     throw new WebinyError(
-      ex.message || 'Could not create new page.',
+      ex.message || 'Could not create stocking entry.',
       ex.code || 'CREATE_STOCKING_ERROR',
       ex.data || {
         params,

@@ -10,7 +10,7 @@ class DynamoDB {
         { name: 'GSI1_PK', type: 'S' },
         { name: 'GSI1_SK', type: 'S' },
       ],
-      billingMode: 'PAY_PER_REQUEST',
+      billingMode: 'PROVISIONED',
       hashKey: 'PK',
       rangeKey: 'SK',
       globalSecondaryIndexes: [
@@ -19,8 +19,12 @@ class DynamoDB {
           hashKey: 'GSI1_PK',
           rangeKey: 'GSI1_SK',
           projectionType: 'ALL',
+          readCapacity: 1,
+          writeCapacity: 1,
         },
       ],
+      readCapacity: 2,
+      writeCapacity: 2,
     })
   }
 }

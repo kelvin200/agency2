@@ -1,9 +1,35 @@
-import trim from 'lodash/trim'
 import zipObject from 'lodash/zipObject'
 
-export const csvToObjectArray = <T = unknown>(csvString: string): T[] => {
-  const csvRowArray = csvString.split(/\n/)
-  const headerCellArray = trimQuotes(csvRowArray.shift().split(','))
+export const csvToObjectArray = <T = unknown>(text: string): T[] => {
+  let p = '',
+    row = [''],
+    i = 0,
+    r = 0,
+    s = !0,
+    l
+  const ret = [row]
+
+  for (l of text) {
+    if ('"' === l) {
+      if (s && l === p) {
+        row[i] += l
+      }
+      s = !s
+    } else if (',' === l && s) {
+      l = row[++i] = ''
+    } else if ('\n' === l && s) {
+      if ('\r' === p) {
+        row[i] = row[i].slice(0, -1)
+      }
+      row = ret[++r] = [(l = '')]
+      i = 0
+    } else {
+      row[i] += l
+    }
+    p = l
+  }
+
+  const headerCellArray = ret.shift()
   const emptyCell = []
 
   for (let i = 0; i < headerCellArray.length; ++i) {
@@ -17,12 +43,12 @@ export const csvToObjectArray = <T = unknown>(csvString: string): T[] => {
 
   const objectArray = []
 
-  while (csvRowArray.length) {
-    const c = csvRowArray.shift()
-    if (!trim(c)) {
+  while (ret.length) {
+    const c = ret.shift()
+    if (c.length < 2) {
       continue
     }
-    const rowCellArray = trimQuotes(c.split(','))
+    const rowCellArray = c
     for (let i = emptyCell.length - 1; i >= 0; --i) {
       rowCellArray.splice(emptyCell[i], 1)
     }
@@ -31,11 +57,4 @@ export const csvToObjectArray = <T = unknown>(csvString: string): T[] => {
     objectArray.push(rowObject)
   }
   return objectArray
-}
-
-export const trimQuotes = (stringArray: string[]) => {
-  for (let i = 0; i < stringArray.length; i++) {
-    stringArray[i] = trim(stringArray[i], '"')
-  }
-  return stringArray
 }

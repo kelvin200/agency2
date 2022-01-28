@@ -148,7 +148,7 @@ export const Stocking = () => {
 
   const [ls, setLs] = useState([])
 
-  const variables = {}
+  const variables = { sort: ['expiryDate_ASC'] }
 
   const { data: _ } = useQuery(LIST, {
     variables,
@@ -209,9 +209,9 @@ export const Stocking = () => {
         Import
       </Button>
       <input type="file" onChange={onChange} accept=".csv" />
-      {error ? (
+      {error && (
         <Alert message={'Error'} description={error} type="error" showIcon />
-      ) : null}
+      )}
       <Table columns={columns} dataSource={ls} />
     </div>
   )

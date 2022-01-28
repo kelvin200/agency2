@@ -1,9 +1,9 @@
 import type { MClient } from '@m/api-elasticsearch/src/create'
-import { fromEsRecord, toEsRecord } from '@m/ultimate/src/es/record'
 import WebinyError from '@webiny/error'
 import get from 'lodash/get'
 import set from 'lodash/set'
-import { EsRecordType } from './type'
+import { Entity, OneIndexIndex } from '../type'
+import { fromEsRecord, toEsRecordRaw } from './esRecord'
 
 interface Meta {
   total: number
@@ -68,7 +68,7 @@ const addSort = (query: any, sort?: string[]) => {
       const [, field, initialOrder] = match
       const order = initialOrder.toLowerCase() === 'asc' ? 'asc' : 'desc'
 
-      return { [field]: { order } }
+      return toEsRecordRaw({ [field]: { order } })
     })
     .filter(Boolean)
 
@@ -76,7 +76,7 @@ const addSort = (query: any, sort?: string[]) => {
     return
   }
 
-  query.sort = sort
+  query.sort = _s
 }
 
 const addLimit = (query: any, limit?: number) => {
@@ -149,8 +149,8 @@ export const listStocking = async (params: Params, context: Context) => {
         bool: {
           filter: [
             {
-              term: toEsRecord({
-                esIndex: EsRecordType.STOCKING,
+              term: toEsRecordRaw({
+                [Entity.ES_INDEX]: OneIndexIndex.STOCKING,
               }),
             },
           ],
@@ -166,7 +166,7 @@ export const listStocking = async (params: Params, context: Context) => {
 
     try {
       const res = await context.elasticsearch.search({
-        index: 'one-index',
+        index: OneIndexIndex.ONE_INDEX,
         body,
       })
 

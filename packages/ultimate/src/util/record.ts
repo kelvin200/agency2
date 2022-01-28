@@ -2,20 +2,42 @@ import get from 'lodash/get'
 import set from 'lodash/set'
 import { getJsonSize } from './getJsonSize'
 
-export const record = ({
-  fieldMapping,
-  recordMaxSize,
-}: {
-  fieldMapping: Record<string, string>
-  recordMaxSize: number
-}) => {
-  const FIELDS = Object.entries(fieldMapping)
+const ALPHABET = 'abcdefghijklmnopqrstuvwxyz0123456789+-*/?!@#$%^&*()[]{}|:;<>,'
 
-  const toRecord = (obj: Record<string, any>) => {
-    const result: any = {}
-    for (const f of FIELDS) {
-      result[f[1]] = get(obj, f[0])
+export type MapObjFunc = (obj: Record<string, any>) => Record<string, any>
+
+export const record = ({
+  fields,
+  recordMaxSize,
+  mapBefore,
+  mapAfter,
+}: {
+  fields: string[]
+  recordMaxSize: number
+  mapBefore?: MapObjFunc
+  mapAfter?: MapObjFunc
+}) => {
+  const toRecord = (obj: Record<string, any>, mapObjAfter?: MapObjFunc) => {
+    mapBefore && (obj = mapBefore(obj))
+    let result: Record<string, any> = {}
+    for (let i = 0; i < fields.length; ++i) {
+      result[ALPHABET[i]] = get(obj, fields[i])
     }
+    mapObjAfter && (result = mapObjAfter(result))
+    mapAfter && (result = mapAfter(result))
+    const size = getJsonSize(result)
+    if (size > recordMaxSize) {
+      throw new Error(`RECORD is bigger than ${recordMaxSize}KB`)
+    }
+    return result
+  }
+
+  const toRecordWithoutMapping = (obj: Record<string, any>) => {
+    let result: Record<string, any> = {}
+    for (let i = 0; i < fields.length; ++i) {
+      result[ALPHABET[i]] = get(obj, fields[i])
+    }
+    result = result
     const size = getJsonSize(result)
     if (size > recordMaxSize) {
       throw new Error(`RECORD is bigger than ${recordMaxSize}KB`)
@@ -25,13 +47,13 @@ export const record = ({
 
   const fromRecord = (obj: Record<string, any>) => {
     const result: any = {}
-    for (const f of FIELDS) {
-      if (typeof obj[f[1]] !== 'undefined') {
-        set(result, f[0], obj[f[1]])
+    for (let i = 0; i < fields.length; ++i) {
+      if (typeof obj[ALPHABET[i]] !== 'undefined') {
+        set(result, fields[i], obj[ALPHABET[i]])
       }
     }
     return result
   }
 
-  return { toRecord, fromRecord }
+  return { toRecord, fromRecord, toRecordWithoutMapping }
 }

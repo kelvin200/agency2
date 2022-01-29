@@ -17,6 +17,14 @@ export const record = ({
   mapBefore?: MapObjFunc
   mapAfter?: MapObjFunc
 }) => {
+  const fieldMapping: Record<string, string> = {}
+  const fieldMappingReversed: Record<string, string> = {}
+
+  for (let i = 0; i < fields.length; ++i) {
+    fieldMapping[fields[i]] = ALPHABET[i]
+    fieldMappingReversed[ALPHABET[i]] = fields[i]
+  }
+
   const toRecord = (obj: Record<string, any>, mapObjAfter?: MapObjFunc) => {
     mapBefore && (obj = mapBefore(obj))
     let result: Record<string, any> = {}
@@ -55,5 +63,11 @@ export const record = ({
     return result
   }
 
-  return { toRecord, fromRecord, toRecordWithoutMapping }
+  return {
+    toRecord,
+    fromRecord,
+    toRecordWithoutMapping,
+    fieldMapping,
+    fieldMappingReversed,
+  }
 }

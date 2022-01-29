@@ -1,16 +1,14 @@
+import type { MClient } from '@m/api-elasticsearch/src/create'
 import type { WriteRequest } from '@m/ultimate/src/util/dynamo'
 
-export type Create =
-  | (<T = unknown>(
-      params,
-      context,
-      returnForBatch: true,
-    ) => Promise<{ input: WriteRequest[]; data: T }>)
-  | (<T = unknown>(
-      params,
-      context,
-      returnForBatch?: false,
-    ) => Promise<{ data: T }>)
+export interface Context {
+  elasticsearch: MClient
+}
+
+export type Create<T = unknown> = (
+  params,
+  context,
+) => Promise<{ input: WriteRequest[]; data: T }>
 
 export enum OneIndexIndex {
   STOCKING = 's',

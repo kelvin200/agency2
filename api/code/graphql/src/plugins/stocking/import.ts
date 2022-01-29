@@ -1,7 +1,6 @@
 import { csvToObjectArray } from '@m/ultimate/src/util/csv'
-import { batchWrite } from '@m/ultimate/src/util/dynamo'
 import WebinyError from '@webiny/error'
-import { create } from './create'
+import { createBatch } from './create'
 
 interface Params {
   csv: string
@@ -18,18 +17,14 @@ export const importStocking = async (params: Params, context) => {
 
     const { csv } = params
 
-    const arr = await Promise.all(
-      csvToObjectArray(csv).map(i => create(i, context, true)),
-    )
+    const { data } = await createBatch(csvToObjectArray(csv), context)
 
-    await batchWrite(arr.map(a => a.input).flat())
-
-    return arr.map(a => a.data)
+    return data
   } catch (ex) {
     console.log('ERROR', ex)
 
     throw new WebinyError(
-      ex.message || 'Could not create new page.',
+      ex.message || 'Could not import stocking entries.',
       ex.code || 'IMPORT_STOCKING_ERROR',
       ex.data || {
         params,

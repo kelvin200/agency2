@@ -1,6 +1,6 @@
 import { record } from '@m/ultimate/src/util/record'
 import { Entity, OneIndexIndex } from '../type'
-import { StockingEntity } from './type'
+import { ProductEntity } from './type'
 
 export const {
   fromRecord: fromEsRecord,
@@ -13,22 +13,14 @@ export const {
     Entity.ES_INDEX,
     Entity.ID,
 
-    StockingEntity.PID,
-    StockingEntity.PNAME,
-    StockingEntity.VENDOR,
-    StockingEntity.QUANTITY,
-    StockingEntity.EXPIRY_DATE,
-    StockingEntity.RECEIVED,
-    StockingEntity.PAID_BY,
-    StockingEntity.PURCHASED_BY,
-    StockingEntity.TO_LOCATION,
-    StockingEntity.PURCHASE_DATE,
-    StockingEntity.FLAG,
+    ProductEntity.NAME,
+    ProductEntity.TAGS,
+    ProductEntity.FLAG,
   ],
   recordMaxSize: 1024,
   mapBefore: d => ({
     ...d,
-    esIndex: OneIndexIndex.STOCKING,
+    esIndex: OneIndexIndex.PRODUCT,
   }),
   mapAfter: d => ({
     ...d,

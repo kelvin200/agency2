@@ -13,8 +13,10 @@ export const createId = () => nanoid(10)
 export const getIdWithVersion = (id: string, version: number) =>
   `${id}#${getZeroPaddedVersionNumber(version)}`
 
-export const getOneIndexPK = (type: string, id: string) =>
-  `${EntityPK.ONE_INDEX}#${type}#${id}`
+export const getOneIndexPK = (type: string, id?: string) =>
+  typeof id !== 'undefined'
+    ? `${EntityPK.ONE_INDEX}#${type}#${id}`
+    : `${EntityPK.ONE_INDEX}#${type}`
 
 export const makeEntity = ({
   type,
@@ -58,3 +60,33 @@ export const makeCreateObj = ({
 
   return obj
 }
+
+export const validateRequiredFields =
+  ({
+    requiredFields,
+    requiredFieldSets,
+  }: {
+    requiredFields?: string[]
+    requiredFieldSets?: string[][]
+  }) =>
+  (params = {}, doNotThrow?: boolean) => {
+    const er = requiredFields?.filter?.(k => !(k in params))
+    if (er && er.length > 0) {
+      const e = `[${er.join(', ')}] are required!`
+      if (doNotThrow) {
+        return e
+      }
+      throw new Error(e)
+    }
+
+    const es = requiredFieldSets?.filter?.(ks => ks.every(k => !(k in params)))
+    if (es && es.length > 0) {
+      const e = es
+        .map(ks => `One of the fields: [${ks.join(', ')}] are required!`)
+        .join('\n')
+      if (doNotThrow) {
+        return e
+      }
+      throw new Error(e)
+    }
+  }

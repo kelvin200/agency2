@@ -28,6 +28,7 @@ export const { fromRecord: fromDbRecord, toRecord: toDbRecord } = record({
     StockingEntity.RECEIVED_DATE,
     StockingEntity.TOTAL_VND,
     StockingEntity.TOTAL_AUD,
+    StockingEntity.FLAG,
   ],
   recordMaxSize: 1024,
   mapAfter: d => ({

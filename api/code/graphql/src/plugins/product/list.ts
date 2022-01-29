@@ -10,21 +10,21 @@ import {
 import WebinyError from '@webiny/error'
 import { Context, Entity, OneIndexIndex } from '../type'
 import { fromEsRecord, toEsMap } from './esRecord'
-import { Stocking, StockingEntity } from './type'
+import { Product, ProductEntity } from './type'
 
-export const listStocking = async (
+export const list = async (
   params: Params,
   context: Context,
-): Promise<ListResponse<Stocking>> => {
+): Promise<ListResponse<Product>> => {
   try {
     const { from, limit, search, sort, where } = params
 
     const body: any = { from }
-    addIndex(body, toEsMap[Entity.ES_INDEX], OneIndexIndex.STOCKING)
+    addIndex(body, toEsMap[Entity.ES_INDEX], OneIndexIndex.PRODUCT)
     addWhere(body, where)
-    addSearch(body, toEsMap[StockingEntity.PNAME], search)
+    addSearch(body, toEsMap[ProductEntity.NAME], search)
     addLimit(body, limit)
-    addSort(body, sort)
+    addSort(toEsMap, body, sort)
 
     console.log('QUERY', body)
 
@@ -45,7 +45,7 @@ export const listStocking = async (
     } catch (ex) {
       throw new WebinyError(
         ex.message || 'Could not load pages by given Elasticsearch body.',
-        ex.code || 'LIST_STOCKING_ERROR',
+        ex.code || 'LIST_PRODUCT_ERROR',
         {
           body,
         },
@@ -53,8 +53,8 @@ export const listStocking = async (
     }
   } catch (ex) {
     throw new WebinyError(
-      ex.message || 'Could not list stocking.',
-      ex.code || 'LIST_STOCKING_ERROR',
+      ex.message || 'Could not list products.',
+      ex.code || 'LIST_PRODUCT_ERROR',
       {
         ...(ex.data || {}),
         params,

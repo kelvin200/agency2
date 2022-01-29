@@ -72,6 +72,9 @@ const LIST = gql`
           quantity
           expiryDate
         }
+        meta {
+          total
+        }
         error {
           code
           data
@@ -123,9 +126,8 @@ const modifyCacheForAllListPagesQuery = (
   )
 
   existingQueriesInCache.forEach(cacheKey => {
-    // const variables = extractVariables(cacheKey)
-    // operation(variables)
-    operation()
+    const variables = extractVariables(cacheKey)
+    operation(variables)
   })
 }
 

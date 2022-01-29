@@ -16,7 +16,7 @@ export const { fromRecord: fromDbRecord, toRecord: toDbRecord } = record({
     ProductEntity.TAGS,
     ProductEntity.FLAG,
   ],
-  recordMaxSize: 1024,
+  recordMaxSize: 2048,
   mapAfter: d => ({
     ...d,
     TYPE: EntityType.PRODUCT,

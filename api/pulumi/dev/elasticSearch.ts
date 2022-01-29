@@ -73,6 +73,7 @@ class ElasticSearch {
       handler: 'handler.handler',
       timeout: 600,
       memorySize: 512,
+      reservedConcurrentExecutions: 3,
       environment: {
         variables: {
           DEBUG: String(process.env.DEBUG),

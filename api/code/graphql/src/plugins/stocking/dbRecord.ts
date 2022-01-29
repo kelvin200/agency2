@@ -30,7 +30,7 @@ export const { fromRecord: fromDbRecord, toRecord: toDbRecord } = record({
     StockingEntity.TOTAL_AUD,
     StockingEntity.FLAG,
   ],
-  recordMaxSize: 1024,
+  recordMaxSize: 2048,
   mapAfter: d => ({
     ...d,
     TYPE: EntityType.STOCKING,

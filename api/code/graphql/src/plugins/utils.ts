@@ -1,4 +1,4 @@
-import { nanoid } from 'nanoid'
+import mdbid from 'mdbid'
 import { EntityPK } from './type'
 
 export const getZeroPaddedVersionNumber = (value: string | number): string => {
@@ -8,7 +8,7 @@ export const getZeroPaddedVersionNumber = (value: string | number): string => {
   return String(value).padStart(4, '0')
 }
 
-export const createId = () => nanoid(10)
+export const createId = mdbid
 
 export const getIdWithVersion = (id: string, version: number) =>
   `${id}#${getZeroPaddedVersionNumber(version)}`

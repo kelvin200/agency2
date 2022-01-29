@@ -24,8 +24,13 @@ export const createAthenaGraphQL = () => ({
         expiryDate: String
       }
 
+      type Meta {
+        total: Number
+      }
+
       type ListStockingResponse {
         data: [StockingRecord]
+        meta: Meta
         error: PbError
       }
 

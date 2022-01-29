@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from '@apollo/react-hooks'
-import { Alert, Button, Table } from 'antd'
+import { Alert, Button, Table, TableProps } from 'antd'
 import { get, set } from 'dot-prop-immutable'
 import gql from 'graphql-tag'
 import React, { ChangeEventHandler, useEffect, useState } from 'react'
@@ -9,6 +9,7 @@ const columns = [
     title: 'Purchase Date',
     dataIndex: 'purchaseDate',
     key: 'purchaseDate',
+    sorter: (a, b) => a.purchaseDate.localeCompare(b.purchaseDate),
   },
   {
     title: 'Product Name',
@@ -24,6 +25,10 @@ const columns = [
     title: 'Location',
     dataIndex: 'toLocation',
     key: 'toLocation',
+    filters: [
+      { text: 'Melbourne', value: 'melbourne' },
+      { text: 'Perth', value: 'perth' },
+    ],
   },
   {
     title: 'Expiry Date',
@@ -65,6 +70,7 @@ const LIST = gql`
       ) {
         data {
           id
+          key: id
           pName
           purchaseDate
           vendor
@@ -91,6 +97,7 @@ const IMPORT = gql`
       importStocking(csv: $csv) {
         data {
           id
+          key: id
           pName
           purchaseDate
           vendor
@@ -152,24 +159,24 @@ export const Stocking = () => {
 
   const variables = { sort: ['expiryDate_ASC'] }
 
-  const { data: _ } = useQuery(LIST, {
+  const { data: lsQueryRaw, loading } = useQuery(LIST, {
     variables,
   })
 
   useEffect(() => {
-    if (!_) {
+    if (!lsQueryRaw) {
       return
     }
 
-    const { error, data } = _.athena.listStocking
+    const { error, data } = lsQueryRaw.athena.listStocking
 
     if (error) {
       setError(error.message)
       return
     }
 
-    setLs(data.map(d => ({ ...d, key: d.id })))
-  }, [_])
+    setLs(data)
+  }, [lsQueryRaw])
 
   const [importCsv] = useMutation(IMPORT)
 
@@ -204,6 +211,40 @@ export const Stocking = () => {
     file.text().then(setCsv)
   }
 
+  const handleTableChange: TableProps<any>['onChange'] = (
+    pagination,
+    filters,
+    sorter,
+  ) => {
+    let l = [...lsQueryRaw.athena.listStocking.data]
+
+    for (const k in filters) {
+      if (filters[k] === null) {
+        continue
+      }
+
+      l = l.filter(x => filters[k].includes(x[k].toLowerCase()))
+    }
+
+    if (!Array.isArray(sorter)) {
+      sorter = [sorter]
+    }
+
+    for (const s of sorter) {
+      l.sort((a, b) =>
+        s.order === 'ascend'
+          ? // @ts-ignore
+            s.column.sorter(a, b)
+          : s.order === 'descend'
+          ? // @ts-ignore
+            -s.column.sorter(a, b)
+          : 0,
+      )
+    }
+
+    setLs(l)
+  }
+
   return (
     <div>
       <h1>Nhap Hang</h1>
@@ -214,7 +255,12 @@ export const Stocking = () => {
       {error && (
         <Alert message={'Error'} description={error} type="error" showIcon />
       )}
-      <Table columns={columns} dataSource={ls} />
+      <Table
+        columns={columns}
+        dataSource={ls}
+        loading={loading}
+        onChange={handleTableChange}
+      />
     </div>
   )
 }

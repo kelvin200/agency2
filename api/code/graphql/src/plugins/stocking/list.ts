@@ -24,7 +24,7 @@ export const listStocking = async (
     addWhere(body, where)
     addSearch(body, toEsMap[StockingEntity.PNAME], search)
     addLimit(body, limit)
-    addSort(body, sort)
+    addSort(toEsMap, body, sort)
 
     console.log('QUERY', body)
 

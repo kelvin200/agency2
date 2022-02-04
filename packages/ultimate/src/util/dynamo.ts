@@ -9,6 +9,8 @@ export interface WriteRequest {
 export const batchWrite = (items: WriteRequest[]) => {
   const documentClient = new DynamoDB.DocumentClient()
 
+  items.sort((a, b) => a.tableName.localeCompare(b.tableName))
+
   return Promise.all(
     chunk(items, 25).map(c => {
       const r: DynamoDB.DocumentClient.BatchWriteItemRequestMap = {}

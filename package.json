@@ -4,6 +4,7 @@
   "private": true,
   "packageManager": "yarn@3.1.1",
   "dependencies": {
+    "@apollo/client": "^3.5.8",
     "@webiny/aws-layers": "5.20.0",
     "@webiny/cli": "5.20.0",
     "@webiny/cli-plugin-deploy-pulumi": "5.20.0",
@@ -98,6 +99,7 @@
     "link-workspaces": "node ./scripts/linkWorkspaces.js",
     "postinstall": "yarn link-workspaces",
     "deploy:graphql": "cd api/code/graphql && yarn build --env=dev && cd ../../../ && yarn webiny deploy api --env=dev --build=false",
+    "deploy:graphql_dynamotoes": "cd api/code/graphql && yarn build --env=dev && cd ../dynamoToElastic && yarn build --env=dev && cd ../../../ && yarn webiny deploy api --env=dev --build=false",
     "start:athena": "cd clients/athena/apps/admin/code && yarn watch --env=dev"
   },
   "resolutions": {

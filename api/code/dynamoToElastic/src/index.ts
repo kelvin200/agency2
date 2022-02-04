@@ -1,7 +1,7 @@
 import elasticsearchClientContext from '@m/api-elasticsearch/src'
-import dynamoDBToElastic from '@webiny/api-dynamodb-to-elasticsearch/handler'
 import elasticsearchDataGzipCompression from '@webiny/api-elasticsearch/plugins/GzipCompression'
 import { createHandler } from '@webiny/handler-aws'
+import { dynamoDBToElastic } from './dynamodb-to-elastic'
 
 export const handler = createHandler({
   plugins: [

@@ -1,15 +1,18 @@
+import { makeVar, useReactiveVar } from '@apollo/client'
 import { useMutation, useQuery } from '@apollo/react-hooks'
 import { Alert, Button, Table, TableProps } from 'antd'
 import { get, set } from 'dot-prop-immutable'
 import gql from 'graphql-tag'
 import React, { ChangeEventHandler, useEffect, useState } from 'react'
 
-const columns = [
+const columns: TableProps<any>['columns'] = [
   {
     title: 'Purchase Date',
     dataIndex: 'purchaseDate',
     key: 'purchaseDate',
-    sorter: (a, b) => a.purchaseDate.localeCompare(b.purchaseDate),
+    sorter: true,
+    defaultSortOrder: 'descend',
+    sortDirections: ['ascend', 'descend', 'ascend'],
   },
   {
     title: 'Product Name',
@@ -34,6 +37,8 @@ const columns = [
     title: 'Expiry Date',
     dataIndex: 'expiryDate',
     key: 'expiryDate',
+    sorter: true,
+    sortDirections: ['ascend', 'descend', 'ascend'],
   },
   {
     title: 'Quantity',
@@ -56,7 +61,7 @@ const LIST = gql`
   query List(
     $where: ListStockingInput
     $limit: Int
-    $after: String
+    $from: Int
     $sort: [ListStockingSort!]
     $search: ListStockingSearchInput
   ) {
@@ -65,7 +70,7 @@ const LIST = gql`
         where: $where
         sort: $sort
         limit: $limit
-        after: $after
+        from: $from
         search: $search
       ) {
         data {
@@ -152,15 +157,24 @@ export const addExtraItemsToList = (cache, extraItems) => {
   })
 }
 
+// Create the initial value
+const initVars = {
+  from: 0,
+  sort: ['purchaseDate_DESC'],
+}
+
+// Create the teamMembersQuery var and initialize it with the initial value
+export const queryVars = makeVar(initVars)
+
 export const Stocking = () => {
   const [error, setError] = useState(null)
-
   const [ls, setLs] = useState([])
+  const [total, setTotal] = useState(undefined)
 
-  const variables = { sort: ['expiryDate_ASC'] }
+  const [variables, setVariables] = useState<any>({})
 
   const { data: lsQueryRaw, loading } = useQuery(LIST, {
-    variables,
+    variables: useReactiveVar(queryVars),
   })
 
   useEffect(() => {
@@ -168,7 +182,7 @@ export const Stocking = () => {
       return
     }
 
-    const { error, data } = lsQueryRaw.athena.listStocking
+    const { error, data, meta } = lsQueryRaw.athena.listStocking
 
     if (error) {
       setError(error.message)
@@ -176,6 +190,7 @@ export const Stocking = () => {
     }
 
     setLs(data)
+    setTotal(meta.total)
   }, [lsQueryRaw])
 
   const [importCsv] = useMutation(IMPORT)
@@ -216,33 +231,33 @@ export const Stocking = () => {
     filters,
     sorter,
   ) => {
-    let l = [...lsQueryRaw.athena.listStocking.data]
-
-    for (const k in filters) {
-      if (filters[k] === null) {
-        continue
-      }
-
-      l = l.filter(x => filters[k].includes(x[k].toLowerCase()))
-    }
+    let newVars = variables
 
     if (!Array.isArray(sorter)) {
       sorter = [sorter]
     }
 
+    sorter = sorter.filter(s => !!s.order)
+
+    const ss = []
     for (const s of sorter) {
-      l.sort((a, b) =>
-        s.order === 'ascend'
-          ? // @ts-ignore
-            s.column.sorter(a, b)
-          : s.order === 'descend'
-          ? // @ts-ignore
-            -s.column.sorter(a, b)
-          : 0,
-      )
+      ss.push(`${s.field}_${s.order === 'ascend' ? 'ASC' : 'DESC'}`)
     }
 
-    setLs(l)
+    if (ss.join(',') !== newVars?.sort?.join(',')) {
+      newVars = set(newVars, 'sort', ss)
+    }
+
+    const { current = 1, pageSize = 10 } = pagination || {}
+    const nF = (current - 1) * pageSize
+    if (nF !== newVars.from) {
+      newVars = set(newVars, 'from', nF)
+    }
+
+    if (newVars !== variables) {
+      setVariables(newVars)
+      queryVars(newVars)
+    }
   }
 
   return (
@@ -260,6 +275,9 @@ export const Stocking = () => {
         dataSource={ls}
         loading={loading}
         onChange={handleTableChange}
+        pagination={{
+          total,
+        }}
       />
     </div>
   )

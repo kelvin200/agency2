@@ -67,7 +67,7 @@ export const createAthenaGraphQL = () => ({
         listStocking(
           where: ListStockingInput
           limit: Int
-          after: String
+          from: Int
           sort: [ListStockingSort!]
           search: ListStockingSearchInput
         ): ListStockingResponse

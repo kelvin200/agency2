@@ -1,5 +1,3 @@
-import zipObject from 'lodash/zipObject'
-
 export const csvToObjectArray = <T = unknown>(text: string): T[] => {
   let p = '',
     row = [''],
@@ -52,8 +50,13 @@ export const csvToObjectArray = <T = unknown>(text: string): T[] => {
     for (let i = emptyCell.length - 1; i >= 0; --i) {
       rowCellArray.splice(emptyCell[i], 1)
     }
+    const rowObject = {}
+    for (let i = 0; i < headerCellArray.length; ++i) {
+      if (typeof rowCellArray[i] !== 'undefined' && rowCellArray[i] !== '') {
+        rowObject[headerCellArray[i]] = rowCellArray[i]
+      }
+    }
 
-    const rowObject = zipObject(headerCellArray, rowCellArray)
     objectArray.push(rowObject)
   }
   return objectArray

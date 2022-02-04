@@ -1,61 +1,23 @@
 import { makeVar, useReactiveVar } from '@apollo/client'
 import { useMutation, useQuery } from '@apollo/react-hooks'
-import { Alert, Button, Table, TableProps } from 'antd'
+import {
+  Alert,
+  Button,
+  Popconfirm,
+  Space,
+  Table,
+  TableProps,
+  Tooltip,
+} from 'antd'
 import { get, set } from 'dot-prop-immutable'
 import gql from 'graphql-tag'
-import React, { ChangeEventHandler, useEffect, useState } from 'react'
-
-const columns: TableProps<any>['columns'] = [
-  {
-    title: 'Purchase Date',
-    dataIndex: 'purchaseDate',
-    key: 'purchaseDate',
-    sorter: true,
-    defaultSortOrder: 'descend',
-    sortDirections: ['ascend', 'descend', 'ascend'],
-  },
-  {
-    title: 'Product Name',
-    dataIndex: 'pName',
-    key: 'pName',
-  },
-  {
-    title: 'Vendor',
-    dataIndex: 'vendor',
-    key: 'vendor',
-  },
-  {
-    title: 'Location',
-    dataIndex: 'toLocation',
-    key: 'toLocation',
-    filters: [
-      { text: 'Melbourne', value: 'melbourne' },
-      { text: 'Perth', value: 'perth' },
-    ],
-  },
-  {
-    title: 'Expiry Date',
-    dataIndex: 'expiryDate',
-    key: 'expiryDate',
-    sorter: true,
-    sortDirections: ['ascend', 'descend', 'ascend'],
-  },
-  {
-    title: 'Quantity',
-    dataIndex: 'quantity',
-    key: 'quantity',
-  },
-  // {
-  //   title: 'Action',
-  //   key: 'action',
-  //   render: (text, record) => (
-  //     <Space size="middle">
-  //       <a>Invite {record.name}</a>
-  //       <a>Delete</a>
-  //     </Space>
-  //   ),
-  // },
-]
+import React, {
+  ChangeEventHandler,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
 
 const LIST = gql`
   query List(
@@ -157,13 +119,11 @@ export const addExtraItemsToList = (cache, extraItems) => {
   })
 }
 
-// Create the initial value
 const initVars = {
   from: 0,
   sort: ['purchaseDate_DESC'],
 }
 
-// Create the teamMembersQuery var and initialize it with the initial value
 export const queryVars = makeVar(initVars)
 
 export const Stocking = () => {
@@ -176,6 +136,83 @@ export const Stocking = () => {
   const { data: lsQueryRaw, loading } = useQuery(LIST, {
     variables: useReactiveVar(queryVars),
   })
+
+  const handleDelete = useCallback(() => {}, [])
+
+  const columns: TableProps<any>['columns'] = useMemo(
+    () => [
+      {
+        title: 'Purchase Date',
+        dataIndex: 'purchaseDate',
+        key: 'purchaseDate',
+        sorter: true,
+        defaultSortOrder: 'descend',
+        sortDirections: ['ascend', 'descend', 'ascend'],
+        width: 150,
+      },
+      {
+        title: 'Product Name',
+        dataIndex: 'pName',
+        key: 'pName',
+        width: 300,
+        ellipsis: {
+          showTitle: false,
+        },
+        render: v => (
+          <Tooltip placement="topLeft" title={v}>
+            {v}
+          </Tooltip>
+        ),
+      },
+      {
+        title: 'Vendor',
+        dataIndex: 'vendor',
+        key: 'vendor',
+        width: 100,
+      },
+      {
+        title: 'Location',
+        dataIndex: 'toLocation',
+        key: 'toLocation',
+        width: 120,
+        filters: [
+          { text: 'Melbourne', value: 'melbourne' },
+          { text: 'Perth', value: 'perth' },
+        ],
+      },
+      {
+        title: 'Expiry Date',
+        dataIndex: 'expiryDate',
+        key: 'expiryDate',
+        sorter: true,
+        width: 150,
+        sortDirections: ['ascend', 'descend', 'ascend'],
+      },
+      {
+        title: 'Quantity',
+        dataIndex: 'quantity',
+        key: 'quantity',
+        width: 90,
+      },
+      {
+        title: 'Action',
+        key: 'action',
+        width: 100,
+        render: (_, record: { key: React.Key }) => (
+          <Space size="middle">
+            <a>Edit</a>
+            <Popconfirm
+              title="Sure to delete?"
+              onConfirm={() => handleDelete()}
+            >
+              <a>Delete</a>
+            </Popconfirm>
+          </Space>
+        ),
+      },
+    ],
+    [handleDelete],
+  )
 
   useEffect(() => {
     if (!lsQueryRaw) {

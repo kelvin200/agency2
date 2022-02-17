@@ -1,123 +1,11 @@
 import { makeVar, useReactiveVar } from '@apollo/client'
-import { useMutation, useQuery } from '@apollo/react-hooks'
-import {
-  Alert,
-  Button,
-  Popconfirm,
-  Space,
-  Table,
-  TableProps,
-  Tooltip,
-} from 'antd'
-import { get, set } from 'dot-prop-immutable'
-import gql from 'graphql-tag'
-import React, {
-  ChangeEventHandler,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react'
-
-const LIST = gql`
-  query List(
-    $where: ListStockingInput
-    $limit: Int
-    $from: Int
-    $sort: [ListStockingSort!]
-    $search: ListStockingSearchInput
-  ) {
-    athena {
-      listStocking(
-        where: $where
-        sort: $sort
-        limit: $limit
-        from: $from
-        search: $search
-      ) {
-        data {
-          id
-          key: id
-          pName
-          purchaseDate
-          vendor
-          toLocation
-          quantity
-          expiryDate
-        }
-        meta {
-          total
-        }
-        error {
-          code
-          data
-          message
-        }
-      }
-    }
-  }
-`
-
-const IMPORT = gql`
-  mutation Import($csv: String!) {
-    athena {
-      importStocking(csv: $csv) {
-        data {
-          id
-          key: id
-          pName
-          purchaseDate
-          vendor
-          toLocation
-          quantity
-          expiryDate
-        }
-        error {
-          code
-          data
-          message
-        }
-      }
-    }
-  }
-`
-
-const extractVariables = key => {
-  // TODO: Find a better way to parse the query/id from cache
-  const variables = key
-    .replace('$ROOT_QUERY.athena.listStocking(', '')
-    .replace(')', '')
-
-  return JSON.parse(variables)
-}
-
-const modifyCacheForAllListPagesQuery = (
-  cache,
-  operation: (variables?: any) => void,
-) => {
-  const existingQueriesInCache = Object.keys(cache.data.data).filter(
-    key => key.includes('.listStocking') && !key.endsWith('.meta'),
-  )
-
-  existingQueriesInCache.forEach(cacheKey => {
-    const variables = extractVariables(cacheKey)
-    operation(variables)
-  })
-}
-
-export const addExtraItemsToList = (cache, extraItems) => {
-  modifyCacheForAllListPagesQuery(cache, variables => {
-    const gqlParams = { query: LIST, variables }
-    const data = cache.readQuery(gqlParams)
-
-    const list = get(data, 'athena.listStocking.data')
-
-    cache.writeQuery({
-      ...gqlParams,
-      data: set(data, 'athena.listStocking.data', list.concat(extraItems)),
-    })
-  })
-}
+import { useQuery } from '@apollo/react-hooks'
+import { Alert, Popconfirm, Space, Table, TableProps, Tooltip } from 'antd'
+import { set } from 'dot-prop-immutable'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import { LIST } from './gql'
+import { CollectionCreateForm } from './useCreate'
+import { useImport } from './useImport'
 
 const initVars = {
   from: 0,
@@ -136,6 +24,12 @@ export const Stocking = () => {
   const { data: lsQueryRaw, loading } = useQuery(LIST, {
     variables: useReactiveVar(queryVars),
   })
+
+  const [isModalVisible, setIsModalVisible] = useState(false)
+
+  const showModal = (key: any) => {
+    setIsModalVisible(true)
+  }
 
   const handleDelete = useCallback(() => {}, [])
 
@@ -200,7 +94,7 @@ export const Stocking = () => {
         width: 100,
         render: (_, record: { key: React.Key }) => (
           <Space size="middle">
-            <a>Edit</a>
+            <a onClick={() => showModal(record.key)}>Edit</a>
             <Popconfirm
               title="Sure to delete?"
               onConfirm={() => handleDelete()}
@@ -211,7 +105,7 @@ export const Stocking = () => {
         ),
       },
     ],
-    [handleDelete],
+    [handleDelete, showModal],
   )
 
   useEffect(() => {
@@ -230,40 +124,7 @@ export const Stocking = () => {
     setTotal(meta.total)
   }, [lsQueryRaw])
 
-  const [importCsv] = useMutation(IMPORT)
-
-  const onClick = async () => {
-    if (!csv) {
-      setError('Select csv file first!')
-      return
-    }
-    const { data: res } = await importCsv({
-      variables: { csv },
-      update(cache, { data }) {
-        if (data.athena.importStocking.error) {
-          return
-        }
-        addExtraItemsToList(cache, data.athena.importStocking.data)
-      },
-    })
-    const { error } = res.athena.importStocking
-    if (error) {
-      return setError(error.message)
-    }
-  }
-
-  const [csv, setCsv] = useState('')
-  const onChange: ChangeEventHandler<HTMLInputElement> = event => {
-    const file = event.target.files[0]
-    if (!file) {
-      setCsv('')
-      return
-    }
-
-    file.text().then(setCsv)
-  }
-
-  const handleTableChange: TableProps<any>['onChange'] = (
+  const onTableChange: TableProps<any>['onChange'] = (
     pagination,
     filters,
     sorter,
@@ -297,24 +158,41 @@ export const Stocking = () => {
     }
   }
 
+  const handleOk = () => {
+    setIsModalVisible(false)
+  }
+
+  const handleCancel = () => {
+    setIsModalVisible(false)
+  }
+
+  const { error: importError, importComp } = useImport()
+
   return (
     <div>
       <h1>Nhap Hang</h1>
-      <Button type="primary" onClick={onClick} disabled={!csv}>
-        Import
-      </Button>
-      <input type="file" onChange={onChange} accept=".csv" />
       {error && (
-        <Alert message={'Error'} description={error} type="error" showIcon />
+        <Alert
+          message={'Error'}
+          description={error || importError}
+          type="error"
+          showIcon
+        />
       )}
+      {importComp}
       <Table
         columns={columns}
         dataSource={ls}
         loading={loading}
-        onChange={handleTableChange}
+        onChange={onTableChange}
         pagination={{
           total,
         }}
+      />
+      <CollectionCreateForm
+        visible={isModalVisible}
+        onCreate={handleOk}
+        onCancel={handleCancel}
       />
     </div>
   )

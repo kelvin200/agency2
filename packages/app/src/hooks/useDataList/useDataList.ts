@@ -1,12 +1,11 @@
-import { useState, useEffect, useRef, useCallback } from 'react'
+import type { ApolloClient } from '@apollo/client'
 import { useQuery } from '@apollo/react-hooks'
 import { useRouter } from '@webiny/react-router'
-import { get, isEqual } from 'lodash'
-import { prepareLoadListParams } from './utils'
-import { getData, getError, getMeta } from './functions'
-
 import { DocumentNode } from 'graphql'
-import { ApolloClient } from 'apollo-client'
+import { get, isEqual } from 'lodash'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { getData, getError, getMeta } from './functions'
+import { prepareLoadListParams } from './utils'
 
 export interface UseDataListParams {
   useRouter?: boolean

@@ -1,10 +1,10 @@
-import ApolloClient from 'apollo-client'
-import { ApolloLink } from 'apollo-link'
-import { BatchHttpLink } from 'apollo-link-batch-http'
-import { InMemoryCache } from '@webiny/app/apollo-client/InMemoryCache'
+import { ApolloClient } from '@apollo/client'
+import { InMemoryCache } from '@m/app/src/apollo-client/InMemoryCache'
+import { ApolloCacheObjectIdPlugin } from '@webiny/app/plugins/ApolloCacheObjectIdPlugin'
 import { ApolloDynamicLink } from '@webiny/app/plugins/ApolloDynamicLink'
 import { plugins } from '@webiny/plugins'
-import { ApolloCacheObjectIdPlugin } from '@webiny/app/plugins/ApolloCacheObjectIdPlugin'
+import { ApolloLink } from 'apollo-link'
+import { BatchHttpLink } from 'apollo-link-batch-http'
 
 export const createApolloClient = () => {
   const cache = new InMemoryCache({
@@ -47,5 +47,5 @@ export const createApolloClient = () => {
     return cache.data.data
   }
 
-  return new ApolloClient({ link, cache })
+  return new ApolloClient({ uri, cache })
 }

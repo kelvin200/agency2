@@ -1,8 +1,8 @@
 import { ApolloClient } from '@apollo/client'
 import { useApolloClient } from '@apollo/react-hooks'
-import { plugins } from '@m/plugins/src'
 import React, { useMemo } from 'react'
-import { ReactRouterOnLinkPlugin } from '~/types'
+import { plugins } from '../../../plugins'
+import { ReactRouterOnLinkPlugin } from '../types'
 
 export type ReactRouterContextValue = {
   onLink(link: string): void

@@ -1,8 +1,8 @@
+import { tagResources } from '@webiny/cli-plugin-deploy-pulumi/utils'
 import App from './app'
 import Delivery from './delivery'
-import { tagResources } from '@webiny/cli-plugin-deploy-pulumi/utils'
 
-export = async () => {
+export default async () => {
   // Add tags to all resources that support tagging.
   tagResources({
     WbyProjectName: process.env.WEBINY_PROJECT_NAME as string,

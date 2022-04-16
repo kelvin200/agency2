@@ -1,7 +1,6 @@
-import * as React from 'react'
-import { Plugin } from '@webiny/plugins/types'
-import { ApolloClient } from 'apollo-client'
-import { CSSProperties } from 'react'
+import type { ApolloClient } from '@apollo/client'
+import type { Plugin } from '@m/plugins/src/types'
+import type { CSSProperties, ReactElement } from 'react'
 
 export interface FileItem {
   id: string
@@ -29,7 +28,7 @@ export type UploadOptions = {
 
 export type UiStatePlugin = Plugin & {
   type: 'ui-state'
-  render(): React.ReactElement
+  render(): ReactElement
 }
 
 export type FileUploaderPlugin = Plugin & {
@@ -68,7 +67,7 @@ export interface ImageProps {
  */
 export type ImageComponentPlugin = Plugin & {
   type: 'image-component'
-  render: (props: ImageProps) => React.ReactElement
+  render: (props: ImageProps) => ReactElement
   getImageSrc: (props?: Record<string, any>) => string
   presets: { [key: string]: any }
 }
@@ -79,7 +78,7 @@ export type ImageComponentPlugin = Plugin & {
  */
 export type RoutePlugin = Plugin & {
   type: 'route'
-  route: React.ReactElement
+  route: ReactElement
 }
 
 interface CacheGetObjectIdPluginObj {

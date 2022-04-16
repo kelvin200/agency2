@@ -1,8 +1,7 @@
 {
-  "extends": "../../../tsconfig",
-  "include": ["src"],
+  "extends": "../../../../../tsconfig",
   "compilerOptions": {
-    "composite": false,
-    "jsx": "react-jsx"
-  }
+    "baseUrl": "./"
+  },
+  "include": ["./"]
 }

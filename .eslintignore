@@ -1,8 +1,10 @@
-**/node_modules/
-**/dist/
 **/build/
 **/.out/
 **/*.d.ts
 idea.js
 scripts
 .yarn
+.webiny
+.pulumi
+dist
+node_modules

@@ -1,8 +1,8 @@
-import * as React from 'react'
-import invariant from 'invariant'
 import { plugins } from '@webiny/plugins'
+import invariant from 'invariant'
 import { get } from 'lodash'
-import { ImageComponentPlugin, ImageProps } from '~/types'
+import * as React from 'react'
+import { ImageComponentPlugin, ImageProps } from '../types'
 
 export const Image: React.FC<ImageProps> = ({
   preset: presetName,

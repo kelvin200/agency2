@@ -1,6 +1,6 @@
+import { plugins } from '@m/plugins'
 import React from 'react'
-import { UiStatePlugin } from '~/types'
-import { plugins } from '@webiny/plugins'
+import type { UiStatePlugin } from '../../types'
 
 export const UiContext = React.createContext({})
 

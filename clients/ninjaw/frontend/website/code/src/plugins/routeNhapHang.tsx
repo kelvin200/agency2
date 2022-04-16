@@ -1,4 +1,4 @@
-import { Route } from '@webiny/react-router'
+import { Route } from '@m/react-router/src'
 import React from 'react'
 import { Stocking } from '../components/stocking'
 

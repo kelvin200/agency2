@@ -1,23 +1,21 @@
-import ApolloClient from 'apollo-client'
-import { ApolloLink } from 'apollo-link'
-import { BatchHttpLink } from 'apollo-link-batch-http'
-import { InMemoryCache } from '@webiny/app/apollo-client/InMemoryCache'
-import { plugins } from '@webiny/plugins'
-import { ApolloDynamicLink } from '@webiny/app/plugins/ApolloDynamicLink'
+import { ApolloClient } from '@apollo/client'
+import { InMemoryCache } from '@m/app/src/apollo-client/InMemoryCache'
 import { ApolloCacheObjectIdPlugin } from '@webiny/app/plugins/ApolloCacheObjectIdPlugin'
+import { plugins } from '@webiny/plugins'
 
 export const createApolloClient = ({ uri }) => {
   return new ApolloClient({
-    link: ApolloLink.from([
-      /**
-       * This will process links from plugins on every request.
-       */
-      new ApolloDynamicLink(),
-      /**
-       * This batches requests made to the API to pack multiple requests into a single HTTP request.
-       */
-      new BatchHttpLink({ uri }),
-    ]),
+    uri,
+    // link: ApolloLink.from([
+    //   /**
+    //    * This will process links from plugins on every request.
+    //    */
+    //   new ApolloDynamicLink(),
+    //   /**
+    //    * This batches requests made to the API to pack multiple requests into a single HTTP request.
+    //    */
+    //   new BatchHttpLink({ uri }),
+    // ]),
     cache: new InMemoryCache({
       addTypename: true,
       dataIdFromObject: obj => {

@@ -7,7 +7,7 @@ import { tagResources } from '@webiny/cli-plugin-deploy-pulumi/utils'
 // https://www.webiny.com/docs/key-topics/ci-cd/environments/staging-prod-deployments
 const PROD_STACK_ENVIRONMENTS = ['prod' /*"staging"*/]
 
-export = async () => {
+export default async () => {
   // Add tags to all resources that support tagging. Read more about the default environment variables:
   // https://www.webiny.com/docs/how-to-guides/environment-variables#webiny-environment-variables
   tagResources({

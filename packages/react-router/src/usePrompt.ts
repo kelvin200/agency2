@@ -6,12 +6,12 @@
  * @see https://gist.github.com/rmorse/426ffcc579922a82749934826fa9f743
  * Thanks to https://github.com/rmorse
  */
-import { useContext, useEffect, useCallback } from 'react'
+import type { History, Transition } from 'history'
+import { useCallback, useContext, useEffect } from 'react'
 import {
   UNSAFE_NavigationContext as NavigationContext,
   useLocation,
 } from 'react-router-dom'
-import { History, Transition } from 'history'
 
 type Navigator = Pick<
   History,

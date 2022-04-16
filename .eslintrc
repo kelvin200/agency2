@@ -29,6 +29,7 @@
     "@typescript-eslint/no-var-requires": 0,
     "@typescript-eslint/no-explicit-any": 0,
     "@typescript-eslint/no-empty-function": 0,
+    "@typescript-eslint/no-extra-semi": 0,
     "curly": ["error"],
     "jest/expect-expect": 0,
     "jest/no-focused-tests": 0,

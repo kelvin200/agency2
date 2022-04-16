@@ -21,6 +21,7 @@ export default (
     /**
      * Initialize the Elasticsearch client.
      */
+    // @ts-ignore
     context.elasticsearch =
       'endpoint' in params ? createElasticsearchClient(params) : params
 

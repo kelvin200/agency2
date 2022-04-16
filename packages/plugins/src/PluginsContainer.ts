@@ -1,5 +1,5 @@
-import { Plugin, PluginCollection } from './types'
 import uniqid from 'uniqid'
+import { Plugin, PluginCollection } from './types'
 
 const isOptionsObject = (item?: any) =>
   item && !Array.isArray(item) && !item.type && !item.name

@@ -1,7 +1,36 @@
 {
-  "extends": "./tsconfig.build.json",
   "compilerOptions": {
+    "target": "ESNext",
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "module": "ESNext",
+    "lib": ["dom", "dom.iterable", "ESNext"],
+    "esModuleInterop": true,
+    "declaration": false,
+    "composite": false,
     "noEmit": true,
-    "emitDeclarationOnly": false
-  }
+    "resolveJsonModule": true,
+    "jsx": "react-jsx",
+    "diagnostics": false,
+    "emitDeclarationOnly": false,
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "baseUrl": "./",
+    "rootDir": "./",
+    "paths": {
+      "@m/*": ["./packages/*"]
+    },
+    "typeRoots": ["node_modules/@types", "./types"]
+  },
+  "include": ["./"],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**jest**",
+    "**resources.js",
+    ".pulumi",
+    ".webiny",
+    ".yarn"
+  ]
 }

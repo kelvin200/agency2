@@ -1,12 +1,4 @@
 {
   "name": "@m/plugins",
-  "version": "5.25.0",
-  "publishConfig": {
-    "access": "public",
-    "directory": "dist"
-  },
-  "scripts": {
-    "build": "yarn webiny run build",
-    "watch": "yarn webiny run watch"
-  }
+  "version": "0.1.0"
 }

@@ -1,6 +1,6 @@
-import invariant from 'invariant'
+import { createBuildApp, createWatchApp } from '@m/project-utils'
 import { getStackOutput } from '@webiny/cli-plugin-deploy-pulumi/utils'
-import { createWatchApp, createBuildApp } from '@webiny/project-utils'
+import invariant from 'invariant'
 
 const API_MAP = {
   REACT_APP_USER_POOL_REGION: '${region}',

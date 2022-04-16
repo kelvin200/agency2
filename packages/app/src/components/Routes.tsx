@@ -1,6 +1,6 @@
 import React from 'react'
-import { plugins } from '@webiny/plugins'
-import { Routes as ReactRouterRoutes } from '@webiny/react-router'
+import { plugins } from '../../../plugins/src'
+import { Routes as ReactRouterRoutes } from '../../../react-router/src/Routes'
 import { RoutePlugin } from '../types'
 
 export const Routes = () => {

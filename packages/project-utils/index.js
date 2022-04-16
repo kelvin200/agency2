@@ -1,20 +1,23 @@
-const { createWatchApp, createBuildApp } = require("./bundling/app");
-const { createBuildFunction, createWatchFunction } = require("./bundling/function");
-const { createWatchPackage, createBuildPackage } = require("./packages");
-const { traverseLoaders } = require("./traverseLoaders");
+const { createWatchApp, createBuildApp } = require('./bundling/app')
+const {
+  createBuildFunction,
+  createWatchFunction,
+} = require('./bundling/function')
+const { createWatchPackage, createBuildPackage } = require('./packages')
+const { traverseLoaders } = require('./traverseLoaders')
 
 module.exports = {
-    createBuildApp,
-    createWatchApp,
+  createBuildApp,
+  createWatchApp,
 
-    // Functions.
-    createBuildFunction,
-    createWatchFunction,
+  // Functions.
+  createBuildFunction,
+  createWatchFunction,
 
-    // Packages.
-    createWatchPackage,
-    createBuildPackage,
+  // Packages.
+  createWatchPackage,
+  createBuildPackage,
 
-    // Other.
-    traverseLoaders
-};
+  // Other.
+  traverseLoaders,
+}

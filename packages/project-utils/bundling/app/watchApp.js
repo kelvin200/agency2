@@ -1,13 +1,13 @@
-const { applyDefaults } = require("./utils");
+const { applyDefaults } = require('./utils')
 
 module.exports = options => {
-    applyDefaults();
+  applyDefaults()
 
-    if (!("REACT_APP_DEBUG" in process.env)) {
-        process.env.REACT_APP_DEBUG = "true";
-    }
+  if (!('REACT_APP_DEBUG' in process.env)) {
+    process.env.REACT_APP_DEBUG = 'true'
+  }
 
-    process.env.NODE_ENV = "development";
+  process.env.NODE_ENV = 'development'
 
-    return require("./createWatchConfig")(options);
-};
+  return require('./createWatchConfig')(options)
+}

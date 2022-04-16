@@ -4,8 +4,7 @@ import { Alert, Popconfirm, Space, Table, TableProps, Tooltip } from 'antd'
 import { set } from 'dot-prop-immutable'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { LIST } from './gql'
-import { CollectionCreateForm } from './useCreate'
-import { useImport } from './useImport'
+import { useModalStocking } from './useModalStocking'
 
 const initVars = {
   from: 0,
@@ -25,13 +24,9 @@ export const Stocking = () => {
     variables: useReactiveVar(queryVars),
   })
 
-  const [isModalVisible, setIsModalVisible] = useState(false)
-
-  const showModal = (key: any) => {
-    setIsModalVisible(true)
-  }
-
   const handleDelete = useCallback(() => {}, [])
+
+  const { modal, showModal } = useModalStocking()
 
   const columns: TableProps<any>['columns'] = useMemo(
     () => [
@@ -158,28 +153,12 @@ export const Stocking = () => {
     }
   }
 
-  const handleOk = () => {
-    setIsModalVisible(false)
-  }
-
-  const handleCancel = () => {
-    setIsModalVisible(false)
-  }
-
-  const { error: importError, importComp } = useImport()
-
   return (
     <div>
       <h1>Nhap Hang</h1>
       {error && (
-        <Alert
-          message={'Error'}
-          description={error || importError}
-          type="error"
-          showIcon
-        />
+        <Alert message={'Error'} description={error} type="error" showIcon />
       )}
-      {importComp}
       <Table
         columns={columns}
         dataSource={ls}
@@ -189,11 +168,7 @@ export const Stocking = () => {
           total,
         }}
       />
-      <CollectionCreateForm
-        visible={isModalVisible}
-        onCreate={handleOk}
-        onCancel={handleCancel}
-      />
+      {modal}
     </div>
   )
 }

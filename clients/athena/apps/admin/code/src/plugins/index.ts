@@ -1,6 +1,5 @@
 import { plugins } from '@webiny/plugins'
 import apolloLinkPlugins from './apolloLinks'
-import { routeNhapHang } from './routeNhapHang'
-import { routeTrangChu } from './routeTrangChu'
+import * as route from './route'
 
-plugins.register([apolloLinkPlugins, routeNhapHang, routeTrangChu])
+plugins.register([apolloLinkPlugins, ...Object.values(route)])

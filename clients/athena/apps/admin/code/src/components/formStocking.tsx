@@ -1,27 +1,30 @@
-import { Form, Input, Modal, Radio } from 'antd'
-import React from 'react'
+import { makeVar, useQuery, useReactiveVar } from '@apollo/client'
+import { Form, FormInstance, Input, Radio } from 'antd'
+import React, { useState } from 'react'
+import { GET } from './gql'
 
-export const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
-  const [form] = Form.useForm()
-  return (
-    <Modal
-      visible={visible}
-      title="Create a new collection"
-      okText="Create"
-      cancelText="Cancel"
-      onCancel={onCancel}
-      onOk={() => {
-        form
-          .validateFields()
-          .then(values => {
-            form.resetFields()
-            onCreate(values)
-          })
-          .catch(info => {
-            console.log('Validate Failed:', info)
-          })
-      }}
-    >
+const initVars: { key?: React.Key } = {
+  key: '',
+}
+
+export const queryVars = makeVar(initVars)
+
+export const useFormStocking = (form: FormInstance<any>) => {
+  const [key, _setKey] = useState<React.Key | undefined>(undefined)
+
+  const { data: lsQueryRaw, loading } = useQuery(GET, {
+    variables: useReactiveVar(queryVars),
+    skip: !key,
+  })
+
+  const setKey = (key: React.Key | undefined) => {
+    _setKey(key)
+    queryVars({ key })
+  }
+
+  return {
+    setKey,
+    comp: (
       <Form
         form={form}
         layout="vertical"
@@ -53,6 +56,6 @@ export const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
           </Radio.Group>
         </Form.Item>
       </Form>
-    </Modal>
-  )
+    ),
+  }
 }

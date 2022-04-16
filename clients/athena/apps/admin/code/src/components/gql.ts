@@ -39,6 +39,30 @@ export const LIST = gql`
   }
 `
 
+export const GET = gql`
+  query Get($id: String) {
+    athena {
+      getStocking(id: $id) {
+        data {
+          id
+          key: id
+          pName
+          purchaseDate
+          vendor
+          toLocation
+          quantity
+          expiryDate
+        }
+        error {
+          code
+          data
+          message
+        }
+      }
+    }
+  }
+`
+
 export const IMPORT = gql`
   mutation Import($csv: String!) {
     athena {

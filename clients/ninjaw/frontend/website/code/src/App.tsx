@@ -1,5 +1,5 @@
 import { ApolloProvider } from '@apollo/react-components'
-// import { Routes } from '@webiny/app/components/Routes'
+import { Routes } from '@webiny/app/components/Routes'
 import { UiProvider } from '@webiny/app/contexts/Ui'
 import { BrowserRouter } from '@webiny/react-router'
 import 'antd/dist/antd.css'
@@ -17,6 +17,7 @@ export const App = () => (
   >
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <UiProvider>
+        <Routes />
         {/* <Header />
         <Routes />
         <Footer /> */}

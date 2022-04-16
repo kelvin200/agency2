@@ -1,10 +1,10 @@
+import { InMemoryCache } from '@webiny/app/apollo-client/InMemoryCache'
+import { ApolloCacheObjectIdPlugin } from '@webiny/app/plugins/ApolloCacheObjectIdPlugin'
+import { ApolloDynamicLink } from '@webiny/app/plugins/ApolloDynamicLink'
+import { plugins } from '@webiny/plugins'
 import ApolloClient from 'apollo-client'
 import { ApolloLink } from 'apollo-link'
 import { BatchHttpLink } from 'apollo-link-batch-http'
-import { InMemoryCache } from '@webiny/app/apollo-client/InMemoryCache'
-import { plugins } from '@webiny/plugins'
-import { ApolloDynamicLink } from '@webiny/app/plugins/ApolloDynamicLink'
-import { ApolloCacheObjectIdPlugin } from '@webiny/app/plugins/ApolloCacheObjectIdPlugin'
 
 export const createApolloClient = ({ uri }) => {
   return new ApolloClient({
@@ -25,7 +25,9 @@ export const createApolloClient = ({ uri }) => {
          * Since every data type coming from API can have a different data structure,
          * we cannot rely on having an `id` field.
          */
-        const getters = plugins.byType<ApolloCacheObjectIdPlugin>(ApolloCacheObjectIdPlugin.type)
+        const getters = plugins.byType<ApolloCacheObjectIdPlugin>(
+          ApolloCacheObjectIdPlugin.type,
+        )
 
         for (let i = 0; i < getters.length; i++) {
           const id = getters[i].getObjectId(obj)

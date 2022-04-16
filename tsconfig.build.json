@@ -7,7 +7,7 @@
     "module": "ESNext",
     "lib": ["dom", "dom.iterable", "ESNext"],
     "esModuleInterop": true,
-    "declaration": false,
+    "declaration": true,
     "composite": true,
     "noEmit": false,
     "resolveJsonModule": true,

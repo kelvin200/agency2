@@ -2774,49 +2774,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@c/athena-admin@workspace:clients/athena/apps/admin/code"
   dependencies:
-    "@apollo/react-components": ^4.0.0
-    "@editorjs/delimiter": ^1.2.0
-    "@editorjs/list": ^1.7.0
-    "@editorjs/quote": ^2.4.0
-    "@editorjs/underline": ^1.0.0
-    "@types/react": ^18.0.5
-    "@webiny/app": 5.20.0
-    "@webiny/app-admin": 5.20.0
-    "@webiny/app-admin-users-cognito": 5.20.0
-    "@webiny/app-file-manager": 5.20.0
-    "@webiny/app-file-manager-s3": 5.20.0
-    "@webiny/app-form-builder": 5.20.0
-    "@webiny/app-graphql-playground": 5.20.0
-    "@webiny/app-headless-cms": 5.20.0
-    "@webiny/app-i18n": 5.20.0
-    "@webiny/app-i18n-content": 5.20.0
-    "@webiny/app-page-builder": 5.20.0
-    "@webiny/app-page-builder-elements": 5.20.0
-    "@webiny/app-plugin-admin-welcome-screen": 5.20.0
-    "@webiny/app-security": 5.20.0
-    "@webiny/app-security-access-management": 5.20.0
-    "@webiny/app-tenancy": 5.20.0
     "@webiny/cli": 5.20.0
-    "@webiny/cli-plugin-deploy-pulumi": 5.20.0
-    "@webiny/plugins": 5.20.0
-    "@webiny/project-utils": 5.20.0
-    "@webiny/react-router": 5.20.0
-    "@webiny/ui": 5.20.0
-    antd: ^4.19.5
-    apollo-cache: 1.3.5
-    apollo-client: 2.6.10
-    apollo-link: 1.2.14
-    apollo-link-batch-http: 1.2.14
-    apollo-utilities: 1.3.4
-    core-js: ^3.22.0
-    cross-env: 7.0.3
-    cross-fetch: ^3.1.5
-    invariant: ^2.2.4
-    prop-types: ^15.8.1
-    react: ^18.0.0
-    react-dom: ^18.0.0
-    regenerator-runtime: ^0.13.9
-    theme: ^0.1.0
   languageName: unknown
   linkType: soft
 
@@ -2830,69 +2788,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@c/ninjaw-website@workspace:clients/ninjaw/frontend/website/code"
   dependencies:
-    "@apollo/react-components": 4.0.0
-    "@apollo/react-hooks": 4.0.0
-    "@editorjs/delimiter": 1.2.0
-    "@editorjs/list": 1.7.0
-    "@editorjs/quote": 2.4.0
-    "@editorjs/underline": 1.0.0
-    "@types/react": 18.0.5
-    "@types/react-dom": 18.0.1
-    "@types/react-router-dom": 5.3.3
-    "@webiny/app": 5.20.0
-    "@webiny/app-admin": 5.20.0
-    "@webiny/app-admin-users-cognito": 5.20.0
-    "@webiny/app-file-manager": 5.20.0
-    "@webiny/app-file-manager-s3": 5.20.0
-    "@webiny/app-form-builder": 5.20.0
-    "@webiny/app-graphql-playground": 5.20.0
-    "@webiny/app-headless-cms": 5.20.0
-    "@webiny/app-i18n": 5.20.0
-    "@webiny/app-i18n-content": 5.20.0
-    "@webiny/app-page-builder": 5.20.0
-    "@webiny/app-page-builder-elements": 5.20.0
-    "@webiny/app-plugin-admin-welcome-screen": 5.20.0
-    "@webiny/app-security": 5.20.0
-    "@webiny/app-security-access-management": 5.20.0
-    "@webiny/app-tenancy": 5.20.0
     "@webiny/cli": 5.20.0
-    "@webiny/cli-plugin-deploy-pulumi": 5.20.0
-    "@webiny/form": 5.20.0
-    "@webiny/plugins": 5.20.0
-    "@webiny/project-utils": 5.20.0
-    "@webiny/react-rich-text-renderer": 5.20.0
-    "@webiny/react-router": 5.20.0
-    "@webiny/ui": 5.20.0
-    "@webiny/validation": 5.20.0
-    antd: 4.19.5
-    apollo-cache: 1.3.5
-    apollo-client: 2.6.10
-    apollo-link: 1.2.14
-    apollo-link-batch-http: 1.2.14
-    apollo-utilities: 1.3.4
-    classnames: 2.3.1
-    core-js: 3.22.0
-    cross-env: 7.0.3
-    cross-fetch: 3.1.5
-    emotion: 11.0.0
-    graphql: 16.3.0
-    graphql-tag: 2.12.6
-    i18next: 21.6.16
-    i18next-browser-languagedetector: 6.1.4
-    i18next-xhr-backend: 3.2.2
-    invariant: 2.2.4
-    lodash.get: 4.4.2
-    nanoid: 3.3.2
-    prop-types: 15.8.1
-    react: ^18.0.0
-    react-awesome-reveal: 3.8.1
-    react-dom: 18.0.0
-    react-hamburger-menu: 1.2.1
-    react-helmet: 6.1.0
-    react-i18next: 11.16.6
-    react-router-dom: 6.3.0
-    regenerator-runtime: 0.13.9
-    theme: 0.1.0
   languageName: unknown
   linkType: soft
 
@@ -2953,7 +2849,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@editorjs/delimiter@npm:1.2.0, @editorjs/delimiter@npm:^1.2.0":
+"@editorjs/delimiter@npm:^1.2.0":
   version: 1.2.0
   resolution: "@editorjs/delimiter@npm:1.2.0"
   checksum: 42f1f74a4f8568c69072b9d8ac470b27dd934873fc054d5e59e3d6368ac3c59c85a954b3b55642b7b6069ae2f73171cbfd32b4c606a1b9223c3bf3e3309af46e
@@ -2971,21 +2867,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@editorjs/list@npm:1.7.0, @editorjs/list@npm:^1.7.0":
+"@editorjs/list@npm:^1.7.0":
   version: 1.7.0
   resolution: "@editorjs/list@npm:1.7.0"
   checksum: a0922f17248a089a8fce0ad25ff78b1d2f1215edff97e439c535870bf6f16ebd4108932574c38f231a570981a5f2edab08879d359ae840561033e091f59e06c5
   languageName: node
   linkType: hard
 
-"@editorjs/quote@npm:2.4.0, @editorjs/quote@npm:^2.4.0":
+"@editorjs/quote@npm:^2.4.0":
   version: 2.4.0
   resolution: "@editorjs/quote@npm:2.4.0"
   checksum: e588643b0a9a3cfafb30e3a4b045fffdad3a0a2443497200be4b1dd2a9e860f1b740169da4f017d9de8868e302064d1c6b99fe9f32705f301b376dc44ae7d95b
   languageName: node
   linkType: hard
 
-"@editorjs/underline@npm:1.0.0, @editorjs/underline@npm:^1.0.0":
+"@editorjs/underline@npm:^1.0.0":
   version: 1.0.0
   resolution: "@editorjs/underline@npm:1.0.0"
   checksum: a1dd093918964645f6b4b5e3be116f6f04055ce9abd5c7352b4fda99232d9d185e3ebcdd91b61dd78104d1554e9929806694e18d796220f29be75a4b5adbd051
@@ -3672,62 +3568,36 @@ __metadata:
 "@m/api-elasticsearch@workspace:packages/api-elasticsearch":
   version: 0.0.0-use.local
   resolution: "@m/api-elasticsearch@workspace:packages/api-elasticsearch"
-  dependencies:
-    "@webiny/api-dynamodb-to-elasticsearch": 5.20.0
-    "@webiny/api-elasticsearch": 5.20.0
-    "@webiny/cli": 5.20.0
-    "@webiny/handler-aws": 5.20.0
-    "@webiny/project-utils": 5.20.0
   languageName: unknown
   linkType: soft
 
 "@m/api-file-manager-ddb-es@workspace:packages/api-file-manager-ddb-es":
   version: 0.0.0-use.local
   resolution: "@m/api-file-manager-ddb-es@workspace:packages/api-file-manager-ddb-es"
-  dependencies:
-    "@webiny/api-dynamodb-to-elasticsearch": 5.20.0
-    "@webiny/api-elasticsearch": 5.20.0
-    "@webiny/api-file-manager-ddb-es": 5.20.0
-    "@webiny/cli": 5.20.0
-    "@webiny/handler-aws": 5.20.0
-    "@webiny/project-utils": 5.20.0
   languageName: unknown
   linkType: soft
 
 "@m/api-form-builder-so-ddb-es@workspace:packages/api-form-builder-so-ddb-es":
   version: 0.0.0-use.local
   resolution: "@m/api-form-builder-so-ddb-es@workspace:packages/api-form-builder-so-ddb-es"
-  dependencies:
-    "@webiny/api-dynamodb-to-elasticsearch": 5.20.0
-    "@webiny/api-elasticsearch": 5.20.0
-    "@webiny/api-form-builder-so-ddb-es": 5.20.0
-    "@webiny/cli": 5.20.0
-    "@webiny/handler-aws": 5.20.0
-    "@webiny/project-utils": 5.20.0
   languageName: unknown
   linkType: soft
 
 "@m/api-headless-cms-ddb-es@workspace:packages/api-headless-cms-ddb-es":
   version: 0.0.0-use.local
   resolution: "@m/api-headless-cms-ddb-es@workspace:packages/api-headless-cms-ddb-es"
-  dependencies:
-    "@webiny/api-headless-cms-ddb-es": 5.20.0
-    "@webiny/cli": 5.20.0
-    "@webiny/handler-aws": 5.20.0
-    "@webiny/project-utils": 5.20.0
   languageName: unknown
   linkType: soft
 
 "@m/api-page-builder-so-ddb-es@workspace:packages/api-page-builder-so-ddb-es":
   version: 0.0.0-use.local
   resolution: "@m/api-page-builder-so-ddb-es@workspace:packages/api-page-builder-so-ddb-es"
-  dependencies:
-    "@webiny/api-dynamodb-to-elasticsearch": 5.20.0
-    "@webiny/api-elasticsearch": 5.20.0
-    "@webiny/api-page-builder-so-ddb-es": 5.20.0
-    "@webiny/cli": 5.20.0
-    "@webiny/handler-aws": 5.20.0
-    "@webiny/project-utils": 5.20.0
+  languageName: unknown
+  linkType: soft
+
+"@m/app@workspace:packages/app":
+  version: 0.0.0-use.local
+  resolution: "@m/app@workspace:packages/app"
   languageName: unknown
   linkType: soft
 
@@ -6267,25 +6137,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@webiny/api-file-manager-ddb-es@npm:5.20.0":
-  version: 5.20.0
-  resolution: "@webiny/api-file-manager-ddb-es@npm:5.20.0"
-  dependencies:
-    "@babel/runtime": 7.16.3
-    "@webiny/api-elasticsearch": 5.20.0
-    "@webiny/api-file-manager": 5.20.0
-    "@webiny/api-upgrade": 5.20.0
-    "@webiny/db-dynamodb": 5.20.0
-    "@webiny/error": 5.20.0
-    "@webiny/handler-db": 5.20.0
-    "@webiny/plugins": 5.20.0
-    "@webiny/project-utils": 5.20.0
-    aws-sdk: 2.1032.0
-    dynamodb-toolbox: 0.3.5
-  checksum: aa452f18355121bd91ed75c9b833901e30077e6382b276d4b65b77bf564f5ec3eaa907a6e6caae21705fb9c2c3433478e1a6cd43f8b6b9f4af3915d8743103b6
-  languageName: node
-  linkType: hard
-
 "@webiny/api-file-manager-s3@npm:5.20.0":
   version: 5.20.0
   resolution: "@webiny/api-file-manager-s3@npm:5.20.0"
@@ -6327,29 +6178,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@webiny/api-form-builder-so-ddb-es@npm:5.20.0":
-  version: 5.20.0
-  resolution: "@webiny/api-form-builder-so-ddb-es@npm:5.20.0"
-  dependencies:
-    "@babel/runtime": 7.16.3
-    "@elastic/elasticsearch": 7.12.0
-    "@webiny/api-elasticsearch": 5.20.0
-    "@webiny/api-form-builder": 5.20.0
-    "@webiny/api-i18n": 5.20.0
-    "@webiny/api-tenancy": 5.20.0
-    "@webiny/api-upgrade": 5.20.0
-    "@webiny/db-dynamodb": 5.20.0
-    "@webiny/error": 5.20.0
-    "@webiny/handler": 5.20.0
-    "@webiny/handler-aws": 5.20.0
-    "@webiny/plugins": 5.20.0
-    "@webiny/utils": 5.20.0
-    dynamodb-toolbox: 0.3.5
-    elastic-ts: 0.7.0
-  checksum: 357d587d2e1e904690eac7bd482ea643d804d12914035c167e32cad454d68353f586fcd5a889f8a841a1a8b0c44e417b004fc6bd24a11de762cb0901ee87d73b
-  languageName: node
-  linkType: hard
-
 "@webiny/api-form-builder@npm:5.20.0":
   version: 5.20.0
   resolution: "@webiny/api-form-builder@npm:5.20.0"
@@ -6379,30 +6207,6 @@ __metadata:
     node-fetch: 2.6.6
     slugify: 1.6.2
   checksum: 768c04b0337e51e3de9424fa844f0d4c8cdf841458326aed067461eed8c59aa1e941374c24c5dffa6327bbc6ddafeb53b945b7c0d87b2c3fe74532ea58a2a3d2
-  languageName: node
-  linkType: hard
-
-"@webiny/api-headless-cms-ddb-es@npm:5.20.0":
-  version: 5.20.0
-  resolution: "@webiny/api-headless-cms-ddb-es@npm:5.20.0"
-  dependencies:
-    "@babel/runtime": 7.16.3
-    "@webiny/api-headless-cms": 5.20.0
-    "@webiny/api-upgrade": 5.20.0
-    "@webiny/db-dynamodb": 5.20.0
-    "@webiny/error": 5.20.0
-    "@webiny/handler": 5.20.0
-    "@webiny/handler-aws": 5.20.0
-    "@webiny/handler-db": 5.20.0
-    "@webiny/plugins": 5.20.0
-    "@webiny/utils": 5.20.0
-    dataloader: 2.0.0
-    dynamodb-toolbox: 0.3.5
-    jsonpack: 1.1.5
-    lodash.chunk: 4.2.0
-    lodash.clonedeep: 4.5.0
-    lodash.omit: 4.5.0
-  checksum: 26c97e770ceda3e66e584e71fdcd36b39af7f647485f0144e14bb4e2762dddba2d0ec9a16328c04a34844b856dd8b5ae8c4b9b51ef375e46288539c092bfb64f
   languageName: node
   linkType: hard
 
@@ -6534,26 +6338,6 @@ __metadata:
     uniqid: 5.4.0
     yauzl: 2.10.0
   checksum: 4bd9802b88712ba6b81656f7534fa3c56b3b931fa8339da0d62e0e94d29ea85bb473ebcc0f60d63041b02e9f020b030cf32395e1205fc980aecb78a0e2b75166
-  languageName: node
-  linkType: hard
-
-"@webiny/api-page-builder-so-ddb-es@npm:5.20.0":
-  version: 5.20.0
-  resolution: "@webiny/api-page-builder-so-ddb-es@npm:5.20.0"
-  dependencies:
-    "@babel/runtime": 7.16.3
-    "@webiny/api-elasticsearch": 5.20.0
-    "@webiny/api-page-builder": 5.20.0
-    "@webiny/api-upgrade": 5.20.0
-    "@webiny/db-dynamodb": 5.20.0
-    "@webiny/error": 5.20.0
-    "@webiny/handler-db": 5.20.0
-    "@webiny/plugins": 5.20.0
-    dataloader: 2.0.0
-    dynamodb-toolbox: 0.3.5
-    elastic-ts: 0.7.0
-    lodash: 4.17.21
-  checksum: 0f688b91751dcbb4e96cc88fb654d25f6cd109d38a940d58b4cfdc5e03e1a33098027ad05e65221cfe6a8de609ac55eb180adccd0be717c8d9ebc214c3b4d041
   languageName: node
   linkType: hard
 
@@ -8206,9 +7990,6 @@ __metadata:
     "@webiny/cwp-template-aws": 5.20.0
     "@webiny/project-utils": 5.20.0
     antd: 4.19.5
-    apollo-cache: 1.3.5
-    apollo-cache-inmemory: 1.6.6
-    apollo-client: 2.6.10
     apollo-link: 1.2.14
     apollo-link-batch-http: 1.2.14
     apollo-link-context: 1.0.20
@@ -8454,7 +8235,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"antd@npm:4.19.5, antd@npm:^4.19.5":
+"antd@npm:4.19.5":
   version: 4.19.5
   resolution: "antd@npm:4.19.5"
   dependencies:
@@ -11310,17 +11091,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js@npm:3.22.0, core-js@npm:^3.22.0":
-  version: 3.22.0
-  resolution: "core-js@npm:3.22.0"
-  checksum: 88ac28dfb8e7fdcd80d32a69dc634900e3daf3bc873ebefb6f189b598ce96e9b68fe553428627e5c43f27749779389faceb865a2a120cf2d44f05795830b5cd7
-  languageName: node
-  linkType: hard
-
 "core-js@npm:^2.4.0, core-js@npm:^2.4.1, core-js@npm:^2.6.5":
   version: 2.6.12
   resolution: "core-js@npm:2.6.12"
   checksum: 44fa9934a85f8c78d61e0c8b7b22436330471ffe59ec5076fe7f324d6e8cf7f824b14b1c81ca73608b13bdb0fef035bd820989bf059767ad6fa13123bb8bd016
+  languageName: node
+  linkType: hard
+
+"core-js@npm:^3.22.0":
+  version: 3.22.0
+  resolution: "core-js@npm:3.22.0"
+  checksum: 88ac28dfb8e7fdcd80d32a69dc634900e3daf3bc873ebefb6f189b598ce96e9b68fe553428627e5c43f27749779389faceb865a2a120cf2d44f05795830b5cd7
   languageName: node
   linkType: hard
 
@@ -11462,7 +11243,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cross-fetch@npm:3.1.5, cross-fetch@npm:^3.1.5":
+"cross-fetch@npm:^3.1.5":
   version: 3.1.5
   resolution: "cross-fetch@npm:3.1.5"
   dependencies:
@@ -12796,9 +12577,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.3.378, electron-to-chromium@npm:^1.4.84":
-  version: 1.4.110
-  resolution: "electron-to-chromium@npm:1.4.110"
-  checksum: 48e2d26e27ff4469363a7a645da3a2a05f4d120c78919cb64a9f1d966bc13f9891e07efcd4589ed189c0c37f4440edf880e119d42a5348a0d58b5b6fa6e240f1
+  version: 1.4.111
+  resolution: "electron-to-chromium@npm:1.4.111"
+  checksum: 8b9d5008895bf782e399190d6c646eb14189458cae6df52b09b533aa68db0e0eb5b03eb9421e407db2344e8e29b4305b6fea8eac9faba3f0552391263413fb9a
   languageName: node
   linkType: hard
 
@@ -17796,13 +17577,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash.chunk@npm:4.2.0":
-  version: 4.2.0
-  resolution: "lodash.chunk@npm:4.2.0"
-  checksum: 6286c6d06814fbeda502164015c42ef53a9194e6ebaac52ec2b41e83344aefe7bc3d94fdfec525adcd2c66cefdf05dc333b6a1128e4de739797342315c17cbc7
-  languageName: node
-  linkType: hard
-
 "lodash.clonedeep@npm:4.5.0":
   version: 4.5.0
   resolution: "lodash.clonedeep@npm:4.5.0"
@@ -17905,13 +17679,6 @@ __metadata:
   version: 4.6.2
   resolution: "lodash.merge@npm:4.6.2"
   checksum: ad580b4bdbb7ca1f7abf7e1bce63a9a0b98e370cf40194b03380a46b4ed799c9573029599caebc1b14e3f24b111aef72b96674a56cfa105e0f5ac70546cdc005
-  languageName: node
-  linkType: hard
-
-"lodash.omit@npm:4.5.0":
-  version: 4.5.0
-  resolution: "lodash.omit@npm:4.5.0"
-  checksum: 434645e49fe84ab315719bd5a9a3a585a0f624aa4160bc09157dd041a414bcc287c15840365c1379476a3f3eda41fbe838976c3f7bdecbbf4c5478e86c471a30
   languageName: node
   linkType: hard
 
@@ -21312,7 +21079,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:15.8.1, prop-types@npm:15.x, prop-types@npm:^15.5.0, prop-types@npm:^15.5.10, prop-types@npm:^15.5.4, prop-types@npm:^15.5.7, prop-types@npm:^15.5.8, prop-types@npm:^15.5.9, prop-types@npm:^15.6.0, prop-types@npm:^15.6.1, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
+"prop-types@npm:15.x, prop-types@npm:^15.5.0, prop-types@npm:^15.5.10, prop-types@npm:^15.5.4, prop-types@npm:^15.5.7, prop-types@npm:^15.5.8, prop-types@npm:^15.5.9, prop-types@npm:^15.6.0, prop-types@npm:^15.6.1, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -23020,17 +22787,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"regenerator-runtime@npm:0.13.9, regenerator-runtime@npm:^0.13.4, regenerator-runtime@npm:^0.13.9":
-  version: 0.13.9
-  resolution: "regenerator-runtime@npm:0.13.9"
-  checksum: 65ed455fe5afd799e2897baf691ca21c2772e1a969d19bb0c4695757c2d96249eb74ee3553ea34a91062b2a676beedf630b4c1551cc6299afb937be1426ec55e
-  languageName: node
-  linkType: hard
-
 "regenerator-runtime@npm:^0.11.0":
   version: 0.11.1
   resolution: "regenerator-runtime@npm:0.11.1"
   checksum: 3c97bd2c7b2b3247e6f8e2147a002eb78c995323732dad5dc70fac8d8d0b758d0295e7015b90d3d444446ae77cbd24b9f9123ec3a77018e81d8999818301b4f4
+  languageName: node
+  linkType: hard
+
+"regenerator-runtime@npm:^0.13.4, regenerator-runtime@npm:^0.13.9":
+  version: 0.13.9
+  resolution: "regenerator-runtime@npm:0.13.9"
+  checksum: 65ed455fe5afd799e2897baf691ca21c2772e1a969d19bb0c4695757c2d96249eb74ee3553ea34a91062b2a676beedf630b4c1551cc6299afb937be1426ec55e
   languageName: node
   linkType: hard
 
@@ -25042,7 +24809,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"theme@0.1.0, theme@^0.1.0, theme@workspace:apps/theme":
+"theme@^0.1.0, theme@workspace:apps/theme":
   version: 0.0.0-use.local
   resolution: "theme@workspace:apps/theme"
   dependencies:

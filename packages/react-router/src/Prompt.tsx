@@ -2,7 +2,7 @@
  * https://github.com/remix-run/react-router/blob/v5/packages/react-router/modules/Prompt.js
  */
 import React from 'react'
-import { usePrompt } from '~/usePrompt'
+import { usePrompt } from './usePrompt'
 
 export interface PromptProps {
   when: boolean

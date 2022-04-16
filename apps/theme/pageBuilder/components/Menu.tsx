@@ -38,7 +38,10 @@ export const GET_PUBLIC_MENU = gql`
 `
 
 const Menu = ({ slug, component: Component }) => {
-  invariant(Component, `You must provide a valid Menu component name (via "component" prop).`)
+  invariant(
+    Component,
+    `You must provide a valid Menu component name (via "component" prop).`,
+  )
 
   return (
     <Query query={GET_PUBLIC_MENU} variables={{ slug }}>

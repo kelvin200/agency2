@@ -53,7 +53,9 @@ export class PageStorageOperationsDdbEs extends _ {
         SearchPublishedPagesPlugin.type,
       )
     } else if (params.where.latest) {
-      plugins = this.context.plugins.byType<SearchLatestPagesPlugin>(SearchLatestPagesPlugin.type)
+      plugins = this.context.plugins.byType<SearchLatestPagesPlugin>(
+        SearchLatestPagesPlugin.type,
+      )
     } else {
       throw new WebinyError(
         'Only published or latest can be listed. Missing where condition.',
@@ -129,7 +131,9 @@ export class PageStorageOperationsDdbEs extends _ {
      * https://www.elastic.co/guide/en/elasticsearch/reference/current/paginate-search-results.html#search-after
      */
     const cursor =
-      items.length > 0 && hasMoreItems ? encodeCursor(hits[items.length - 1].sort) : null
+      items.length > 0 && hasMoreItems
+        ? encodeCursor(hits[items.length - 1].sort)
+        : null
     return {
       items,
       meta: {
@@ -141,7 +145,9 @@ export class PageStorageOperationsDdbEs extends _ {
     }
   }
 
-  public async listTags(params: PageStorageOperationsListTagsParams): Promise<string[]> {
+  public async listTags(
+    params: PageStorageOperationsListTagsParams,
+  ): Promise<string[]> {
     const { where } = params
 
     const tenant: string = where.tenant

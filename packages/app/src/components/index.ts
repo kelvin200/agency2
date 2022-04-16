@@ -1,2 +1,2 @@
-export { Image } from "./Image";
-export { Routes } from "./Routes";
+export { Image } from './Image'
+export { Routes } from './Routes'

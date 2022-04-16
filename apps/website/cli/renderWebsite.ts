@@ -14,7 +14,9 @@ export default {
     }
 
     if (args.inputs.build === false) {
-      context.info(`"--no-build" argument detected - skipping Website re-rendering.`)
+      context.info(
+        `"--no-build" argument detected - skipping Website re-rendering.`,
+      )
       return
     }
 
@@ -59,7 +61,9 @@ export default {
         'Please note that it can take a couple of minutes for the website to be fully updated.',
       )
     } catch (e) {
-      context.error(`An error occurred while trying to update default Page Builder app's settings!`)
+      context.error(
+        `An error occurred while trying to update default Page Builder app's settings!`,
+      )
       console.log(e)
     }
   },

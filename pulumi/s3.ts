@@ -21,7 +21,9 @@ export class S3 {
                 Effect: 'Allow',
                 Principal: '*',
                 Action: ['s3:GetObject'],
-                Resource: publicFolders.map(x => `arn:aws:s3:::${bucketName}/${x}`),
+                Resource: publicFolders.map(
+                  x => `arn:aws:s3:::${bucketName}/${x}`,
+                ),
               },
             ],
           }),

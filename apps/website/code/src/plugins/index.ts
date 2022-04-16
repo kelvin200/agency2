@@ -6,4 +6,10 @@ import apolloLinks from './apolloLinks'
 
 import theme from 'theme'
 
-plugins.register([imageComponent(), pageBuilder, formBuilder, apolloLinks(), theme()])
+plugins.register([
+  imageComponent(),
+  pageBuilder,
+  formBuilder,
+  apolloLinks(),
+  theme(),
+])

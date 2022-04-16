@@ -1,0 +1,19 @@
+{
+  "name": "@m/react-router",
+  "version": "5.25.0",
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist"
+  },
+  "scripts": {
+    "build": "yarn webiny run build",
+    "watch": "yarn webiny run watch"
+  },
+  "adio": {
+    "ignore": {
+      "dependencies": [
+        "@types/react-router-dom"
+      ]
+    }
+  }
+}

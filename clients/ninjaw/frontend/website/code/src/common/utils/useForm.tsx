@@ -1,55 +1,55 @@
-import { useState, useEffect } from "react";
-import { notification } from "antd";
-import axios from "axios";
+import { useState, useEffect } from 'react'
+import { notification } from 'antd'
+import axios from 'axios'
 
 export const useForm = (validate: any) => {
-  const [values, setValues] = useState({});
-  const [errors, setErrors] = useState({});
-  const [shouldSubmit, setShouldSubmit] = useState(false);
+  const [values, setValues] = useState({})
+  const [errors, setErrors] = useState({})
+  const [shouldSubmit, setShouldSubmit] = useState(false)
 
   const openNotificationWithIcon = () => {
-    notification["success"]({
-      message: "Success",
-      description: "Your message has been sent!",
-    });
-  };
+    notification['success']({
+      message: 'Success',
+      description: 'Your message has been sent!',
+    })
+  }
 
   const handleSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setErrors(validate(values));
+    event.preventDefault()
+    setErrors(validate(values))
     // Your url for API
-    const url = "";
+    const url = ''
     if (Object.keys(values).length === 3) {
       axios
         .post(url, {
           ...values,
         })
         .then(() => {
-          setShouldSubmit(true);
-        });
+          setShouldSubmit(true)
+        })
     }
-  };
+  }
 
   useEffect(() => {
     if (Object.keys(errors).length === 0 && shouldSubmit) {
-      setValues("");
-      openNotificationWithIcon();
+      setValues('')
+      openNotificationWithIcon()
     }
-  }, [errors, shouldSubmit]);
+  }, [errors, shouldSubmit])
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.persist();
-    setValues((values) => ({
+    event.persist()
+    setValues(values => ({
       ...values,
       [event.target.name]: event.target.value,
-    }));
-    setErrors((errors) => ({ ...errors, [event.target.name]: "" }));
-  };
+    }))
+    setErrors(errors => ({ ...errors, [event.target.name]: '' }))
+  }
 
   return {
     handleChange,
     handleSubmit,
     values,
     errors,
-  };
-};
+  }
+}

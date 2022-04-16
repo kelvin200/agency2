@@ -26,7 +26,9 @@ export const handler = createHandler({
   plugins: [
     dynamoDbPlugins(),
     logsPlugins(),
-    elasticSearch({ endpoint: `https://${process.env.ELASTIC_SEARCH_ENDPOINT}` }),
+    elasticSearch({
+      endpoint: `https://${process.env.ELASTIC_SEARCH_ENDPOINT}`,
+    }),
     dbPlugins({
       table: process.env.DB_TABLE,
       driver: new DynamoDbDriver({

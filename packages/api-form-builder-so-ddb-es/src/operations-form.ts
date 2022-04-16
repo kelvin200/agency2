@@ -48,7 +48,10 @@ export interface Params {
   plugins: PluginsContainer
 }
 
-type FbFormElastic = Omit<FbForm, 'triggers' | 'fields' | 'settings' | 'layout' | 'stats'> & {
+type FbFormElastic = Omit<
+  FbForm,
+  'triggers' | 'fields' | 'settings' | 'layout' | 'stats'
+> & {
   __type: string
 }
 
@@ -72,12 +75,16 @@ const getESDataForLatestRevision = (form: FbForm): FbFormElastic => ({
   formId: form.formId,
 })
 
-export const createFormStorageOperations = (params: Params): FormBuilderFormStorageOperations => {
+export const createFormStorageOperations = (
+  params: Params,
+): FormBuilderFormStorageOperations => {
   const { entity, esEntity, table, plugins, elasticsearch } = params
 
   const formDynamoDbFields = fields()
 
-  const createFormPartitionKey = (params: FormBuilderFormCreateKeyParams): string => {
+  const createFormPartitionKey = (
+    params: FormBuilderFormCreateKeyParams,
+  ): string => {
     const { tenant, locale, id: targetId } = params
 
     const { id } = parseIdentifier(targetId)
@@ -86,7 +93,8 @@ export const createFormStorageOperations = (params: Params): FormBuilderFormStor
   }
 
   const createRevisionSortKey = (value: string | number): string => {
-    const version = typeof value === 'number' ? Number(value) : parseIdentifier(value).version
+    const version =
+      typeof value === 'number' ? Number(value) : parseIdentifier(value).version
     return `REV#${zeroPad(version)}`
   }
 
@@ -211,7 +219,8 @@ export const createFormStorageOperations = (params: Params): FormBuilderFormStor
       })
     } catch (ex) {
       throw new WebinyError(
-        ex.message || 'Could not create form data in the regular table, from existing form.',
+        ex.message ||
+          'Could not create form data in the regular table, from existing form.',
         ex.code || 'CREATE_FORM_FROM_ERROR',
         {
           revisionKeys,
@@ -235,7 +244,8 @@ export const createFormStorageOperations = (params: Params): FormBuilderFormStor
       })
     } catch (ex) {
       throw new WebinyError(
-        ex.message || 'Could not create form in the Elasticsearch table, from existing form.',
+        ex.message ||
+          'Could not create form in the Elasticsearch table, from existing form.',
         ex.code || 'CREATE_FORM_FROM_ERROR',
         {
           latestKeys,
@@ -340,7 +350,9 @@ export const createFormStorageOperations = (params: Params): FormBuilderFormStor
     return form
   }
 
-  const getForm = async (params: FormBuilderStorageOperationsGetFormParams): Promise<FbForm> => {
+  const getForm = async (
+    params: FormBuilderStorageOperationsGetFormParams,
+  ): Promise<FbForm> => {
     const { where } = params
     const { id, formId, latest, published, version, tenant, locale } = where
     if (latest && published) {
@@ -357,9 +369,13 @@ export const createFormStorageOperations = (params: Params): FormBuilderFormStor
     } else if (id || version) {
       sortKey = createRevisionSortKey(version || id)
     } else {
-      throw new WebinyError('Missing parameter to create a sort key.', 'MISSING_WHERE_PARAMETER', {
-        where,
-      })
+      throw new WebinyError(
+        'Missing parameter to create a sort key.',
+        'MISSING_WHERE_PARAMETER',
+        {
+          where,
+        },
+      )
     }
 
     const keys = {
@@ -414,10 +430,14 @@ export const createFormStorageOperations = (params: Params): FormBuilderFormStor
     try {
       response = await (elasticsearch as unknown as Client).search(query)
     } catch (ex) {
-      throw new WebinyError(ex.message || 'Could list forms.', ex.code || 'LIST_FORMS_ERROR', {
-        where,
-        query,
-      })
+      throw new WebinyError(
+        ex.message || 'Could list forms.',
+        ex.code || 'LIST_FORMS_ERROR',
+        {
+          where,
+          query,
+        },
+      )
     }
 
     const { hits, total } = response.hits
@@ -439,7 +459,8 @@ export const createFormStorageOperations = (params: Params): FormBuilderFormStor
       hasMoreItems,
       // @ts-ignore
       totalCount: total.value,
-      cursor: items.length > 0 ? encodeCursor(hits[items.length - 1].sort) : null,
+      cursor:
+        items.length > 0 ? encodeCursor(hits[items.length - 1].sort) : null,
     }
 
     return {
@@ -587,7 +608,9 @@ export const createFormStorageOperations = (params: Params): FormBuilderFormStor
     const latestPublishedForm = revisions.find(rev => rev.published === true)
 
     const isLatest = latestForm ? latestForm.id === form.id : false
-    const isLatestPublished = latestPublishedForm ? latestPublishedForm.id === form.id : false
+    const isLatestPublished = latestPublishedForm
+      ? latestPublishedForm.id === form.id
+      : false
 
     const items = [entity.deleteBatch(revisionKeys)]
     let esDataItem = undefined
@@ -600,7 +623,10 @@ export const createFormStorageOperations = (params: Params): FormBuilderFormStor
         const previouslyPublishedForm = revisions
           .filter(f => !!f.publishedOn && f.version !== form.version)
           .sort((a, b) => {
-            return new Date(b.publishedOn).getTime() - new Date(a.publishedOn).getTime()
+            return (
+              new Date(b.publishedOn).getTime() -
+              new Date(a.publishedOn).getTime()
+            )
           })
           .shift()
         if (previouslyPublishedForm) {
@@ -851,7 +877,9 @@ export const createFormStorageOperations = (params: Params): FormBuilderFormStor
     })
 
     const isLatest = latestForm ? latestForm.id === form.id : false
-    const isLatestPublished = latestPublishedForm ? latestPublishedForm.id === form.id : false
+    const isLatestPublished = latestPublishedForm
+      ? latestPublishedForm.id === form.id
+      : false
 
     const items = [
       entity.putBatch({

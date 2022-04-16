@@ -15,6 +15,8 @@ export = async () => {
 
   return {
     appStorage: app.bucket.id,
-    appUrl: cloudfront.distribution.domainName.apply(value => `https://${value}`),
+    appUrl: cloudfront.distribution.domainName.apply(
+      value => `https://${value}`,
+    ),
   }
 }

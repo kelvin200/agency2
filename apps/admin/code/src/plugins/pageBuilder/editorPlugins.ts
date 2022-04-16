@@ -40,7 +40,10 @@ import blocksCategories from '@webiny/app-page-builder/editor/plugins/blocksCate
 import addElement from '@webiny/app-page-builder/editor/plugins/toolbar/addElement'
 import navigator from '@webiny/app-page-builder/editor/plugins/toolbar/navigator'
 import saving from '@webiny/app-page-builder/editor/plugins/toolbar/saving'
-import { undo, redo } from '@webiny/app-page-builder/editor/plugins/toolbar/undoRedo'
+import {
+  undo,
+  redo,
+} from '@webiny/app-page-builder/editor/plugins/toolbar/undoRedo'
 // Element settings
 import advanced from '@webiny/app-page-builder/editor/plugins/elementSettings/advanced'
 import animation from '@webiny/app-page-builder/editor/plugins/elementSettings/animation'

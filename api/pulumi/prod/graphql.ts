@@ -53,10 +53,13 @@ class Graphql {
       policyArn: policy.arn.apply(arn => arn),
     })
 
-    new aws.iam.RolePolicyAttachment(`${roleName}-AWSLambdaVPCAccessExecutionRole`, {
-      role: this.role,
-      policyArn: aws.iam.ManagedPolicy.AWSLambdaVPCAccessExecutionRole,
-    })
+    new aws.iam.RolePolicyAttachment(
+      `${roleName}-AWSLambdaVPCAccessExecutionRole`,
+      {
+        role: this.role,
+        policyArn: aws.iam.ManagedPolicy.AWSLambdaVPCAccessExecutionRole,
+      },
+    )
 
     this.functions = {
       api: new aws.lambda.Function('graphql', {

@@ -14,7 +14,11 @@ class HeadlessCMS {
   }
   role: aws.iam.Role
 
-  constructor({ env, primaryDynamodbTable, elasticsearchDynamodbTable }: HeadlessCMSParams) {
+  constructor({
+    env,
+    primaryDynamodbTable,
+    elasticsearchDynamodbTable,
+  }: HeadlessCMSParams) {
     const roleName = 'headless-cms-lambda-role'
     this.role = new aws.iam.Role(roleName, {
       assumeRolePolicy: {
@@ -41,10 +45,13 @@ class HeadlessCMS {
       policyArn: policy.arn.apply(arn => arn),
     })
 
-    new aws.iam.RolePolicyAttachment(`${roleName}-AWSLambdaBasicExecutionRole`, {
-      role: this.role,
-      policyArn: aws.iam.ManagedPolicy.AWSLambdaBasicExecutionRole,
-    })
+    new aws.iam.RolePolicyAttachment(
+      `${roleName}-AWSLambdaBasicExecutionRole`,
+      {
+        role: this.role,
+        policyArn: aws.iam.ManagedPolicy.AWSLambdaBasicExecutionRole,
+      },
+    )
 
     this.functions = {
       graphql: new aws.lambda.Function('headless-cms', {

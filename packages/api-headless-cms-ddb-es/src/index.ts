@@ -16,7 +16,10 @@ import { createModelsStorageOperations } from '@webiny/api-headless-cms-ddb-es/o
 import { createSettingsStorageOperations } from '@webiny/api-headless-cms-ddb-es/operations/settings'
 import { createSystemStorageOperations } from '@webiny/api-headless-cms-ddb-es/operations/system'
 import { createElasticsearchTemplate } from '@webiny/api-headless-cms-ddb-es/operations/system/createElasticsearchTemplate'
-import { ENTITIES, StorageOperationsFactory } from '@webiny/api-headless-cms-ddb-es/types'
+import {
+  ENTITIES,
+  StorageOperationsFactory,
+} from '@webiny/api-headless-cms-ddb-es/types'
 import { HeadlessCms } from '@webiny/api-headless-cms/types'
 import dynamoDbValueFilters from '@webiny/db-dynamodb/plugins/filters'
 import { PluginsContainer } from '@webiny/plugins'

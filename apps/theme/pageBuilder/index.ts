@@ -1,6 +1,9 @@
 import StaticLayout from './layouts/Static'
 
-import { PbPageLayoutPlugin, PbThemePlugin } from '@webiny/app-page-builder/types'
+import {
+  PbPageLayoutPlugin,
+  PbThemePlugin,
+} from '@webiny/app-page-builder/types'
 
 export default [
   {
@@ -25,23 +28,36 @@ export default [
           ],
         },
         heading: {
-          types: [{ className: 'webiny-pb-typography-heading', label: 'Default' }],
+          types: [
+            { className: 'webiny-pb-typography-heading', label: 'Default' },
+          ],
         },
         paragraph: {
           types: [
             { className: 'webiny-pb-typography-body', label: 'Body' },
-            { className: 'webiny-pb-typography-description', label: 'Description' },
+            {
+              className: 'webiny-pb-typography-description',
+              label: 'Description',
+            },
           ],
         },
         list: {
           types: [
             { className: '', label: 'Default' },
-            { className: 'webiny-pb-typography-list--primary', label: 'Primary' },
-            { className: 'webiny-pb-typography-list--secondary', label: 'Secondary' },
+            {
+              className: 'webiny-pb-typography-list--primary',
+              label: 'Primary',
+            },
+            {
+              className: 'webiny-pb-typography-list--secondary',
+              label: 'Secondary',
+            },
           ],
         },
         quote: {
-          types: [{ className: 'webiny-pb-typography-quote', label: 'Default' }],
+          types: [
+            { className: 'webiny-pb-typography-quote', label: 'Default' },
+          ],
         },
       },
     },

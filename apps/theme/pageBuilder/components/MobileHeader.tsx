@@ -17,7 +17,9 @@ const MobileHeader = ({ menuName, logo, name, active, toggleMenu }) => {
         <Link to="/">
           {logo && logo.src && <img src={logo.src} alt={name} />}{' '}
           {(!logo || !logo.src) && (
-            <span className={'webiny-pb-section-header__site-name'}>{name}</span>
+            <span className={'webiny-pb-section-header__site-name'}>
+              {name}
+            </span>
           )}
         </Link>
       </div>
@@ -32,7 +34,10 @@ const MobileHeader = ({ menuName, logo, name, active, toggleMenu }) => {
         </div>
       </nav>
       {hasMenuItems(data) && (
-        <div onClick={toggleMenu} className="webiny-pb-section-header__mobile-icon">
+        <div
+          onClick={toggleMenu}
+          className="webiny-pb-section-header__mobile-icon"
+        >
           <HamburgerMenu
             isOpen={active}
             menuClicked={toggleMenu}

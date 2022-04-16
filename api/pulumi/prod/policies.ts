@@ -1,7 +1,9 @@
 import * as aws from '@pulumi/aws'
 import * as pulumi from '@pulumi/pulumi'
 
-export type EsDomain = aws.elasticsearch.Domain | pulumi.Output<aws.elasticsearch.GetDomainResult>
+export type EsDomain =
+  | aws.elasticsearch.Domain
+  | pulumi.Output<aws.elasticsearch.GetDomainResult>
 
 class Policies {
   private readonly awsRegion: string
@@ -42,7 +44,8 @@ class Policies {
     bucket: aws.s3.Bucket,
   ): aws.iam.Policy {
     return new aws.iam.Policy('PreRenderingServicePolicy', {
-      description: 'This policy enables access to Lambda, S3, Cloudfront and Dynamodb',
+      description:
+        'This policy enables access to Lambda, S3, Cloudfront and Dynamodb',
       policy: {
         Version: '2012-10-17',
         Statement: [
@@ -169,7 +172,8 @@ class Policies {
     cognitoUserPool: aws.cognito.UserPool
   }): aws.iam.Policy {
     return new aws.iam.Policy('ImportPageLambdaPolicy', {
-      description: 'This policy enables access to ES, Dynamodb, S3, Lambda and Cognito IDP',
+      description:
+        'This policy enables access to ES, Dynamodb, S3, Lambda and Cognito IDP',
       policy: {
         Version: '2012-10-17',
         Statement: [
@@ -226,7 +230,9 @@ class Policies {
     })
   }
 
-  getPbUpdateSettingsLambdaPolicy(primaryDynamodbTable: aws.dynamodb.Table): aws.iam.Policy {
+  getPbUpdateSettingsLambdaPolicy(
+    primaryDynamodbTable: aws.dynamodb.Table,
+  ): aws.iam.Policy {
     return new aws.iam.Policy('PbUpdateSettingsLambdaPolicy', {
       description: 'This policy enables access to Dynamodb',
       policy: {
@@ -266,7 +272,8 @@ class Policies {
     cognitoUserPool: aws.cognito.UserPool
   }): aws.iam.Policy {
     return new aws.iam.Policy('ApiGraphqlLambdaPolicy', {
-      description: 'This policy enables access to ES, Dynamodb, S3, Lambda and Cognito IDP',
+      description:
+        'This policy enables access to ES, Dynamodb, S3, Lambda and Cognito IDP',
       policy: {
         Version: '2012-10-17',
         Statement: [

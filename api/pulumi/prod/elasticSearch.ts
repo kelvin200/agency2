@@ -49,15 +49,21 @@ class ElasticSearch {
       },
     })
 
-    new aws.iam.RolePolicyAttachment(`${roleName}-AWSLambdaVPCAccessExecutionRole`, {
-      role: this.role,
-      policyArn: aws.iam.ManagedPolicy.AWSLambdaVPCAccessExecutionRole,
-    })
+    new aws.iam.RolePolicyAttachment(
+      `${roleName}-AWSLambdaVPCAccessExecutionRole`,
+      {
+        role: this.role,
+        policyArn: aws.iam.ManagedPolicy.AWSLambdaVPCAccessExecutionRole,
+      },
+    )
 
-    new aws.iam.RolePolicyAttachment(`${roleName}-AWSLambdaDynamoDBExecutionRole`, {
-      role: this.role,
-      policyArn: aws.iam.ManagedPolicy.AWSLambdaDynamoDBExecutionRole,
-    })
+    new aws.iam.RolePolicyAttachment(
+      `${roleName}-AWSLambdaDynamoDBExecutionRole`,
+      {
+        role: this.role,
+        policyArn: aws.iam.ManagedPolicy.AWSLambdaDynamoDBExecutionRole,
+      },
+    )
 
     /**
      * This Lambda will process the stream events from DynamoDB table that contains Elasticsearch items.

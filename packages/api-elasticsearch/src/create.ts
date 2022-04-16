@@ -26,7 +26,9 @@ export class MClient {
   }
 }
 
-export const createElasticsearchClient = (options: ElasticsearchClientOptions) => {
+export const createElasticsearchClient = (
+  options: ElasticsearchClientOptions,
+) => {
   const { endpoint, ...rest } = options
 
   return new MClient({

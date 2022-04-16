@@ -9,7 +9,15 @@ class Cloudfront {
       waitForDeployment: false,
       defaultCacheBehavior: {
         compress: true,
-        allowedMethods: ['GET', 'HEAD', 'OPTIONS', 'PUT', 'POST', 'PATCH', 'DELETE'],
+        allowedMethods: [
+          'GET',
+          'HEAD',
+          'OPTIONS',
+          'PUT',
+          'POST',
+          'PATCH',
+          'DELETE',
+        ],
         cachedMethods: ['GET', 'HEAD', 'OPTIONS'],
         forwardedValues: {
           cookies: {
@@ -30,7 +38,15 @@ class Cloudfront {
       orderedCacheBehaviors: [
         {
           compress: true,
-          allowedMethods: ['GET', 'HEAD', 'OPTIONS', 'PUT', 'POST', 'PATCH', 'DELETE'],
+          allowedMethods: [
+            'GET',
+            'HEAD',
+            'OPTIONS',
+            'PUT',
+            'POST',
+            'PATCH',
+            'DELETE',
+          ],
           cachedMethods: ['GET', 'HEAD', 'OPTIONS'],
           forwardedValues: {
             cookies: {
@@ -44,7 +60,15 @@ class Cloudfront {
           targetOriginId: apiGateway.api.name,
         },
         {
-          allowedMethods: ['GET', 'HEAD', 'OPTIONS', 'PUT', 'POST', 'PATCH', 'DELETE'],
+          allowedMethods: [
+            'GET',
+            'HEAD',
+            'OPTIONS',
+            'PUT',
+            'POST',
+            'PATCH',
+            'DELETE',
+          ],
           cachedMethods: ['GET', 'HEAD', 'OPTIONS'],
           forwardedValues: {
             cookies: {

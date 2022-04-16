@@ -14,7 +14,10 @@ export default {
     }
 
     // 1. Get exports from `site` stack, for `args.env` environment.
-    const websiteOutput = getStackOutput({ folder: 'apps/website', env: args.env })
+    const websiteOutput = getStackOutput({
+      folder: 'apps/website',
+      env: args.env,
+    })
 
     // 2. Get exports from `api` stack, again, for `args.env` environment.
     const apiOutput = getStackOutput({ folder: 'api', env: args.env })
@@ -22,7 +25,9 @@ export default {
     // 3. Let's update relevant Page Builder app's URLs, by invoking the `updateSettings` function,
     // which has been exported from the `api` stack for this exact purpose.
     try {
-      context.success(`Updating Page Builder application's prerendering settings...`)
+      context.success(
+        `Updating Page Builder application's prerendering settings...`,
+      )
 
       const lambdaClient = new LambdaClient({ region: apiOutput.region })
 
@@ -56,9 +61,13 @@ export default {
         throw error
       }
 
-      context.success(`Page Builder application's prerendering settings updated.`)
+      context.success(
+        `Page Builder application's prerendering settings updated.`,
+      )
     } catch (e) {
-      context.error(`An error occurred while trying to update default Page Builder app's settings!`)
+      context.error(
+        `An error occurred while trying to update default Page Builder app's settings!`,
+      )
       console.log(e)
     }
   },

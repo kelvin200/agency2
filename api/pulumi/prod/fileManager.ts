@@ -59,10 +59,13 @@ class FileManager {
       policyArn: policy.arn.apply(arn => arn),
     })
 
-    new aws.iam.RolePolicyAttachment(`${roleName}-AWSLambdaVPCAccessExecutionRole`, {
-      role: this.role,
-      policyArn: aws.iam.ManagedPolicy.AWSLambdaVPCAccessExecutionRole,
-    })
+    new aws.iam.RolePolicyAttachment(
+      `${roleName}-AWSLambdaVPCAccessExecutionRole`,
+      {
+        role: this.role,
+        policyArn: aws.iam.ManagedPolicy.AWSLambdaVPCAccessExecutionRole,
+      },
+    )
 
     const transform = new aws.lambda.Function('fm-image-transformer', {
       handler: 'handler.handler',
@@ -72,7 +75,9 @@ class FileManager {
       role: this.role.arn,
       description: 'Performs image optimization, resizing, etc.',
       code: new pulumi.asset.AssetArchive({
-        '.': new pulumi.asset.FileArchive('../code/fileManager/transform/build'),
+        '.': new pulumi.asset.FileArchive(
+          '../code/fileManager/transform/build',
+        ),
       }),
       layers: [getLayerArn('sharp')],
       environment: {
@@ -156,7 +161,11 @@ class FileManager {
         ],
       },
       {
-        dependsOn: [this.bucket, this.functions.manage, this.manageS3LambdaPermission],
+        dependsOn: [
+          this.bucket,
+          this.functions.manage,
+          this.manageS3LambdaPermission,
+        ],
       },
     )
   }

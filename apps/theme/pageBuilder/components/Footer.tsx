@@ -18,8 +18,14 @@ const Footer = ({ settings }: FooterProps) => {
     <div className={'webiny-pb-section-footer'} data-testid={'pb-footer'}>
       <div className="webiny-pb-section-footer__wrapper">
         <div className={'webiny-pb-section-footer__logo'}>
-          <Link to="/">{logo && logo.src && <img src={logo.src} alt={name} />}</Link>
-          <div className={'webiny-pb-section-footer__copy webiny-pb-typography-description'}>
+          <Link to="/">
+            {logo && logo.src && <img src={logo.src} alt={name} />}
+          </Link>
+          <div
+            className={
+              'webiny-pb-section-footer__copy webiny-pb-typography-description'
+            }
+          >
             {name} © {new Date().getFullYear()}
           </div>
         </div>

@@ -70,9 +70,12 @@ class Cognito {
       { protect: protectedEnvironment },
     )
 
-    this.userPoolClient = new aws.cognito.UserPoolClient('api-user-pool-client', {
-      userPoolId: this.userPool.id,
-    })
+    this.userPoolClient = new aws.cognito.UserPoolClient(
+      'api-user-pool-client',
+      {
+        userPoolId: this.userPool.id,
+      },
+    )
   }
 }
 

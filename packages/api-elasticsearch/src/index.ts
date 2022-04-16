@@ -8,7 +8,9 @@ import { ElasticsearchClientOptions, ElasticsearchContext } from './types'
 /**
  * We must accept either Elasticsearch client or options that create the client.
  */
-export default (params: ElasticsearchClientOptions | Client): ContextPlugin<ElasticsearchContext> =>
+export default (
+  params: ElasticsearchClientOptions | Client,
+): ContextPlugin<ElasticsearchContext> =>
   new ContextPlugin<ElasticsearchContext>(context => {
     if (context.elasticsearch) {
       throw new WebinyError(
@@ -19,7 +21,8 @@ export default (params: ElasticsearchClientOptions | Client): ContextPlugin<Elas
     /**
      * Initialize the Elasticsearch client.
      */
-    context.elasticsearch = 'endpoint' in params ? createElasticsearchClient(params) : params
+    context.elasticsearch =
+      'endpoint' in params ? createElasticsearchClient(params) : params
 
     context.plugins.register(getElasticsearchOperators())
   })

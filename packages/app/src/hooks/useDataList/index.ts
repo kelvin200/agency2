@@ -1,1 +1,1 @@
-export { useDataList } from "./useDataList";
+export { useDataList } from './useDataList'

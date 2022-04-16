@@ -17,7 +17,11 @@ export default {
     async watch(options) {
       invariant(options.env, NO_ENV_MESSAGE)
 
-      const output = getStackOutput({ folder: 'api', env: options.env, map: API_MAP })
+      const output = getStackOutput({
+        folder: 'api',
+        env: options.env,
+        map: API_MAP,
+      })
       invariant(output, NO_API_MESSAGE(options.env))
 
       Object.assign(process.env, output)
@@ -31,7 +35,11 @@ export default {
     async build(options) {
       invariant(options.env, NO_ENV_MESSAGE)
 
-      const output = getStackOutput({ folder: 'api', env: options.env, map: API_MAP })
+      const output = getStackOutput({
+        folder: 'api',
+        env: options.env,
+        map: API_MAP,
+      })
       invariant(output, NO_API_MESSAGE(options.env))
 
       Object.assign(process.env, output)

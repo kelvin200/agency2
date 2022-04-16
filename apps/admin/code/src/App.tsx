@@ -16,7 +16,9 @@ import { Telemetry } from './components/Telemetry'
 import './App.scss'
 
 export const App = () => (
-  <ApolloProvider client={createApolloClient({ uri: process.env.REACT_APP_GRAPHQL_API_URL })}>
+  <ApolloProvider
+    client={createApolloClient({ uri: process.env.REACT_APP_GRAPHQL_API_URL })}
+  >
     {/*
             <TenancyProvider> provides tenant context and a mechanism to switch tenants in a multi-tenant environment.
         */}
@@ -52,7 +54,9 @@ export const App = () => (
                                 permissions, so we always need to know all locales to be able to render language selectors,
                                 and send the proper locale code to the GraphQL API.
                             */}
-              <I18NProvider loader={<CircularProgress label={'Loading locales...'} />}>
+              <I18NProvider
+                loader={<CircularProgress label={'Loading locales...'} />}
+              >
                 {/*
                                     <PageBuilderProvider> handles "pb-theme" plugins and combines them into a single
                                     "theme" object. You can build your theme using multiple "pb-theme" plugins and

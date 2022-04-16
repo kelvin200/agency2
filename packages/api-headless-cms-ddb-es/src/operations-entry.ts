@@ -41,7 +41,11 @@ import {
 import { batchWriteAll } from '@webiny/db-dynamodb/utils/batchWrite'
 import { cleanupItem } from '@webiny/db-dynamodb/utils/cleanup'
 import { get as getRecord } from '@webiny/db-dynamodb/utils/get'
-import { queryAll, queryOne, QueryOneParams } from '@webiny/db-dynamodb/utils/query'
+import {
+  queryAll,
+  queryOne,
+  QueryOneParams,
+} from '@webiny/db-dynamodb/utils/query'
 import WebinyError from '@webiny/error'
 import { PluginsContainer } from '@webiny/plugins'
 import { zeroPad } from '@webiny/utils'
@@ -68,7 +72,10 @@ const getEntryData = (entry: CmsEntry) => {
   }
 }
 
-const getESLatestEntryData = async (plugins: PluginsContainer, entry: CmsEntry) => {
+const getESLatestEntryData = async (
+  plugins: PluginsContainer,
+  entry: CmsEntry,
+) => {
   return compress(plugins, {
     ...getEntryData(entry),
     latest: true,
@@ -77,7 +84,10 @@ const getESLatestEntryData = async (plugins: PluginsContainer, entry: CmsEntry) 
   })
 }
 
-const getESPublishedEntryData = async (plugins: PluginsContainer, entry: CmsEntry) => {
+const getESPublishedEntryData = async (
+  plugins: PluginsContainer,
+  entry: CmsEntry,
+) => {
   return compress(plugins, {
     ...getEntryData(entry),
     published: true,
@@ -92,14 +102,19 @@ export interface Params {
   elasticsearch: Client
   plugins: PluginsContainer
 }
-export const createEntriesStorageOperations = (params: Params): CmsEntryStorageOperations => {
+export const createEntriesStorageOperations = (
+  params: Params,
+): CmsEntryStorageOperations => {
   const { entity, esEntity, elasticsearch, plugins } = params
 
   const dataLoaders = new DataLoadersHandler({
     entity,
   })
 
-  const create = async (model: CmsModel, params: CmsEntryStorageOperationsCreateParams) => {
+  const create = async (
+    model: CmsModel,
+    params: CmsEntryStorageOperationsCreateParams,
+  ) => {
     const { entry, storageEntry } = params
 
     const esEntry = prepareEntryToIndex({
@@ -166,7 +181,8 @@ export const createEntriesStorageOperations = (params: Params): CmsEntryStorageO
       })
     } catch (ex) {
       throw new WebinyError(
-        ex.message || 'Could not insert entry data into the Elasticsearch DynamoDB table.',
+        ex.message ||
+          'Could not insert entry data into the Elasticsearch DynamoDB table.',
         ex.code || 'CREATE_ES_ENTRY_ERROR',
         {
           error: ex,
@@ -228,7 +244,8 @@ export const createEntriesStorageOperations = (params: Params): CmsEntryStorageO
       })
     } catch (ex) {
       throw new WebinyError(
-        ex.message || 'Could not create revision from given entry in the DynamoDB table.',
+        ex.message ||
+          'Could not create revision from given entry in the DynamoDB table.',
         ex.code || 'CREATE_REVISION_ERROR',
         {
           error: ex,
@@ -249,7 +266,8 @@ export const createEntriesStorageOperations = (params: Params): CmsEntryStorageO
       })
     } catch (ex) {
       throw new WebinyError(
-        ex.message || 'Could not update latest entry in the DynamoDB Elasticsearch table.',
+        ex.message ||
+          'Could not update latest entry in the DynamoDB Elasticsearch table.',
         ex.code || 'CREATE_REVISION_ERROR',
         {
           error: ex,
@@ -264,7 +282,10 @@ export const createEntriesStorageOperations = (params: Params): CmsEntryStorageO
     return storageEntry
   }
 
-  const update = async (model: CmsModel, params: CmsEntryStorageOperationsUpdateParams) => {
+  const update = async (
+    model: CmsModel,
+    params: CmsEntryStorageOperationsUpdateParams,
+  ) => {
     const { originalEntry, entry, storageEntry } = params
     const revisionKeys = {
       PK: createPartitionKey(entry),
@@ -363,7 +384,10 @@ export const createEntriesStorageOperations = (params: Params): CmsEntryStorageO
     return storageEntry
   }
 
-  const deleteEntry = async (model: CmsModel, params: CmsEntryStorageOperationsDeleteParams) => {
+  const deleteEntry = async (
+    model: CmsModel,
+    params: CmsEntryStorageOperationsDeleteParams,
+  ) => {
     const { entry } = params
 
     const partitionKey = createPartitionKey(entry)
@@ -424,7 +448,8 @@ export const createEntriesStorageOperations = (params: Params): CmsEntryStorageO
       })
     } catch (ex) {
       throw new WebinyError(
-        ex.message || 'Could not delete entry records from DynamoDB Elasticsearch table.',
+        ex.message ||
+          'Could not delete entry records from DynamoDB Elasticsearch table.',
         ex.code || 'DELETE_ENTRY_ERROR',
         {
           error: ex,
@@ -438,7 +463,8 @@ export const createEntriesStorageOperations = (params: Params): CmsEntryStorageO
     model: CmsModel,
     params: CmsEntryStorageOperationsDeleteRevisionParams,
   ) => {
-    const { entryToDelete, entryToSetAsLatest, storageEntryToSetAsLatest } = params
+    const { entryToDelete, entryToSetAsLatest, storageEntryToSetAsLatest } =
+      params
 
     const partitionKey = createPartitionKey(entryToDelete)
 
@@ -448,10 +474,11 @@ export const createEntriesStorageOperations = (params: Params): CmsEntryStorageO
     /**
      * We need published entry to delete it if necessary.
      */
-    const [publishedStorageEntry] = await dataLoaders.getPublishedRevisionByEntryId({
-      model,
-      ids: [entryToDelete.id],
-    })
+    const [publishedStorageEntry] =
+      await dataLoaders.getPublishedRevisionByEntryId({
+        model,
+        ids: [entryToDelete.id],
+      })
     /**
      * We need to delete all existing records of the given entry revision.
      */
@@ -470,7 +497,10 @@ export const createEntriesStorageOperations = (params: Params): CmsEntryStorageO
     /**
      * If revision we are deleting is the published one as well, we need to delete those records as well.
      */
-    if (publishedStorageEntry && entryToDelete.id === publishedStorageEntry.id) {
+    if (
+      publishedStorageEntry &&
+      entryToDelete.id === publishedStorageEntry.id
+    ) {
       items.push(
         entity.deleteBatch({
           PK: partitionKey,
@@ -547,7 +577,8 @@ export const createEntriesStorageOperations = (params: Params): CmsEntryStorageO
       })
     } catch (ex) {
       throw new WebinyError(
-        ex.message || 'Could not batch write entry records to DynamoDB Elasticsearch table.',
+        ex.message ||
+          'Could not batch write entry records to DynamoDB Elasticsearch table.',
         ex.code || 'DELETE_REVISION_ERROR',
         {
           error: ex,
@@ -559,7 +590,10 @@ export const createEntriesStorageOperations = (params: Params): CmsEntryStorageO
     }
   }
 
-  const list = async (model: CmsModel, params: CmsEntryStorageOperationsListParams) => {
+  const list = async (
+    model: CmsModel,
+    params: CmsEntryStorageOperationsListParams,
+  ) => {
     const limit = createLimit(params.limit, 50)
     const { index } = configurations.es({
       model,
@@ -630,7 +664,8 @@ export const createEntriesStorageOperations = (params: Params): CmsEntryStorageO
      * Cursor is the `sort` value of the last item in the array.
      * https://www.elastic.co/guide/en/elasticsearch/reference/current/paginate-search-results.html#search-after
      */
-    const cursor = items.length > 0 ? encodeCursor(hits[items.length - 1].sort) : null
+    const cursor =
+      items.length > 0 ? encodeCursor(hits[items.length - 1].sort) : null
     return {
       hasMoreItems,
       // @ts-ignore
@@ -640,7 +675,10 @@ export const createEntriesStorageOperations = (params: Params): CmsEntryStorageO
     }
   }
 
-  const get = async (model: CmsModel, params: CmsEntryStorageOperationsGetParams) => {
+  const get = async (
+    model: CmsModel,
+    params: CmsEntryStorageOperationsGetParams,
+  ) => {
     const { items } = await list(model, {
       ...params,
       limit: 1,
@@ -651,16 +689,20 @@ export const createEntriesStorageOperations = (params: Params): CmsEntryStorageO
     return items.shift()
   }
 
-  const publish = async (model: CmsModel, params: CmsEntryStorageOperationsPublishParams) => {
+  const publish = async (
+    model: CmsModel,
+    params: CmsEntryStorageOperationsPublishParams,
+  ) => {
     const { entry, storageEntry } = params
 
     /**
      * We need currently published entry to check if need to remove it.
      */
-    const [publishedStorageEntry] = await dataLoaders.getPublishedRevisionByEntryId({
-      model,
-      ids: [entry.id],
-    })
+    const [publishedStorageEntry] =
+      await dataLoaders.getPublishedRevisionByEntryId({
+        model,
+        ids: [entry.id],
+      })
 
     const revisionKeys = {
       PK: createPartitionKey(entry),
@@ -789,7 +831,10 @@ export const createEntriesStorageOperations = (params: Params): CmsEntryStorageO
     /**
      * Update the published revision entry in ES.
      */
-    const esLatestData = await getESPublishedEntryData(plugins, preparedEntryData)
+    const esLatestData = await getESPublishedEntryData(
+      plugins,
+      preparedEntryData,
+    )
 
     esItems.push(
       esEntity.putBatch({
@@ -812,7 +857,8 @@ export const createEntriesStorageOperations = (params: Params): CmsEntryStorageO
       })
     } catch (ex) {
       throw new WebinyError(
-        ex.message || 'Could not store publish entry records in DynamoDB table.',
+        ex.message ||
+          'Could not store publish entry records in DynamoDB table.',
         ex.code || 'PUBLISH_ERROR',
         {
           error: ex,
@@ -832,7 +878,8 @@ export const createEntriesStorageOperations = (params: Params): CmsEntryStorageO
       })
     } catch (ex) {
       throw new WebinyError(
-        ex.message || 'Could not store publish entry records in DynamoDB Elasticsearch table.',
+        ex.message ||
+          'Could not store publish entry records in DynamoDB Elasticsearch table.',
         ex.code || 'PUBLISH_ES_ERROR',
         {
           error: ex,
@@ -845,7 +892,10 @@ export const createEntriesStorageOperations = (params: Params): CmsEntryStorageO
     return storageEntry
   }
 
-  const unpublish = async (model: CmsModel, params: CmsEntryStorageOperationsUnpublishParams) => {
+  const unpublish = async (
+    model: CmsModel,
+    params: CmsEntryStorageOperationsUnpublishParams,
+  ) => {
     const { entry, storageEntry } = params
 
     /**
@@ -892,7 +942,10 @@ export const createEntriesStorageOperations = (params: Params): CmsEntryStorageO
         storageEntry: lodashCloneDeep(storageEntry),
       })
 
-      const esLatestData = await getESLatestEntryData(plugins, preparedEntryData)
+      const esLatestData = await getESLatestEntryData(
+        plugins,
+        preparedEntryData,
+      )
       esItems.push(
         esEntity.putBatch({
           PK: partitionKey,
@@ -916,7 +969,8 @@ export const createEntriesStorageOperations = (params: Params): CmsEntryStorageO
       })
     } catch (ex) {
       throw new WebinyError(
-        ex.message || 'Could not store unpublished entry records in DynamoDB table.',
+        ex.message ||
+          'Could not store unpublished entry records in DynamoDB table.',
         ex.code || 'UNPUBLISH_ERROR',
         {
           entry,
@@ -934,7 +988,8 @@ export const createEntriesStorageOperations = (params: Params): CmsEntryStorageO
       })
     } catch (ex) {
       throw new WebinyError(
-        ex.message || 'Could not store unpublished entry records in DynamoDB Elasticsearch table.',
+        ex.message ||
+          'Could not store unpublished entry records in DynamoDB Elasticsearch table.',
         ex.code || 'UNPUBLISH_ERROR',
         {
           entry,
@@ -991,7 +1046,8 @@ export const createEntriesStorageOperations = (params: Params): CmsEntryStorageO
       })
     } catch (ex) {
       throw new WebinyError(
-        ex.message || 'Could not store request review entry record into DynamoDB table.',
+        ex.message ||
+          'Could not store request review entry record into DynamoDB table.',
         ex.code || 'REQUEST_REVIEW_ERROR',
         {
           entry,
@@ -1090,7 +1146,8 @@ export const createEntriesStorageOperations = (params: Params): CmsEntryStorageO
       })
     } catch (ex) {
       throw new WebinyError(
-        ex.message || 'Could not store request changes entry record into DynamoDB table.',
+        ex.message ||
+          'Could not store request changes entry record into DynamoDB table.',
         ex.code || 'REQUEST_CHANGES_ERROR',
         {
           entry,
@@ -1179,7 +1236,10 @@ export const createEntriesStorageOperations = (params: Params): CmsEntryStorageO
     })
   }
 
-  const getByIds = async (model: CmsModel, params: CmsEntryStorageOperationsGetByIdsParams) => {
+  const getByIds = async (
+    model: CmsModel,
+    params: CmsEntryStorageOperationsGetByIdsParams,
+  ) => {
     return dataLoaders.getRevisionById({
       model,
       ids: params.ids,

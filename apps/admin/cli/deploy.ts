@@ -19,7 +19,9 @@ export default {
     }
 
     if (params.inputs.build === false) {
-      context.info(`"--no-build" argument detected - skipping React application upload.`)
+      context.info(
+        `"--no-build" argument detected - skipping React application upload.`,
+      )
       return
     }
 
@@ -47,12 +49,18 @@ export default {
         console.log(error)
       },
       onFileUploadSkip: ({ paths }) => {
-        context.info(`Skipping ${context.info.hl(paths.relative)}, already exists.`)
+        context.info(
+          `Skipping ${context.info.hl(paths.relative)}, already exists.`,
+        )
       },
     })
 
     const duration = (new Date().getTime() - start) / 1000
 
-    context.success(`React application successfully uploaded in ${context.success.hl(duration)}s.`)
+    context.success(
+      `React application successfully uploaded in ${context.success.hl(
+        duration,
+      )}s.`,
+    )
   },
 }

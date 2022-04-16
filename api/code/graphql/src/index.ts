@@ -75,7 +75,9 @@ export const handler = createHandler({
     pageBuilderDynamoDbElasticsearchPlugins(),
     pageBuilderPrerenderingPlugins(),
     pageBuilderImportExportPlugins({
-      storageOperations: createPageImportExportStorageOperations({ documentClient }),
+      storageOperations: createPageImportExportStorageOperations({
+        documentClient,
+      }),
     }),
     createFormBuilder({
       storageOperations: createFormBuilderStorageOperations({

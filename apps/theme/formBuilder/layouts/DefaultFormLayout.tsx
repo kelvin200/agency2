@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { BindComponentRenderProp, Form } from '@webiny/form'
-import { FbFormModelField, FormLayoutComponent } from '@webiny/app-form-builder/types'
+import {
+  FbFormModelField,
+  FormLayoutComponent,
+} from '@webiny/app-form-builder/types'
 import { validation } from '@webiny/validation'
 import { RichTextRenderer } from '@webiny/react-rich-text-renderer'
 
@@ -137,7 +140,10 @@ const DefaultFormLayout: FormLayoutComponent = ({
               {({ onChange, validation }) => (
                 <>
                   <ReCaptcha onChange={onChange} />
-                  <HelperMessage isValid={validation.isValid} errorMessage={errorMessage} />
+                  <HelperMessage
+                    isValid={validation.isValid}
+                    errorMessage={errorMessage}
+                  />
                 </>
               )}
             </Bind>
@@ -184,7 +190,10 @@ const DefaultFormLayout: FormLayoutComponent = ({
                       </label>
                     </div>
                   </div>
-                  <HelperMessage isValid={validation.isValid} errorMessage={errorMessage} />
+                  <HelperMessage
+                    isValid={validation.isValid}
+                    errorMessage={errorMessage}
+                  />
                 </div>
               )}
             </Bind>

@@ -70,11 +70,14 @@ export default () => {
 
       PRERENDERING_RENDER_HANDLER: prerenderingService.functions.render.arn,
       PRERENDERING_FLUSH_HANDLER: prerenderingService.functions.flush.arn,
-      PRERENDERING_QUEUE_ADD_HANDLER: prerenderingService.functions.queue.add.arn,
-      PRERENDERING_QUEUE_PROCESS_HANDLER: prerenderingService.functions.queue.process.arn,
+      PRERENDERING_QUEUE_ADD_HANDLER:
+        prerenderingService.functions.queue.add.arn,
+      PRERENDERING_QUEUE_PROCESS_HANDLER:
+        prerenderingService.functions.queue.process.arn,
       S3_BUCKET: fileManager.bucket.id,
       IMPORT_PAGES_CREATE_HANDLER: pageBuilder.functions.importPages.create.arn,
-      EXPORT_PAGES_PROCESS_HANDLER: pageBuilder.functions.exportPages.process.arn,
+      EXPORT_PAGES_PROCESS_HANDLER:
+        pageBuilder.functions.exportPages.process.arn,
       DEBUG,
       WEBINY_LOGS_FORWARD_URL,
     },

@@ -12,7 +12,6 @@ export const routeTrangChu = {
   route: <Route path="*" component={Home} />,
 }
 
-
 export const routeNhapHang = {
   type: 'route',
   name: 'route-nhap-hang',

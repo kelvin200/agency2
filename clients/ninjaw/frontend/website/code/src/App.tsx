@@ -1,29 +1,23 @@
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
+import { ApolloProvider } from '@apollo/client'
+import { BrowserRouter } from '@m/react-router/src'
 import { Routes } from '@webiny/app/components/Routes'
 import { UiProvider } from '@webiny/app/contexts/Ui'
-import { BrowserRouter } from '@webiny/react-router'
 import 'antd/dist/antd.css'
 import React from 'react'
+import { apolloClient } from './apolloClient'
 import './common.scss'
 import './components.scss'
-// import Footer from './components/Footer'
-// import Header from './components/Header'
+import Footer from './components/Footer'
+import Header from './components/Header'
 import './global.scss'
-// import { apolloClient } from './components/apolloClient'
-
-const apolloClient = new ApolloClient({
-  uri: 'https://48p1r2roz4.sse.codesandbox.io',
-  cache: new InMemoryCache(),
-})
 
 export const App = () => (
   <ApolloProvider client={apolloClient}>
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <UiProvider>
+        <Header />
         <Routes />
-        {/* <Header />
-        <Routes />
-        <Footer /> */}
+        <Footer />
       </UiProvider>
     </BrowserRouter>
   </ApolloProvider>

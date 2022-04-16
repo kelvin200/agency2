@@ -35,7 +35,9 @@ class ApiGateway {
         action: 'lambda:InvokeFunction',
         function: route.function.arn,
         principal: 'apigateway.amazonaws.com',
-        sourceArn: this.api.executionArn.apply(arn => `${arn}/*/*${route.path}`),
+        sourceArn: this.api.executionArn.apply(
+          arn => `${arn}/*/*${route.path}`,
+        ),
       })
     }
   }

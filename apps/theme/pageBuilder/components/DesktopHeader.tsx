@@ -21,7 +21,9 @@ const DesktopHeader = ({ menuName, logo, name }: DesktopHeaderProps) => {
         <Link to="/">
           {logo && logo.src && <img src={logo.src} alt={name} />}{' '}
           {(!logo || !logo.src) && (
-            <span className={'webiny-pb-section-header__site-name'}>{name}</span>
+            <span className={'webiny-pb-section-header__site-name'}>
+              {name}
+            </span>
           )}
         </Link>
       </div>

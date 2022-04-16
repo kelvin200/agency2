@@ -20,14 +20,19 @@ export default (): ReactRouterOnLinkPlugin => {
         return
       }
 
-      if (typeof path !== 'string' || !path.startsWith('/') || preloadedPaths.includes(path)) {
+      if (
+        typeof path !== 'string' ||
+        !path.startsWith('/') ||
+        preloadedPaths.includes(path)
+      ) {
         return
       }
 
       preloadedPaths.push(path)
 
       const graphqlJson = `graphql.json?k=${window.__PS_RENDER_ID__}`
-      const fetchPath = path !== '/' ? `${path}/${graphqlJson}` : `/${graphqlJson}`
+      const fetchPath =
+        path !== '/' ? `${path}/${graphqlJson}` : `/${graphqlJson}`
       const pageState = await fetch(fetchPath)
         .then(res => res.json())
         .catch(() => null)

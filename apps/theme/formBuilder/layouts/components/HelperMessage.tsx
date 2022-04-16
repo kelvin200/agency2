@@ -14,7 +14,9 @@ const HelperMessage = (props: Props) => {
     <div
       className={
         'webiny-fb-form-field__helper-text' +
-        (props.isValid === false ? ' webiny-fb-form-field__helper-text--error' : '')
+        (props.isValid === false
+          ? ' webiny-fb-form-field__helper-text--error'
+          : '')
       }
     >
       {props.isValid === false ? props.errorMessage : props.helperMessage}

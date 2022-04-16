@@ -7,7 +7,11 @@ interface Vars {
   APP_WEBSITE_FOLDER: string
   CLIENT_NAME: string
 }
-export const pulumi = ({ APP_ADMIN_FOLDER, APP_WEBSITE_FOLDER, CLIENT_NAME }: Vars) => {
+export const pulumi = ({
+  APP_ADMIN_FOLDER,
+  APP_WEBSITE_FOLDER,
+  CLIENT_NAME,
+}: Vars) => {
   // Add tags to all resources that support tagging.
   tagResources({
     Environment: process.env.WEBINY_ENV as string,

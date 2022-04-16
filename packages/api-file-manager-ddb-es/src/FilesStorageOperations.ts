@@ -56,7 +56,9 @@ interface CreatePartitionKeyParams {
   tenant: string
 }
 
-export class FilesStorageOperations implements FileManagerFilesStorageOperations {
+export class FilesStorageOperations
+  implements FileManagerFilesStorageOperations
+{
   private readonly context: FileManagerContext
   private readonly table: Table
   private readonly esTable: Table
@@ -106,7 +108,9 @@ export class FilesStorageOperations implements FileManagerFilesStorageOperations
     })
   }
 
-  public async get(params: FileManagerFilesStorageOperationsGetParams): Promise<File | null> {
+  public async get(
+    params: FileManagerFilesStorageOperationsGetParams,
+  ): Promise<File | null> {
     const { where } = params
     const keys = {
       PK: this.createPartitionKey(where),
@@ -130,7 +134,9 @@ export class FilesStorageOperations implements FileManagerFilesStorageOperations
     }
   }
 
-  public async create(params: FileManagerFilesStorageOperationsCreateParams): Promise<File> {
+  public async create(
+    params: FileManagerFilesStorageOperationsCreateParams,
+  ): Promise<File> {
     const { file } = params
 
     const keys = {
@@ -169,7 +175,9 @@ export class FilesStorageOperations implements FileManagerFilesStorageOperations
     return file
   }
 
-  public async update(params: FileManagerFilesStorageOperationsUpdateParams): Promise<File> {
+  public async update(
+    params: FileManagerFilesStorageOperationsUpdateParams,
+  ): Promise<File> {
     const { file } = params
 
     const keys = {
@@ -208,7 +216,9 @@ export class FilesStorageOperations implements FileManagerFilesStorageOperations
     return file
   }
 
-  public async delete(params: FileManagerFilesStorageOperationsDeleteParams): Promise<void> {
+  public async delete(
+    params: FileManagerFilesStorageOperationsDeleteParams,
+  ): Promise<void> {
     const { file } = params
     const keys = {
       PK: this.createPartitionKey(file),
@@ -286,7 +296,8 @@ export class FilesStorageOperations implements FileManagerFilesStorageOperations
       })
     } catch (ex) {
       throw new WebinyError(
-        ex.message || 'Could not batch insert a list of files into Elasticsearch table.',
+        ex.message ||
+          'Could not batch insert a list of files into Elasticsearch table.',
         ex.code || 'BATCH_CREATE_FILES_ERROR',
         {
           error: ex,
@@ -351,7 +362,8 @@ export class FilesStorageOperations implements FileManagerFilesStorageOperations
       hasMoreItems,
       // @ts-ignore
       totalCount: total.value,
-      cursor: files.length > 0 ? encodeCursor(hits[files.length - 1].sort) : null,
+      cursor:
+        files.length > 0 ? encodeCursor(hits[files.length - 1].sort) : null,
     }
 
     return [files, meta]
@@ -411,7 +423,8 @@ export class FilesStorageOperations implements FileManagerFilesStorageOperations
       )
     }
 
-    const tags = response.aggregations.listTags.buckets.map(item => item.key) || []
+    const tags =
+      response.aggregations.listTags.buckets.map(item => item.key) || []
 
     let hasMoreItems = false
     const totalCount = tags.length
@@ -439,6 +452,8 @@ export class FilesStorageOperations implements FileManagerFilesStorageOperations
   }
 
   private getFileIndexTransformPlugins(): FileIndexTransformPlugin[] {
-    return this.context.plugins.byType<FileIndexTransformPlugin>(FileIndexTransformPlugin.type)
+    return this.context.plugins.byType<FileIndexTransformPlugin>(
+      FileIndexTransformPlugin.type,
+    )
   }
 }

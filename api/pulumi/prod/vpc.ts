@@ -79,15 +79,21 @@ class Vpc {
       routeTableId: publicSubnetRouteTable.id,
     })
 
-    new aws.ec2.RouteTableAssociation('private-subnet-1-route-table-association', {
-      subnetId: privateSubnet1.id,
-      routeTableId: privateSubnetRouteTable.id,
-    })
+    new aws.ec2.RouteTableAssociation(
+      'private-subnet-1-route-table-association',
+      {
+        subnetId: privateSubnet1.id,
+        routeTableId: privateSubnetRouteTable.id,
+      },
+    )
 
-    new aws.ec2.RouteTableAssociation('private-subnet-2-route-table-association', {
-      subnetId: privateSubnet2.id,
-      routeTableId: privateSubnetRouteTable.id,
-    })
+    new aws.ec2.RouteTableAssociation(
+      'private-subnet-2-route-table-association',
+      {
+        subnetId: privateSubnet2.id,
+        routeTableId: privateSubnetRouteTable.id,
+      },
+    )
 
     this.vpc = vpc
     this.subnets = {

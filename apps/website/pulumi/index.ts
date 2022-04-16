@@ -24,6 +24,8 @@ export = async () => {
     // defined above, for serving static assets (JS, CSS, images).
     deliveryId: delivery.cloudfront.id,
     deliveryStorage: delivery.bucket.id,
-    deliveryUrl: delivery.cloudfront.domainName.apply(value => `https://${value}`),
+    deliveryUrl: delivery.cloudfront.domainName.apply(
+      value => `https://${value}`,
+    ),
   }
 }

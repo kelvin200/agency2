@@ -3,7 +3,8 @@ import DefaultPage from './DefaultPage'
 
 const getPbNotInstalledErrorMessage = () => {
   // Check if window exists first (does not exist while doing SSR).
-  const isLocalhost = typeof window === 'object' && window.location.hostname === 'localhost'
+  const isLocalhost =
+    typeof window === 'object' && window.location.hostname === 'localhost'
   let adminUi = <a href="/admin">Admin UI</a>
   if (isLocalhost) {
     adminUi = <strong>Admin UI</strong>
@@ -15,7 +16,8 @@ const getPbNotInstalledErrorMessage = () => {
       <>
         <p>Page Builder is not installed!</p>
         <p>
-          Before you continue, please open up the {adminUi} and complete the installation wizard.
+          Before you continue, please open up the {adminUi} and complete the
+          installation wizard.
         </p>
       </>
     ),

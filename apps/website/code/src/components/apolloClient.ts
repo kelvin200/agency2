@@ -14,7 +14,9 @@ export const createApolloClient = () => {
        * Since every data type coming from API can have a different data structure,
        * we cannot rely on having an `id` field.
        */
-      const getters = plugins.byType<ApolloCacheObjectIdPlugin>(ApolloCacheObjectIdPlugin.type)
+      const getters = plugins.byType<ApolloCacheObjectIdPlugin>(
+        ApolloCacheObjectIdPlugin.type,
+      )
 
       for (let i = 0; i < getters.length; i++) {
         const id = getters[i].getObjectId(obj)
@@ -34,7 +36,10 @@ export const createApolloClient = () => {
   cache.restore('__APOLLO_STATE__' in window ? window.__APOLLO_STATE__ : {})
 
   const uri = process.env.REACT_APP_GRAPHQL_API_URL
-  const link = ApolloLink.from([new ApolloDynamicLink(), new BatchHttpLink({ uri })])
+  const link = ApolloLink.from([
+    new ApolloDynamicLink(),
+    new BatchHttpLink({ uri }),
+  ])
 
   // @ts-ignore
   window.getApolloState = () => {

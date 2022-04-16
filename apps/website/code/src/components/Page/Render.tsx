@@ -58,7 +58,12 @@ function Render({
       <Helmet>
         {/* Read favicon from settings. */}
         {head.favicon && (
-          <link rel="icon" type="image/png" href={head.favicon.src + '?width=128'} sizes="16x16" />
+          <link
+            rel="icon"
+            type="image/png"
+            href={head.favicon.src + '?width=128'}
+            sizes="16x16"
+          />
         )}
 
         {/* Read title from page settings. */}
@@ -66,18 +71,27 @@ function Render({
 
         {/* Read SEO tags from page settings. */}
         {head.seo.title && <meta name="title" content={head.seo.title} />}
-        {head.seo.description && <meta name="description" content={head.seo.description} />}
+        {head.seo.description && (
+          <meta name="description" content={head.seo.description} />
+        )}
         {head.seo.meta.map(({ name, content }, index) => (
           <meta key={index} name={name} content={content} />
         ))}
 
         {/* Read social tags from page settings. */}
-        {settings?.social?.title && <meta property="og:title" content={settings.social.title} />}
+        {settings?.social?.title && (
+          <meta property="og:title" content={settings.social.title} />
+        )}
 
         {head.social.image && (
-          <meta property="og:image" content={head.social.image.src + '?width=1596'} />
+          <meta
+            property="og:image"
+            content={head.social.image.src + '?width=1596'}
+          />
         )}
-        {head.social.title && <meta property="og:title" content={head.social.title} />}
+        {head.social.title && (
+          <meta property="og:title" content={head.social.title} />
+        )}
 
         {head.social.description && (
           <meta property="og:description" content={head.social.description} />
@@ -85,7 +99,9 @@ function Render({
         {head.social.meta.map(({ property, content }, index) => {
           // Replace duplicate "og:og:" with single "og:".
           const preparedProperty = `og:${property}`.replace('og:og:', 'og:')
-          return <meta key={index} property={preparedProperty} content={content} />
+          return (
+            <meta key={index} property={preparedProperty} content={content} />
+          )
         })}
       </Helmet>
       <div className={responsiveClassName} ref={pageElementRef}>

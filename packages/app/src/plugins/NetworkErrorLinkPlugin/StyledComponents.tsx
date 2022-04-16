@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled'
 
-export const OverlayWrapper = styled("div")(`
+export const OverlayWrapper = styled('div')(`
     width: 100vw;
     height: 100vh;
     position: fixed;
@@ -46,9 +46,9 @@ export const OverlayWrapper = styled("div")(`
             font-family: monospace;
         }
     }
-`);
+`)
 
-export const Pre = styled("pre")(`
+export const Pre = styled('pre')(`
     position: relative;
     display: block;
     padding: 0.5em;
@@ -65,4 +65,4 @@ export const Pre = styled("pre")(`
         font-size: 0.85rem;
         line-height: 1rem;
     }
-`);
+`)

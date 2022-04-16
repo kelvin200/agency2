@@ -70,7 +70,8 @@ const Page = () => {
   // Here we get all site data like website name, favicon image, social links etc.
   const getSettingsQuery = useQuery(GET_SETTINGS)
 
-  const { data: page, error } = getPublishedPageQuery.data?.pageBuilder?.getPublishedPage || {}
+  const { data: page, error } =
+    getPublishedPageQuery.data?.pageBuilder?.getPublishedPage || {}
   const settings = getSettingsQuery.data?.pageBuilder?.getSettings?.data || {}
 
   // Let's render the page.

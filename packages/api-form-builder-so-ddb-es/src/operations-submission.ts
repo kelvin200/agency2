@@ -306,7 +306,8 @@ export const createSubmissionStorageOperations = (
       hasMoreItems,
       // @ts-ignore
       totalCount: total.value,
-      cursor: items.length > 0 ? encodeCursor(hits[items.length - 1].sort) : null,
+      cursor:
+        items.length > 0 ? encodeCursor(hits[items.length - 1].sort) : null,
     }
 
     return {

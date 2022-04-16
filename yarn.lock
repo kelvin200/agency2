@@ -3601,6 +3601,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@m/plugins@workspace:packages/plugins":
+  version: 0.0.0-use.local
+  resolution: "@m/plugins@workspace:packages/plugins"
+  languageName: unknown
+  linkType: soft
+
 "@m/react-router@workspace:packages/react-router":
   version: 0.0.0-use.local
   resolution: "@m/react-router@workspace:packages/react-router"

@@ -1,5 +1,5 @@
 // This file is required for running tests only!!
-const { allWorkspaces } = require('@webiny/project-utils/workspaces')
+const { allWorkspaces } = require('@m/project-utils/workspaces')
 
 module.exports = {
   babelrc: true,

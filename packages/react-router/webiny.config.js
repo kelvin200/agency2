@@ -1,7 +1,4 @@
-const {
-  createWatchPackage,
-  createBuildPackage,
-} = require('@webiny/project-utils')
+const { createWatchPackage, createBuildPackage } = require('@m/project-utils')
 
 module.exports = {
   commands: {

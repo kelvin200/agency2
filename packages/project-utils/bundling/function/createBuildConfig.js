@@ -2,7 +2,7 @@ module.exports = options => {
   const path = require('path')
   const webpack = require('webpack')
   const WebpackBar = require('webpackbar')
-  const { version } = require('@webiny/project-utils/package.json')
+  const { version } = require('@m/project-utils/package.json')
 
   const { getOutput, getEntry } = require('./utils')
   const output = getOutput(options)

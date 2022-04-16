@@ -1,6 +1,6 @@
 import invariant from 'invariant'
 import { getStackOutput } from '@webiny/cli-plugin-deploy-pulumi/utils'
-import { createWatchApp, createBuildApp } from '@webiny/project-utils'
+import { createWatchApp, createBuildApp } from '@m/project-utils'
 
 const API_MAP = {
   REACT_APP_GRAPHQL_API_URL: '${apiUrl}/graphql',

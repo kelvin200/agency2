@@ -34,7 +34,6 @@
     "@webiny/cli-plugin-workspaces": "5.20.0",
     "@webiny/cwp-template-aws": "5.20.0",
     "@webiny/handler": "5.20.0",
-    "@webiny/project-utils": "5.20.0",
     "antd": "4.19.5",
     "apollo-link": "1.2.14",
     "apollo-link-batch-http": "1.2.14",

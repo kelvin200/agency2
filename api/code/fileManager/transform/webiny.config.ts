@@ -1,4 +1,4 @@
-import { createBuildFunction, createWatchFunction } from '@webiny/project-utils'
+import { createBuildFunction, createWatchFunction } from '@m/project-utils'
 
 const webpack = config => {
   config.externals.push('sharp')

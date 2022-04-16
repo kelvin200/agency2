@@ -1,6 +1,6 @@
 const fs = require('fs')
 const path = require('path')
-const { allWorkspaces } = require('@webiny/project-utils/workspaces')
+const { allWorkspaces } = require('@m/project-utils/workspaces')
 const { version } = require('@webiny/cli/package.json')
 
 process.env.WEBINY_VERSION = version

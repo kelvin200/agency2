@@ -1,4 +1,4 @@
-const { version } = require('@webiny/project-utils/package.json')
+const { version } = require('@m/project-utils/package.json')
 const { globalConfig } = require('@webiny/global-config')
 
 module.exports.applyDefaults = () => {

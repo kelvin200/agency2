@@ -4,6 +4,6 @@
  * - workspace root directory
  */
 ;(async () => {
-  const { linkWorkspaces } = require('@webiny/project-utils/workspaces')
+  const { linkWorkspaces } = require('@m/project-utils/workspaces')
   await linkWorkspaces()
 })()

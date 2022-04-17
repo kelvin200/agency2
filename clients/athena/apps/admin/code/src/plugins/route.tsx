@@ -1,5 +1,6 @@
 import { Route } from '@webiny/react-router'
 import React from 'react'
+
 import { Home } from '../components/home'
 import { Stocking } from '../components/stocking'
 

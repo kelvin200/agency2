@@ -6,6 +6,7 @@ import {
   RoutesProps as BaseRoutesProps,
   useLocation,
 } from 'react-router-dom'
+
 import { RouteProps } from './Route'
 
 const createNativeRoute = (

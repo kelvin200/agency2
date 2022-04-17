@@ -1,7 +1,8 @@
+import { ServerError, ServerParseError } from 'apollo-link-http-common'
 import React from 'react'
 import { render } from 'react-dom'
+
 import ErrorOverlay from './ErrorOverlay'
-import { ServerError, ServerParseError } from 'apollo-link-http-common'
 
 interface CreateErrorOverlayParams {
   query: string

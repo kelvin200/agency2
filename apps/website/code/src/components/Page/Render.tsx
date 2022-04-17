@@ -1,11 +1,12 @@
+import useResponsiveClassName from '@webiny/app-page-builder/hooks/useResponsiveClassName'
+import Element from '@webiny/app-page-builder/render/components/Element'
+import { PbPageData } from '@webiny/app-page-builder/types'
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import { PbPageData } from '@webiny/app-page-builder/types'
-import Layout from './Layout'
-import Element from '@webiny/app-page-builder/render/components/Element'
-import useResponsiveClassName from '@webiny/app-page-builder/hooks/useResponsiveClassName'
-import DefaultNotFoundPage from 'theme/pageBuilder/components/defaultPages/DefaultNotFoundPage'
 import DefaultErrorPage from 'theme/pageBuilder/components/defaultPages/DefaultErrorPage'
+import DefaultNotFoundPage from 'theme/pageBuilder/components/defaultPages/DefaultNotFoundPage'
+
+import Layout from './Layout'
 
 /**
  * This component will render the page, including the page content, its layout, and also meta tags.

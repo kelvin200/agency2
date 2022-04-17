@@ -1,11 +1,11 @@
 import Delimiter from '@editorjs/delimiter'
-import Quote from '@editorjs/quote'
 import List from '@editorjs/list'
+import Quote from '@editorjs/quote'
 import Underline from '@editorjs/underline'
-import Image from '@webiny/app-admin/components/RichTextEditor/tools/image'
-import TextColor from '@webiny/app-admin/components/RichTextEditor/tools/textColor'
 import Header from '@webiny/app-admin/components/RichTextEditor/tools/header'
+import Image from '@webiny/app-admin/components/RichTextEditor/tools/image'
 import Paragraph from '@webiny/app-admin/components/RichTextEditor/tools/paragraph'
+import TextColor from '@webiny/app-admin/components/RichTextEditor/tools/textColor'
 import { plugins } from '@webiny/plugins'
 
 /**

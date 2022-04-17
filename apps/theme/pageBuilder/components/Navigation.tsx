@@ -1,5 +1,5 @@
-import React from 'react'
 import { Link } from '@webiny/react-router'
+import React from 'react'
 
 const Navigation = ({ data }) => {
   const items = data?.items

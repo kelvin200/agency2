@@ -1,6 +1,7 @@
 import { batchWrite, WriteRequest } from '@m/ultimate/src/util/dynamo'
 import WebinyError from '@webiny/error'
 import groupBy from 'lodash/groupBy'
+
 import { createWithConfidence as createProduct } from '../product/create'
 import { list as searchProduct } from '../product/list'
 import { ProductFlag } from '../product/type'

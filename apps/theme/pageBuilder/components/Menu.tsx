@@ -1,8 +1,8 @@
-import * as React from 'react'
 import { Query } from '@apollo/react-components'
 import gql from 'graphql-tag'
-import get from 'lodash.get'
 import invariant from 'invariant'
+import get from 'lodash.get'
+import * as React from 'react'
 
 declare global {
   // eslint-disable-next-line

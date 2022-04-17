@@ -1,6 +1,6 @@
+import { Plugin } from '@webiny/plugins'
 import { ApolloLink } from 'apollo-link'
 import { nanoid } from 'nanoid'
-import { Plugin } from '@webiny/plugins'
 
 interface ApolloLinkFactory {
   (): ApolloLink

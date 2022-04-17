@@ -2,6 +2,7 @@ import { Col, Row } from 'antd'
 import React from 'react'
 import { Slide } from 'react-awesome-reveal'
 import { withTranslation } from 'react-i18next'
+
 import { Button } from '../../common/Button'
 
 interface MiddleBlockProps {

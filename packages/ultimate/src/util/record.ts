@@ -1,5 +1,6 @@
 import get from 'lodash/get'
 import set from 'lodash/set'
+
 import { getJsonSize } from './getJsonSize'
 
 const ALPHABET = 'abcdefghijklmnopqrstuvwxyz0123456789+-*/?!@#$%^&*()[]{}|:;<>,'

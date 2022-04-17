@@ -1,4 +1,5 @@
 import uniqid from 'uniqid'
+
 import { Plugin, PluginCollection } from './types'
 
 const isOptionsObject = (item?: any) =>

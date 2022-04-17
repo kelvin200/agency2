@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
-import get from 'lodash/get'
 import { IconButton } from '@webiny/ui/Button'
 import { Typography } from '@webiny/ui/Typography'
+import get from 'lodash/get'
+import React, { useState } from 'react'
+
 import { i18n } from '../../i18n'
-import { OverlayWrapper, Pre } from './StyledComponents'
 import { ReactComponent as CloseIcon } from './assets/close_24px.svg'
+import { OverlayWrapper, Pre } from './StyledComponents'
 
 const t = i18n.ns('app/graphql/error-overlay')
 

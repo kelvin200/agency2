@@ -1,11 +1,20 @@
 import 'core-js/stable'
 import 'cross-fetch/polyfill'
-import React from 'react'
-import ReactDOM from 'react-dom'
 import 'regenerator-runtime/runtime'
-import { App } from './App'
+import './global.scss'
 import 'antd/dist/antd.css'
+import './common.scss'
+import './components.scss'
 import './plugins'
 
-const render = module.hot ? ReactDOM.render : ReactDOM.hydrate
-render(<App />, document.getElementById('root'))
+import React from 'react'
+import { createRoot, hydrateRoot } from 'react-dom/client'
+
+import { App } from './App'
+
+const container = document.getElementById('root')
+if (module.hot) {
+  createRoot(container).render(<App />)
+} else {
+  hydrateRoot(container, <App />)
+}

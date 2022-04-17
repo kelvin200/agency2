@@ -1,5 +1,6 @@
-import React from 'react'
 import { Link } from '@webiny/react-router'
+import React from 'react'
+
 import Menu from './Menu'
 import Navigation from './Navigation'
 

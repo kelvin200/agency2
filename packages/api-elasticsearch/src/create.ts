@@ -1,5 +1,6 @@
 // If using old ES SDK (Not AWS)
 import { Client, ConfigOptions, SearchResponse } from 'elasticsearch'
+
 import { ElasticsearchClientOptions } from './types'
 
 export class MClient {

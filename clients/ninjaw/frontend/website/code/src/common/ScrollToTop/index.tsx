@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+
 import { SvgIcon } from '../SvgIcon'
 import { getScroll } from '../utils/getWindow'
 

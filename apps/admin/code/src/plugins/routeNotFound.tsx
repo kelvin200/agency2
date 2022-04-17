@@ -1,5 +1,5 @@
+import { Redirect,Route } from '@webiny/react-router'
 import React from 'react'
-import { Route, Redirect } from '@webiny/react-router'
 
 /**
  * When react-router is unable to find a proper route, redirect to "/".

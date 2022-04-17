@@ -3,6 +3,7 @@ import * as pulumi from '@pulumi/pulumi'
 //@ts-ignore
 import { createInstallationZip } from '@webiny/api-page-builder/installation'
 import * as path from 'path'
+
 import policies from './policies'
 import vpc from './vpc'
 

@@ -1,5 +1,6 @@
 import React from 'react'
 import { withTranslation } from 'react-i18next'
+
 import { InputProps } from '../types'
 
 const Input = ({ name, placeholder, onChange, t }: InputProps) => (

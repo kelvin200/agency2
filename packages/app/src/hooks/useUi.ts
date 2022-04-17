@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+
 import { UiContext, UiContextValue } from './../contexts/Ui'
 
 export const useUi = () => {

@@ -8,6 +8,7 @@ import {
   Params,
 } from '@m/ultimate/src/util/list'
 import WebinyError from '@webiny/error'
+
 import { Context, Entity, OneIndexIndex } from '../type'
 import { fromEsRecord, toEsMap } from './esRecord'
 import { Stocking, StockingEntity } from './type'

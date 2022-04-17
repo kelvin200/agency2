@@ -1,7 +1,8 @@
-import React, { ReactNode } from 'react'
-import warning from 'warning'
 import { plugins } from '@webiny/plugins'
 import { Plugin } from '@webiny/plugins/types'
+import React, { ReactNode } from 'react'
+import warning from 'warning'
+
 import imagePlugin from './image'
 
 export { imagePlugin }

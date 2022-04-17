@@ -1,7 +1,8 @@
 import { ApolloLink } from 'apollo-link'
 import { DocumentNode } from 'graphql'
-import { ApolloLinkPlugin } from './ApolloLinkPlugin'
 import { ExecutableDefinitionNode, FieldNode } from 'graphql/language/ast'
+
+import { ApolloLinkPlugin } from './ApolloLinkPlugin'
 
 interface Config {
   operationName: string

@@ -1,10 +1,10 @@
-import { plugins } from '@webiny/plugins'
 import imageComponent from '@webiny/app/plugins/image'
-import pageBuilder from './pageBuilder'
-import formBuilder from './formBuilder'
-import apolloLinks from './apolloLinks'
-
+import { plugins } from '@webiny/plugins'
 import theme from 'theme'
+
+import apolloLinks from './apolloLinks'
+import formBuilder from './formBuilder'
+import pageBuilder from './pageBuilder'
 
 plugins.register([
   imageComponent(),

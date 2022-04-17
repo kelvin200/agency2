@@ -1,7 +1,7 @@
-import { DocumentClient } from 'aws-sdk/clients/dynamodb'
-import { createHandler } from '@webiny/handler-aws'
 import queueProcessPlugins from '@webiny/api-prerendering-service/queue/process'
 import { createPrerenderingServiceStorageOperations } from '@webiny/api-prerendering-service-so-ddb'
+import { createHandler } from '@webiny/handler-aws'
+import { DocumentClient } from 'aws-sdk/clients/dynamodb'
 
 const documentClient = new DocumentClient({
   convertEmptyValues: true,

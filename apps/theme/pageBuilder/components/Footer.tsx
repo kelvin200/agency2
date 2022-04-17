@@ -1,10 +1,10 @@
-import * as React from 'react'
+import { PbPageData } from '@webiny/app-page-builder/types'
 import { Link } from '@webiny/react-router'
+import * as React from 'react'
 
 import { ReactComponent as FacebookIcon } from './assets/facebook-square-brands.svg'
-import { ReactComponent as TwitterIcon } from './assets/twitter-square-brands.svg'
 import { ReactComponent as InstagramIcon } from './assets/instagram-brands.svg'
-import { PbPageData } from '@webiny/app-page-builder/types'
+import { ReactComponent as TwitterIcon } from './assets/twitter-square-brands.svg'
 
 type FooterProps = {
   settings: Record<string, any>

@@ -1,5 +1,6 @@
 import { batchWrite, WriteRequest } from '@m/ultimate/src/util/dynamo'
 import WebinyError from '@webiny/error'
+
 import { Create, EntityPK, EntityType } from '../type'
 import {
   getOneIndexPK,

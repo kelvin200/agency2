@@ -1,14 +1,14 @@
-import { createTenancyContext } from '@webiny/api-tenancy'
-import { createStorageOperations as tenancyStorageOperations } from '@webiny/api-tenancy-so-ddb'
 import { createSecurityContext } from '@webiny/api-security'
-import { createStorageOperations as securityStorageOperations } from '@webiny/api-security-so-ddb'
-import { authenticateUsingHttpHeader } from '@webiny/api-security/plugins/authenticateUsingHttpHeader'
+import anonymousAuthorization from '@webiny/api-security/plugins/anonymousAuthorization'
 import apiKeyAuthentication from '@webiny/api-security/plugins/apiKeyAuthentication'
 import apiKeyAuthorization from '@webiny/api-security/plugins/apiKeyAuthorization'
+import { authenticateUsingHttpHeader } from '@webiny/api-security/plugins/authenticateUsingHttpHeader'
 import groupAuthorization from '@webiny/api-security/plugins/groupAuthorization'
 import parentTenantGroupAuthorization from '@webiny/api-security/plugins/parentTenantGroupAuthorization'
 import cognitoAuthentication from '@webiny/api-security-cognito'
-import anonymousAuthorization from '@webiny/api-security/plugins/anonymousAuthorization'
+import { createStorageOperations as securityStorageOperations } from '@webiny/api-security-so-ddb'
+import { createTenancyContext } from '@webiny/api-tenancy'
+import { createStorageOperations as tenancyStorageOperations } from '@webiny/api-tenancy-so-ddb'
 
 export default ({ documentClient }) => [
   /**

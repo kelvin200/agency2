@@ -1,18 +1,19 @@
 import elasticSearch from '@m/api-elasticsearch/src'
 import pageBuilderDynamoDbElasticsearchPlugins from '@m/api-page-builder-so-ddb-es/src'
+import i18nPlugins from '@webiny/api-i18n/graphql'
 import i18nContentPlugins from '@webiny/api-i18n-content/plugins'
 import i18nDynamoDbStorageOperations from '@webiny/api-i18n-ddb'
-import i18nPlugins from '@webiny/api-i18n/graphql'
-import { createStorageOperations as createPageBuilderStorageOperations } from '@webiny/api-page-builder-import-export-so-ddb'
+import pageBuilderPlugins from '@webiny/api-page-builder/graphql'
 import exportPagesCombinePlugins from '@webiny/api-page-builder-import-export/exportPages/combine'
 import pageBuilderImportExportPlugins from '@webiny/api-page-builder-import-export/graphql'
-import pageBuilderPlugins from '@webiny/api-page-builder/graphql'
+import { createStorageOperations as createPageBuilderStorageOperations } from '@webiny/api-page-builder-import-export-so-ddb'
 import { DynamoDbDriver } from '@webiny/db-dynamodb'
 import dynamoDbPlugins from '@webiny/db-dynamodb/plugins'
 import { createHandler } from '@webiny/handler-aws'
 import dbPlugins from '@webiny/handler-db'
 import logsPlugins from '@webiny/handler-logs'
 import { DocumentClient } from 'aws-sdk/clients/dynamodb'
+
 import securityPlugins from './security'
 
 const documentClient = new DocumentClient({

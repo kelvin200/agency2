@@ -1,5 +1,5 @@
-import { PluginsContainer } from './PluginsContainer'
 import { Plugin } from './Plugin'
+import { PluginsContainer } from './PluginsContainer'
 
 const plugins = new PluginsContainer()
 

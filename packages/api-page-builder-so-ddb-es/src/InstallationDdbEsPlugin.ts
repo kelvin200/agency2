@@ -1,5 +1,5 @@
-import configurations from '@webiny/api-page-builder-so-ddb-es/operations/configurations'
 import { PbContext } from '@webiny/api-page-builder/types'
+import configurations from '@webiny/api-page-builder-so-ddb-es/operations/configurations'
 import { ContextPlugin } from '@webiny/handler/plugins/ContextPlugin'
 
 export const installation = (): ContextPlugin<PbContext> => {

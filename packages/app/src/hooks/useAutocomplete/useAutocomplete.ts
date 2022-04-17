@@ -1,6 +1,7 @@
-import { useDataList } from '../useDataList'
-import { debounce } from 'lodash'
 import { DocumentNode } from 'graphql'
+import { debounce } from 'lodash'
+
+import { useDataList } from '../useDataList'
 
 interface UseAutocompleteHook {
   options: any[]

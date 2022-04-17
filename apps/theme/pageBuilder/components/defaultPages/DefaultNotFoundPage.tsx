@@ -1,4 +1,5 @@
 import React from 'react'
+
 import DefaultPage from './DefaultPage'
 
 export default function DefaultNotFoundPage() {

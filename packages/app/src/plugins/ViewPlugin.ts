@@ -1,5 +1,5 @@
-import * as React from 'react'
 import { Plugin } from '@webiny/plugins'
+import * as React from 'react'
 
 interface Config<Props> {
   name: string

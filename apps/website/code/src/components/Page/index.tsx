@@ -1,9 +1,9 @@
-import React from 'react'
 import { useQuery } from '@apollo/react-hooks'
-import Render from './Render'
 import trim from 'lodash.trim'
+import React from 'react'
 
-import { GET_SETTINGS, GET_PUBLISHED_PAGE } from './graphql'
+import { GET_PUBLISHED_PAGE,GET_SETTINGS } from './graphql'
+import Render from './Render'
 
 declare global {
   interface Window {

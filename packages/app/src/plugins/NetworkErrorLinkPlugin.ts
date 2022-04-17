@@ -1,6 +1,7 @@
 import { onError } from 'apollo-link-error'
 import { boolean } from 'boolean'
 import { print } from 'graphql/language'
+
 import { config as appConfig } from '../config'
 import { ApolloLinkPlugin } from './ApolloLinkPlugin'
 import createErrorOverlay from './NetworkErrorLinkPlugin/createErrorOverlay'

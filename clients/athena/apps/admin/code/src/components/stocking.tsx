@@ -3,6 +3,7 @@ import { useQuery } from '@apollo/react-hooks'
 import { Alert, Popconfirm, Space, Table, TableProps, Tooltip } from 'antd'
 import { set } from 'dot-prop-immutable'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
+
 import { LIST } from './gql'
 import { useModalStocking } from './useModalStocking'
 

@@ -1,4 +1,5 @@
 import mdbid from 'mdbid'
+
 import { EntityPK } from './type'
 
 export const getZeroPaddedVersionNumber = (value: string | number): string => {

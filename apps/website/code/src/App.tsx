@@ -1,7 +1,8 @@
-import React from 'react'
 import { ApolloProvider } from '@apollo/react-components'
-import { BrowserRouter, Switch, Route } from '@webiny/react-router'
 import { PageBuilderProvider } from '@webiny/app-page-builder/contexts/PageBuilder'
+import { BrowserRouter, Route,Switch } from '@webiny/react-router'
+import React from 'react'
+
 import { createApolloClient } from './components/apolloClient'
 import Page from './components/Page'
 

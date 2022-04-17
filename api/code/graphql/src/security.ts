@@ -1,20 +1,20 @@
-import { createTenancyContext, createTenancyGraphQL } from '@webiny/api-tenancy'
-import { createStorageOperations as tenancyStorageOperations } from '@webiny/api-tenancy-so-ddb'
+import createAdminUsersApp from '@webiny/api-admin-users-cognito'
+import { syncWithCognito } from '@webiny/api-admin-users-cognito/syncWithCognito'
+import { createStorageOperations as createAdminUsersStorageOperations } from '@webiny/api-admin-users-cognito-so-ddb'
 import {
   createSecurityContext,
   createSecurityGraphQL,
 } from '@webiny/api-security'
-import { createStorageOperations as securityStorageOperations } from '@webiny/api-security-so-ddb'
-import { authenticateUsingHttpHeader } from '@webiny/api-security/plugins/authenticateUsingHttpHeader'
+import anonymousAuthorization from '@webiny/api-security/plugins/anonymousAuthorization'
 import apiKeyAuthentication from '@webiny/api-security/plugins/apiKeyAuthentication'
 import apiKeyAuthorization from '@webiny/api-security/plugins/apiKeyAuthorization'
+import { authenticateUsingHttpHeader } from '@webiny/api-security/plugins/authenticateUsingHttpHeader'
 import groupAuthorization from '@webiny/api-security/plugins/groupAuthorization'
 import parentTenantGroupAuthorization from '@webiny/api-security/plugins/parentTenantGroupAuthorization'
 import cognitoAuthentication from '@webiny/api-security-cognito'
-import anonymousAuthorization from '@webiny/api-security/plugins/anonymousAuthorization'
-import createAdminUsersApp from '@webiny/api-admin-users-cognito'
-import { syncWithCognito } from '@webiny/api-admin-users-cognito/syncWithCognito'
-import { createStorageOperations as createAdminUsersStorageOperations } from '@webiny/api-admin-users-cognito-so-ddb'
+import { createStorageOperations as securityStorageOperations } from '@webiny/api-security-so-ddb'
+import { createTenancyContext, createTenancyGraphQL } from '@webiny/api-tenancy'
+import { createStorageOperations as tenancyStorageOperations } from '@webiny/api-tenancy-so-ddb'
 
 export default ({ documentClient }) => [
   /**

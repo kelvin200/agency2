@@ -2,6 +2,7 @@ import { getElasticsearchOperators } from '@webiny/api-elasticsearch/operators'
 import WebinyError from '@webiny/error'
 import { ContextPlugin } from '@webiny/handler/plugins/ContextPlugin'
 import { Client } from 'elasticsearch'
+
 import { createElasticsearchClient } from './create'
 import { ElasticsearchClientOptions, ElasticsearchContext } from './types'
 

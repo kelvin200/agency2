@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { ContainerProps } from '../types'
 
 const Container = ({ border, children }: ContainerProps) => (

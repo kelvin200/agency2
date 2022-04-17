@@ -1,6 +1,6 @@
+import { css } from 'emotion'
 import React, { ReactNode } from 'react'
 import { Helmet } from 'react-helmet'
-import { css } from 'emotion'
 
 const style = css({
   padding: 50,

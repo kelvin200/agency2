@@ -1,7 +1,8 @@
-import React, { useState, useCallback } from 'react'
+import { PbPageData } from '@webiny/app-page-builder/types'
+import React, { useCallback,useState } from 'react'
+
 import DesktopHeader from './DesktopHeader'
 import MobileHeader from './MobileHeader'
-import { PbPageData } from '@webiny/app-page-builder/types'
 
 const menuName = 'main-menu'
 

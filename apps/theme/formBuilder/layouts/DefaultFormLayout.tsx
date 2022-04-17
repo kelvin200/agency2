@@ -1,18 +1,18 @@
-import React, { useState } from 'react'
-import { BindComponentRenderProp, Form } from '@webiny/form'
 import {
   FbFormModelField,
   FormLayoutComponent,
 } from '@webiny/app-form-builder/types'
-import { validation } from '@webiny/validation'
+import { BindComponentRenderProp, Form } from '@webiny/form'
 import { RichTextRenderer } from '@webiny/react-rich-text-renderer'
+import { validation } from '@webiny/validation'
+import React, { useState } from 'react'
 
-import Input from './fields/Input'
-import Select from './fields/Select'
-import Radio from './fields/Radio'
-import Checkbox from './fields/Checkbox'
-import Textarea from './fields/Textarea'
 import HelperMessage from './components/HelperMessage'
+import Checkbox from './fields/Checkbox'
+import Input from './fields/Input'
+import Radio from './fields/Radio'
+import Select from './fields/Select'
+import Textarea from './fields/Textarea'
 
 /**
  * This is the default form layout component, in which we render all the form fields. We also render terms of service

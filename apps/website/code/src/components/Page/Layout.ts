@@ -1,6 +1,6 @@
-import { useMemo, createElement } from 'react'
-import { plugins } from '@webiny/plugins'
 import { PbPageLayoutPlugin } from '@webiny/app-page-builder/types'
+import { plugins } from '@webiny/plugins'
+import { createElement,useMemo } from 'react'
 
 const Layout = ({ page, settings, children }) => {
   const layouts = useMemo(() => {

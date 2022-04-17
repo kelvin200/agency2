@@ -1,14 +1,5 @@
 import { decodeCursor, encodeCursor } from '@webiny/api-elasticsearch/cursors'
 import { createLimit } from '@webiny/api-elasticsearch/limit'
-import configurations from '@webiny/api-form-builder-so-ddb-es/configurations'
-import {
-  createElasticsearchBody,
-  createSubmissionElasticType,
-} from '@webiny/api-form-builder-so-ddb-es/operations/submission/elasticsearchBody'
-import {
-  FormBuilderSubmissionStorageOperations,
-  FormBuilderSubmissionStorageOperationsCreatePartitionKeyParams,
-} from '@webiny/api-form-builder-so-ddb-es/types'
 import {
   FbSubmission,
   FormBuilderStorageOperationsCreateSubmissionParams,
@@ -18,6 +9,15 @@ import {
   FormBuilderStorageOperationsListSubmissionsResponse,
   FormBuilderStorageOperationsUpdateSubmissionParams,
 } from '@webiny/api-form-builder/types'
+import configurations from '@webiny/api-form-builder-so-ddb-es/configurations'
+import {
+  createElasticsearchBody,
+  createSubmissionElasticType,
+} from '@webiny/api-form-builder-so-ddb-es/operations/submission/elasticsearchBody'
+import {
+  FormBuilderSubmissionStorageOperations,
+  FormBuilderSubmissionStorageOperationsCreatePartitionKeyParams,
+} from '@webiny/api-form-builder-so-ddb-es/types'
 import { batchReadAll } from '@webiny/db-dynamodb/utils/batchRead'
 import { cleanupItem } from '@webiny/db-dynamodb/utils/cleanup'
 import { sortItems } from '@webiny/db-dynamodb/utils/sort'

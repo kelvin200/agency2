@@ -1,5 +1,6 @@
 import { ReactRouterOnLinkPlugin } from '@webiny/react-router/types'
 import gql from 'graphql-tag'
+
 import { GET_PUBLISHED_PAGE } from '../components/Page/graphql'
 
 declare global {

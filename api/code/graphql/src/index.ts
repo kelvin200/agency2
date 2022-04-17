@@ -1,26 +1,25 @@
-// Override
 import elasticsearchClientContext from '@m/api-elasticsearch/src'
 import { createElasticsearchClient } from '@m/api-elasticsearch/src/create'
 import pageBuilderDynamoDbElasticsearchPlugins from '@m/api-page-builder-so-ddb-es/src'
 import elasticsearchDataGzipCompression from '@webiny/api-elasticsearch/plugins/GzipCompression'
+import fileManagerPlugins from '@webiny/api-file-manager/plugins'
 import fileManagerDynamoDbElasticStorageOperation from '@webiny/api-file-manager-ddb-es'
 import fileManagerS3 from '@webiny/api-file-manager-s3'
-import fileManagerPlugins from '@webiny/api-file-manager/plugins'
 import { createFormBuilder } from '@webiny/api-form-builder'
 import { createFormBuilderStorageOperations } from '@webiny/api-form-builder-so-ddb-es'
 import {
   createAdminHeadlessCmsContext,
   createAdminHeadlessCmsGraphQL,
 } from '@webiny/api-headless-cms'
-import { createStorageOperations as createHeadlessCmsStorageOperations } from '@webiny/api-headless-cms-ddb-es'
 import headlessCmsModelFieldToGraphQLPlugins from '@webiny/api-headless-cms/content/plugins/graphqlFields'
+import { createStorageOperations as createHeadlessCmsStorageOperations } from '@webiny/api-headless-cms-ddb-es'
+import i18nPlugins from '@webiny/api-i18n/graphql'
 import i18nContentPlugins from '@webiny/api-i18n-content/plugins'
 import i18nDynamoDbStorageOperations from '@webiny/api-i18n-ddb'
-import i18nPlugins from '@webiny/api-i18n/graphql'
-import { createStorageOperations as createPageImportExportStorageOperations } from '@webiny/api-page-builder-import-export-so-ddb'
-import pageBuilderImportExportPlugins from '@webiny/api-page-builder-import-export/graphql'
 import pageBuilderPlugins from '@webiny/api-page-builder/graphql'
 import pageBuilderPrerenderingPlugins from '@webiny/api-page-builder/prerendering'
+import pageBuilderImportExportPlugins from '@webiny/api-page-builder-import-export/graphql'
+import { createStorageOperations as createPageImportExportStorageOperations } from '@webiny/api-page-builder-import-export-so-ddb'
 import prerenderingServicePlugins from '@webiny/api-prerendering-service/client'
 import { DynamoDbDriver } from '@webiny/db-dynamodb'
 import dynamoDbPlugins from '@webiny/db-dynamodb/plugins'
@@ -29,6 +28,8 @@ import dbPlugins from '@webiny/handler-db'
 import graphqlPlugins from '@webiny/handler-graphql'
 import logsPlugins from '@webiny/handler-logs'
 import { DocumentClient } from 'aws-sdk/clients/dynamodb'
+
+// Override
 import overridePlugins from './plugins'
 import securityPlugins from './security'
 

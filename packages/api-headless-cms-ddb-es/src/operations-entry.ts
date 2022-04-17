@@ -1,19 +1,6 @@
 import { compress, decompress } from '@webiny/api-elasticsearch/compression'
 import { encodeCursor } from '@webiny/api-elasticsearch/cursors'
 import { createLimit } from '@webiny/api-elasticsearch/limit'
-import configurations from '@webiny/api-headless-cms-ddb-es/configurations'
-import {
-  createElasticsearchQueryBody,
-  extractEntriesFromIndex,
-  prepareEntryToIndex,
-} from '@webiny/api-headless-cms-ddb-es/helpers'
-import { DataLoadersHandler } from '@webiny/api-headless-cms-ddb-es/operations/entry/dataLoaders'
-import {
-  createLatestSortKey,
-  createPartitionKey,
-  createPublishedSortKey,
-  createRevisionSortKey,
-} from '@webiny/api-headless-cms-ddb-es/operations/entry/keys'
 import {
   CmsEntry,
   CmsEntryStorageOperations,
@@ -38,6 +25,19 @@ import {
   CmsModel,
   CONTENT_ENTRY_STATUS,
 } from '@webiny/api-headless-cms/types'
+import configurations from '@webiny/api-headless-cms-ddb-es/configurations'
+import {
+  createElasticsearchQueryBody,
+  extractEntriesFromIndex,
+  prepareEntryToIndex,
+} from '@webiny/api-headless-cms-ddb-es/helpers'
+import { DataLoadersHandler } from '@webiny/api-headless-cms-ddb-es/operations/entry/dataLoaders'
+import {
+  createLatestSortKey,
+  createPartitionKey,
+  createPublishedSortKey,
+  createRevisionSortKey,
+} from '@webiny/api-headless-cms-ddb-es/operations/entry/keys'
 import { batchWriteAll } from '@webiny/db-dynamodb/utils/batchWrite'
 import { cleanupItem } from '@webiny/db-dynamodb/utils/cleanup'
 import { get as getRecord } from '@webiny/db-dynamodb/utils/get'

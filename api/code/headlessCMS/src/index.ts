@@ -4,16 +4,17 @@ import {
   createContentHeadlessCmsContext,
   createContentHeadlessCmsGraphQL,
 } from '@webiny/api-headless-cms'
-import { createStorageOperations as createHeadlessCmsStorageOperations } from '@webiny/api-headless-cms-ddb-es'
 import headlessCmsModelFieldToGraphQLPlugins from '@webiny/api-headless-cms/content/plugins/graphqlFields'
+import { createStorageOperations as createHeadlessCmsStorageOperations } from '@webiny/api-headless-cms-ddb-es'
+import i18nPlugins from '@webiny/api-i18n/graphql'
 import i18nContentPlugins from '@webiny/api-i18n-content/plugins'
 import i18nDynamoDbStorageOperations from '@webiny/api-i18n-ddb'
-import i18nPlugins from '@webiny/api-i18n/graphql'
 import { DynamoDbDriver } from '@webiny/db-dynamodb'
 import { createHandler } from '@webiny/handler-aws'
 import dbPlugins from '@webiny/handler-db'
 import logsPlugins from '@webiny/handler-logs'
 import { DocumentClient } from 'aws-sdk/clients/dynamodb'
+
 // Imports plugins created via scaffolding utilities.
 import scaffoldsPlugins from './plugins/scaffolds'
 import securityPlugins from './security'

@@ -1,4 +1,5 @@
 import { getElasticsearchOperators } from '@webiny/api-elasticsearch/operators'
+import { HeadlessCms } from '@webiny/api-headless-cms/types'
 import { createEntryEntity } from '@webiny/api-headless-cms-ddb-es/definitions/entry'
 import { createEntryElasticsearchEntity } from '@webiny/api-headless-cms-ddb-es/definitions/entryElasticsearch'
 import { createGroupEntity } from '@webiny/api-headless-cms-ddb-es/definitions/group'
@@ -20,7 +21,6 @@ import {
   ENTITIES,
   StorageOperationsFactory,
 } from '@webiny/api-headless-cms-ddb-es/types'
-import { HeadlessCms } from '@webiny/api-headless-cms/types'
 import dynamoDbValueFilters from '@webiny/db-dynamodb/plugins/filters'
 import { PluginsContainer } from '@webiny/plugins'
 

@@ -1,17 +1,6 @@
 import { compress } from '@webiny/api-elasticsearch/compression'
 import { decodeCursor, encodeCursor } from '@webiny/api-elasticsearch/cursors'
 import { createLimit } from '@webiny/api-elasticsearch/limit'
-import defineFilesEsEntity from '@webiny/api-file-manager-ddb-es/definitions/filesElasticsearchEntity'
-import defineFilesEntity from '@webiny/api-file-manager-ddb-es/definitions/filesEntity'
-import defineTable from '@webiny/api-file-manager-ddb-es/definitions/table'
-import defineEsTable from '@webiny/api-file-manager-ddb-es/definitions/tableElasticsearch'
-import { configurations } from '@webiny/api-file-manager-ddb-es/operations/configurations'
-import { createElasticsearchBody } from '@webiny/api-file-manager-ddb-es/operations/files/body'
-import {
-  transformFromIndex,
-  transformToIndex,
-} from '@webiny/api-file-manager-ddb-es/operations/files/transformers'
-import { FileIndexTransformPlugin } from '@webiny/api-file-manager-ddb-es/plugins/FileIndexTransformPlugin'
 import {
   File,
   FileManagerContext,
@@ -26,6 +15,17 @@ import {
   FileManagerFilesStorageOperationsTagsResponse,
   FileManagerFilesStorageOperationsUpdateParams,
 } from '@webiny/api-file-manager/types'
+import defineFilesEsEntity from '@webiny/api-file-manager-ddb-es/definitions/filesElasticsearchEntity'
+import defineFilesEntity from '@webiny/api-file-manager-ddb-es/definitions/filesEntity'
+import defineTable from '@webiny/api-file-manager-ddb-es/definitions/table'
+import defineEsTable from '@webiny/api-file-manager-ddb-es/definitions/tableElasticsearch'
+import { configurations } from '@webiny/api-file-manager-ddb-es/operations/configurations'
+import { createElasticsearchBody } from '@webiny/api-file-manager-ddb-es/operations/files/body'
+import {
+  transformFromIndex,
+  transformToIndex,
+} from '@webiny/api-file-manager-ddb-es/operations/files/transformers'
+import { FileIndexTransformPlugin } from '@webiny/api-file-manager-ddb-es/plugins/FileIndexTransformPlugin'
 import { batchWriteAll } from '@webiny/db-dynamodb/utils/batchWrite'
 import { cleanupItem } from '@webiny/db-dynamodb/utils/cleanup'
 import { get as getEntityItem } from '@webiny/db-dynamodb/utils/get'

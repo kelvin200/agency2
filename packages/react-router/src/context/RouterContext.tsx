@@ -1,6 +1,7 @@
 import { ApolloClient } from '@apollo/client'
 import { useApolloClient } from '@apollo/react-hooks'
 import React, { useMemo } from 'react'
+
 import { plugins } from '../../../plugins'
 import { ReactRouterOnLinkPlugin } from '../types'
 

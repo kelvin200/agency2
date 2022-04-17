@@ -1,5 +1,5 @@
-import { OmitTypenameLinkPlugin } from '@webiny/app/plugins/OmitTypenameLinkPlugin'
 import { LocaleHeaderLinkPlugin } from '@webiny/app/plugins/LocaleHeaderLinkPlugin'
+import { OmitTypenameLinkPlugin } from '@webiny/app/plugins/OmitTypenameLinkPlugin'
 import { TenantHeaderLinkPlugin } from '@webiny/app/plugins/TenantHeaderLinkPlugin'
 
 export default () => [

@@ -2,6 +2,7 @@ import { Col, Row } from 'antd'
 import React from 'react'
 import { Fade } from 'react-awesome-reveal'
 import { withTranslation } from 'react-i18next'
+
 import { SvgIcon } from '../../../common/SvgIcon'
 import { ContentBlockProps } from '../types'
 

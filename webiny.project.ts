@@ -10,6 +10,7 @@ import cliScaffoldReactApp from '@webiny/cli-plugin-scaffold-react-app'
 import cliScaffoldReactComponent from '@webiny/cli-plugin-scaffold-react-component'
 import cliWorkspaces from '@webiny/cli-plugin-workspaces'
 import cliAwsTemplate from '@webiny/cwp-template-aws/cli'
+
 // Admin Area and Website CLI plugins.
 import adminPlugins from './apps/admin/cli'
 import websitePlugins from './apps/website/cli'

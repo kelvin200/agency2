@@ -1,6 +1,6 @@
-import gql from 'graphql-tag'
-import { plugins } from '@webiny/plugins'
 import { PbPageSettingsFieldsPlugin } from '@webiny/app-page-builder/types'
+import { plugins } from '@webiny/plugins'
+import gql from 'graphql-tag'
 
 /**
  * We get all of the `PbPageSettingsFieldsPlugin` plugins, which contain different page-settings-related GraphQL fields.

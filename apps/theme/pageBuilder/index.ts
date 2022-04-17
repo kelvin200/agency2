@@ -1,9 +1,9 @@
-import StaticLayout from './layouts/Static'
-
 import {
   PbPageLayoutPlugin,
   PbThemePlugin,
 } from '@webiny/app-page-builder/types'
+
+import StaticLayout from './layouts/Static'
 
 export default [
   {

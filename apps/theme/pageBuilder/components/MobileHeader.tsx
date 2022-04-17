@@ -1,8 +1,9 @@
-import React from 'react'
-import HamburgerMenu from 'react-hamburger-menu'
-import classNames from 'classnames'
 import { useQuery } from '@apollo/react-hooks'
 import { Link } from '@webiny/react-router'
+import classNames from 'classnames'
+import React from 'react'
+import HamburgerMenu from 'react-hamburger-menu'
+
 import Menu, { GET_PUBLIC_MENU, hasMenuItems } from './Menu'
 import Navigation from './Navigation'
 

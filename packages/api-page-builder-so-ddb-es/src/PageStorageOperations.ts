@@ -1,18 +1,18 @@
 import { encodeCursor } from '@webiny/api-elasticsearch/cursors'
 import { createLimit } from '@webiny/api-elasticsearch/limit'
 import { ElasticsearchBoolQueryConfig } from '@webiny/api-elasticsearch/types'
-import configurations from '@webiny/api-page-builder-so-ddb-es/operations/configurations'
-import { createElasticsearchQueryBody } from '@webiny/api-page-builder-so-ddb-es/operations/pages/elasticsearchQueryBody'
-import { PageStorageOperationsDdbEs as _ } from '@webiny/api-page-builder-so-ddb-es/operations/pages/PageStorageOperations'
-import { SearchLatestPagesPlugin } from '@webiny/api-page-builder-so-ddb-es/plugins/definitions/SearchLatestPagesPlugin'
-import { SearchPagesPlugin } from '@webiny/api-page-builder-so-ddb-es/plugins/definitions/SearchPagesPlugin'
-import { SearchPublishedPagesPlugin } from '@webiny/api-page-builder-so-ddb-es/plugins/definitions/SearchPublishedPagesPlugin'
 import {
   Page,
   PageStorageOperationsListParams,
   PageStorageOperationsListResponse,
   PageStorageOperationsListTagsParams,
 } from '@webiny/api-page-builder/types'
+import configurations from '@webiny/api-page-builder-so-ddb-es/operations/configurations'
+import { createElasticsearchQueryBody } from '@webiny/api-page-builder-so-ddb-es/operations/pages/elasticsearchQueryBody'
+import { PageStorageOperationsDdbEs as _ } from '@webiny/api-page-builder-so-ddb-es/operations/pages/PageStorageOperations'
+import { SearchLatestPagesPlugin } from '@webiny/api-page-builder-so-ddb-es/plugins/definitions/SearchLatestPagesPlugin'
+import { SearchPagesPlugin } from '@webiny/api-page-builder-so-ddb-es/plugins/definitions/SearchPagesPlugin'
+import { SearchPublishedPagesPlugin } from '@webiny/api-page-builder-so-ddb-es/plugins/definitions/SearchPublishedPagesPlugin'
 import WebinyError from '@webiny/error'
 import { Client, SearchResponse } from 'elasticsearch'
 

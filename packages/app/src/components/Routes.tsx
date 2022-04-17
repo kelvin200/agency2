@@ -1,6 +1,7 @@
-import React from 'react'
 import { plugins } from '@m/plugins/src'
 import { Routes as ReactRouterRoutes } from '@m/react-router/src/Routes'
+import React from 'react'
+
 import type { RoutePlugin } from '../types'
 
 export const Routes = () => {

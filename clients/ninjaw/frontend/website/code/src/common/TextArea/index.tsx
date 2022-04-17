@@ -1,5 +1,6 @@
 import React from 'react'
 import { withTranslation } from 'react-i18next'
+
 import { InputProps } from '../types'
 
 const TextArea = ({ name, placeholder, onChange, t }: InputProps) => (

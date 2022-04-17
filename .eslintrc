@@ -6,10 +6,16 @@
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": 2018,
+    "ecmaVersion": 2020,
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint", "jest", "import", "react"],
+  "plugins": [
+    "@typescript-eslint",
+    "jest",
+    "import",
+    "react",
+    "simple-import-sort"
+  ],
   "env": {
     "jest": true,
     "commonjs": true,
@@ -17,23 +23,24 @@
     "es6": true
   },
   "rules": {
-    "react/prop-types": 0,
-    "import/no-unresolved": 0,
-    "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/explicit-module-boundary-types": "off",
-    "@typescript-eslint/camelcase": 0,
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/ban-ts-ignore": "off",
     "@typescript-eslint/ban-types": "off",
+    "@typescript-eslint/camelcase": 0,
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-empty-function": 0,
+    "@typescript-eslint/no-explicit-any": 0,
+    "@typescript-eslint/no-extra-semi": 0,
     "@typescript-eslint/no-use-before-define": 0,
     "@typescript-eslint/no-var-requires": 0,
-    "@typescript-eslint/no-explicit-any": 0,
-    "@typescript-eslint/no-empty-function": 0,
-    "@typescript-eslint/no-extra-semi": 0,
     "curly": ["error"],
+    "import/no-unresolved": 0,
     "jest/expect-expect": 0,
     "jest/no-focused-tests": 0,
-    "react/display-name": 0
+    "react/display-name": 0,
+    "react/prop-types": 0,
+    "simple-import-sort/imports": "error"
   },
   "settings": {
     "react": {

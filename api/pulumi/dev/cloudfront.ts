@@ -1,6 +1,7 @@
 import * as aws from '@pulumi/aws'
-import ApiGateway from './apiGateway'
 import { parse } from 'url'
+
+import ApiGateway from './apiGateway'
 
 class Cloudfront {
   cloudfront: aws.cloudfront.Distribution

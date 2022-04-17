@@ -2,6 +2,7 @@ import { plugins } from '@webiny/plugins'
 import invariant from 'invariant'
 import { get } from 'lodash'
 import * as React from 'react'
+
 import { ImageComponentPlugin, ImageProps } from '../types'
 
 export const Image: React.FC<ImageProps> = ({

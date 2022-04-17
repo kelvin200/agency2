@@ -12,9 +12,10 @@ import {
   StaticRouter as RStaticRouter,
   StaticRouterProps,
 } from 'react-router-dom/server'
+
 import { ReactRouterContextValue, RouterContext } from './context/RouterContext'
 import enhancer from './routerEnhancer'
-import { useHistory, UseHistory } from './useHistory'
+import { UseHistory,useHistory } from './useHistory'
 
 export * from 'react-router-dom'
 export { Link } from './Link'

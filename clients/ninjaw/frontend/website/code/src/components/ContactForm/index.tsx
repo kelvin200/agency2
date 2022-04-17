@@ -2,6 +2,7 @@ import { Col, Row } from 'antd'
 import React from 'react'
 import { Slide, Zoom } from 'react-awesome-reveal'
 import { withTranslation } from 'react-i18next'
+
 import { Button } from '../../common/Button'
 import Input from '../../common/Input'
 import TextArea from '../../common/TextArea'

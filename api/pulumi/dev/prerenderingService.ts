@@ -2,6 +2,7 @@ import * as aws from '@pulumi/aws'
 import * as pulumi from '@pulumi/pulumi'
 // @ts-ignore
 import { getLayerArn } from '@webiny/aws-layers'
+
 import policies from './policies'
 
 interface PreRenderingServiceParams {

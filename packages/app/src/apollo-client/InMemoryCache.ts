@@ -4,6 +4,7 @@ import {
 } from '@apollo/client'
 import { plugins } from '@webiny/plugins'
 import { DocumentNode } from 'graphql'
+
 import { AddQuerySelectionPlugin } from '../plugins/AddQuerySelectionPlugin'
 import { ApolloLinkPlugin } from '../plugins/ApolloLinkPlugin'
 

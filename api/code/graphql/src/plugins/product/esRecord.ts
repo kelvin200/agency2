@@ -1,4 +1,5 @@
 import { record } from '@m/ultimate/src/util/record'
+
 import { Entity, OneIndexIndex } from '../type'
 import { ProductEntity } from './type'
 

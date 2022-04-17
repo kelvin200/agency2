@@ -1,5 +1,4 @@
 const path = require('path')
-const { getProject } = require('@webiny/cli/utils')
 
 const getDefaults = cwd => ({
   outputPath: path.join(cwd, 'build'),
@@ -30,16 +29,11 @@ const getOutput = ({ cwd, overrides }) => {
   return output
 }
 
-const getTelemetryFunctionDownloadPath = () => {
-  return path.join(getProject().root, '.webiny', 'telemetryFunction.js')
-}
-
 const getEntry = ({ cwd, overrides }) => {
   return overrides.entry || path.join(cwd, 'src/index')
 }
 
 module.exports = {
   getOutput,
-  getTelemetryFunctionDownloadPath,
   getEntry,
 }

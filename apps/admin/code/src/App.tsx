@@ -15,7 +15,6 @@ import { CircularProgress } from '@webiny/ui/Progress'
 import React from 'react'
 
 import { createApolloClient } from './components/apolloClient'
-import { Telemetry } from './components/Telemetry'
 
 export const App = () => (
   <ApolloProvider
@@ -35,10 +34,6 @@ export const App = () => (
                     <BrowserRouter> is an enhanced version of "react-router" to add some capabilities specific to Webiny.
                 */}
         <BrowserRouter basename={process.env.PUBLIC_URL}>
-          {/*
-                        To learn more about Webiny telemetry system, please visit: https://docs.webiny.com/docs/webiny-telemetry
-                    */}
-          <Telemetry />
           {/*
                         <UiProvider> is a centralized state handler for UI related things. When you need to render
                         dialogs, snackbars, handle dark mode, you can use the "useUi()" hook to set/unset UI information

@@ -2,14 +2,8 @@ const { version } = require('@m/project-utils/package.json')
 const { globalConfig } = require('@webiny/global-config')
 
 module.exports.applyDefaults = () => {
-  let telemetry = false
-
   if (!('REACT_APP_USER_ID' in process.env)) {
     process.env.REACT_APP_USER_ID = globalConfig.get('id')
-  }
-
-  if (!('REACT_APP_WEBINY_TELEMETRY' in process.env)) {
-    process.env.REACT_APP_WEBINY_TELEMETRY = String(telemetry)
   }
 
   if (!('INLINE_RUNTIME_CHUNK' in process.env)) {

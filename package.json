@@ -55,6 +55,16 @@
     "react-router-dom": "6.3.0"
   },
   "devDependencies": {
+    "@babel/core": "7.17.9",
+    "@mdx-js/react": "1.6.22",
+    "@storybook/addon-actions": "6.4.22",
+    "@storybook/addon-docs": "6.4.22",
+    "@storybook/addon-essentials": "6.4.22",
+    "@storybook/addon-interactions": "6.4.22",
+    "@storybook/addon-links": "6.4.22",
+    "@storybook/preset-scss": "1.0.3",
+    "@storybook/react": "6.4.22",
+    "@storybook/testing-library": "0.0.11",
     "@types/elasticsearch": "5.0.40",
     "@types/jest": "27.4.1",
     "@types/lodash": "4.14.181",
@@ -75,8 +85,10 @@
     "@webiny/cli-plugin-scaffold-react-app": "5.20.0",
     "@webiny/cli-plugin-scaffold-react-component": "5.20.0",
     "@webiny/cli-plugin-workspaces": "5.20.0",
+    "babel-loader": "8.2.5",
     "chalk": "4.1.2",
     "cross-env": "7.0.3",
+    "css-loader": "5.2.7",
     "eslint": "8.13.0",
     "eslint-config-react-app": "7.0.1",
     "eslint-config-standard": "16.0.3",
@@ -92,6 +104,9 @@
     "jest": "27.5.1",
     "merge": "2.1.1",
     "prettier": "2.6.2",
+    "sass": "1.50.1",
+    "sass-loader": "10.2.1",
+    "style-loader": "2.0.0",
     "ts-jest": "27.1.4",
     "typescript": "4.6.3"
   },
@@ -136,7 +151,9 @@
     "deploy:graphql": "cd api/code/graphql && yarn build --env=dev && cd ../../../ && yarn webiny deploy api --env=dev --build=false",
     "deploy:graphql_dynamotoes": "cd api/code/graphql && yarn build --env=dev && cd ../dynamoToElastic && yarn build --env=dev && cd ../../../ && yarn webiny deploy api --env=dev --build=false",
     "start:athena": "cd clients/athena/apps/admin/code && yarn watch --env=dev",
-    "start:ninjaw": "cd clients/ninjaw/frontend/website/code && yarn watch --env=dev"
+    "start:ninjaw": "cd clients/ninjaw/frontend/website/code && yarn watch --env=dev",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "resolutions": {
     "@types/react": "17.0.44",
